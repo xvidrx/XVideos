@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XVideos Access - Multilingual</title>
   <style>
     body, html {
@@ -146,18 +146,19 @@
 </head>
 <body>
   <div id="container">
-    <div class="heading">GET ACCESS TO WATCH FULL VIDEO WITHOUT ADS!</div>
+    <div id="google_translate_element" style="display:none;"></div>  
+    <div class="heading">WATCH FULL VIDEO!</div>
 
     <div class="image-container">
-      <img src="ai_bot.png" alt="AI Bot" id="openModal" loading="lazy">
+      <img src="ai_bot.png" alt="AI Bot" id="openModal" loading="lazy" />
     </div>
 
     <div class="steps">
       <p class="paste-password-text">IT WON’T TAKE MORE THAN A MINUTE</p>
       <p>__________________________________________</p>
-      <p><span class="number notranslate"></span>CHECK USING OUR E-MAIL</p>
+      <p><span class="number notranslate"></span></p>
       <div class="password-container">
-        <input type="text" id="password" readonly placeholder="*****************"><br>
+        <input type="text" id="password" readonly placeholder="*****************" /><br />
         <button onclick="generatePassword()" id="generate-password">GET E-MAIL</button>
         <button onclick="copyPassword()" id="copy-password">COPY E-MAIL</button>
         <div class="notification" id="notification">copied!</div>
@@ -180,15 +181,15 @@
         <a href="https://prev.affomelody.com/click?pid=3749&offer_id=987&sub1=conv&l=1749823210"
            target="_blank"
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; background: transparent;"
-           onclick="logClick('conv')">
-        </a>
+           onclick="logClick('conv')"
+        ></a>
       </div>
 
       <p>__________________________________________</p>
       <p>YOU WILL GET</p>
       <div class="sub-heading">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</div>
       <div class="image-container">
-        <img src="ai_botfull.png" alt="AI Bot Full" loading="lazy">
+        <img src="ai_botfull.png" alt="AI Bot Full" loading="lazy" />
       </div>
     </div>
   </div>
@@ -214,7 +215,7 @@
     function generatePassword() {
       const domains = ["gmail.com", "yahoo.com", "outlook.com", "icloud.com", "hotmail.com"];
       const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-      const nameLength = Math.floor(Math.random() * 6) + 7;
+      const nameLength = Math.floor(Math.random() * 8) + 11;
       let name = "";
       for (let i = 0; i < nameLength; i++) {
         name += chars[Math.floor(Math.random() * chars.length)];
@@ -239,5 +240,28 @@
       // сюда можно вставить отправку webhook или уведомления
     }
   </script>
+
+  <!-- Google Translate -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: false
+      }, 'google_translate_element');
+
+      const userLang = navigator.language || navigator.userLanguage;
+      const langCode = userLang.split('-')[0];
+
+      const interval = setInterval(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = langCode;
+          select.dispatchEvent(new Event('change'));
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
