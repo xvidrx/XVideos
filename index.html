@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>XVideos Access - Multilingual</title>
   <style>
-        /* Удаление всплывающих окон Google Translate */
+    /* Удаление всплывающих окон Google Translate */
     .goog-te-banner-frame.skiptranslate,
     .goog-te-gadget-icon,
     #goog-gt-tt,
@@ -19,6 +19,7 @@
     body > .skiptranslate {
       display: none !important;
     }
+
     body, html {
       margin: 0; padding: 0; width: 100%; height: 100%;
       font-family: Arial, sans-serif;
@@ -156,35 +157,12 @@
         color: #fff;
       }
     }
-
-    /* Скрываем мусор Google */
-    .goog-te-banner-frame.skiptranslate, .goog-logo-link, .goog-te-gadget span {
-      display: none !important;
-    }
-
-    body {
-      top: 0 !important;
-    }
-
-    .goog-te-gadget {
-      font-size: 0 !important;
-    }
-
-    .goog-te-combo {
-      font-size: 14px !important;
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      background: #fff;
-      border-radius: 4px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-  <!-- Кнопка Google Перевода -->
-  <div id="google_translate_element" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 9999;"></div>
-
   <div id="container">
+    <div id="google_translate_element" style="display: none;"></div>
+
     <div class="heading">WATCH FULL VIDEO!</div>
 
     <div class="image-container">
@@ -193,6 +171,7 @@
 
     <div class="steps">
       <p>__________________________________________</p>
+      <p><span class="number notranslate"></span></p>
       <div class="password-container">
         <input type="text" id="password" readonly placeholder="*****************"><br>
         <button onclick="generatePassword()" id="generate-password">GET E-MAIL</button>
@@ -203,6 +182,8 @@
 
     <div class="registration-container">
       <h1 style="color: #ff4500; font-size: 16px;">ANSWER A FEW QUICK QUESTIONS</h1>
+      <p><span class="number notranslate"></span></p>
+      <p><span class="number notranslate"></span></p>
       <h1 style="color: #ffae00; font-size: 18px;">THE XVideos ACCESS WILL OPEN AUTOMATICALLY!</h1>
 
       <div style="position: relative; height: 100vh; border-radius: 8px; overflow: hidden; margin: 15px 0;">
@@ -227,7 +208,6 @@
     </div>
   </div>
 
-  <!-- Модальное окно -->
   <div id="myModal" class="modal">
     <div class="modal-content">
       <p>The full video will start automatically!</p>
@@ -237,7 +217,7 @@
     </div>
   </div>
 
-  <!-- JS -->
+  <!-- Scripts -->
   <script>
     document.getElementById("openModal").onclick = function () {
       document.getElementById("myModal").style.display = "block";
@@ -271,23 +251,25 @@
 
     function logClick(sub1) {
       console.log('Click tracked for sub1:', sub1);
-      // можно добавить webhook или Telegram уведомление
+      // можно добавить отправку webhook или уведомление
     }
   </script>
 
   <!-- Google Translate -->
-  <script type="text/javascript">
+  <script>
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+        autoDisplay: false
       }, 'google_translate_element');
 
-      const browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+      const userLang = navigator.language || navigator.userLanguage;
+      const langCode = userLang.split('-')[0];
+
       const interval = setInterval(() => {
         const select = document.querySelector('.goog-te-combo');
         if (select) {
-          select.value = browserLang;
+          select.value = langCode;
           select.dispatchEvent(new Event('change'));
           clearInterval(interval);
         }
