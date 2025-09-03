@@ -87,12 +87,6 @@
       border-radius: 10px;
       text-align: center; color: #fff;
     }
-    .modal-logo {
-      max-width: 200px;
-      height: auto;
-      margin: 10px auto;
-      display: block;
-    }
     .close-button {
       background-color: #ff4500;
       color: #fff; padding: 10px 20px;
@@ -100,6 +94,14 @@
       cursor: pointer; margin-top: 20px;
     }
     .close-button:hover { background-color: #ff6347; }
+
+    /* --- Логотип в модалке --- */
+    .modal-logo {
+      max-width: 200px;
+      height: auto;
+      margin: 10px auto;
+      display: block;
+    }
 
     @media (max-width: 768px) {
       #container {
@@ -150,7 +152,10 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <p>TAKE A QUICK SURVEY ON</p>
+
+      <!-- Вставлен логотип вместо текста -->
       <img src="realsexclub_w.svg" alt="RealSexClub" class="modal-logo">
+
       <p>just answer the questions</p>
       <button class="close-button" id="openLink">I'm ready</button>
     </div>
@@ -195,9 +200,3 @@
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
-
-
-
-
-
