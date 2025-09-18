@@ -1,30 +1,419 @@
-<!DOCTYPE html><html lang="en" data-scrapbook-source="https://prev.affomelody.com/click?pid=3749&offer_id=282&l=1620817266"><head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>FreeTeens</title>
-	<link rel="stylesheet" type="text/css" href="styles.css" media="all">
-	<!--[if lt IE 9]><link rel="stylesheet" media="all" type="text/css" href="ie.css" /><![endif]-->
-	
-	
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XVideos Access</title>
 
+  <style>
+    /* Ваши стили */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      background: url('bg_body.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    #google_translate_element {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    #container {
+      width: 90%;
+      max-width: 900px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      text-align: center;
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    .sub-heading {
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .info-text {
+      font-size: 18px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin: 15px 0;
+    }
+
+    .sub-info-text {
+      font-size: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .steps {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    .steps span.number {
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 18px;
+    }
+
+    .password-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 18px;
+      width: 80%;
+      max-width: 400px;
+      background-color: #333;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .password-container button {
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      text-transform: uppercase;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    .password-container button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8);
+    }
+
+    .notification {
+      display: none;
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .message {
+      display: none;
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+
+    .access-info-text {
+      font-size: 20px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff4500, #ff6347);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-align: center;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .instant-redirect-text {
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    #cta-button {
+      padding: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      background: transparent;
+      text-transform: uppercase;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: none;
+      transition: none;
+      align-self: center;
+    }
+
+    /* Hover effect removed */
+    #cta-button img {
+      width: 100%;
+      max-width: 300px; /* Adjust to your preferred size */
+      height: auto;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); /* Прозрачный фон */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .modal-content {
+      background: rgba(0, 0, 0, 0.8); /* Прозрачный фон модального окна */
+      padding: 30px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      width: 60%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      word-wrap: break-word;
+      animation: zoomIn 0.5s ease-in-out;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background-color: #ff4500;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background-color: #ff6347;
+      transform: scale(1.1);
+    }
+
+    .video-player {
+      width: 100%;
+      margin: 0 0 30px 0;
+      border: 2px solid #444444;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+      cursor: pointer;
+      transition: none;
+    }
+
+    .video-player img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    /* CSS для разделения языков по тира 1, 2, 3 */
+    .language-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .language-group {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      width: 30%;
+    }
+
+    .language-group span {
+      margin: 5px 0;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+  </style>
+
+  <script type="text/javascript">
+    let emailGenerated = false;
+    let emailCopied = false;
+
+    const popularDomains = [
+      "gmail.com",
+      "yahoo.com",
+      "outlook.com",
+      "hotmail.com",
+      "aol.com",
+      "live.com",
+      "icloud.com",
+      "zoho.com",
+      "mail.com",
+      "protonmail.com"
+    ];
+
+    // Функция генерации случайного адреса
+    function generatePassword() {
+      const randomString = Math.random().toString(36).substring(2, 12);  // Генерирует строку из букв и цифр длиной 10 символов
+      const randomDomain = popularDomains[Math.floor(Math.random() * popularDomains.length)];
+      const generatedEmail = `${randomString}@${randomDomain}`;
+      document.getElementById('password').value = generatedEmail;
+      emailGenerated = true;
+      emailCopied = false;
+      document.getElementById('message').style.display = 'none';
+      document.getElementById('notification').style.display = 'none';
+    }
+
+    // Копирование пароля
+    function copyPassword() {
+      const passwordField = document.getElementById('password');
+      passwordField.select();
+      document.execCommand('copy');
+      document.getElementById('notification').style.display = 'block';
+      emailCopied = true;
+    }
+
+    // Открытие модального окна
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    // Закрытие модального окна
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    // Обработка кнопки перехода
+    function handleButtonClick(event) {
+      event.preventDefault(); // Прерывание стандартного поведения ссылки
+
+      // Проверяем, сгенерирован ли адрес и скопирован ли он
+      if (!emailGenerated || !emailCopied) {
+        document.getElementById('message').style.display = 'block';
+        return;
+      }
+
+      const userAgent = navigator.userAgent.toLowerCase();
+
+      // Для мобильных устройств
+      if (/iphone|ipod|ipad|android/i.test(userAgent)) {
+        window.location.href = "https://prev.affomelody.com/click?pid=116623&offer_id=844#join";
+      } 
+      // Для десктопов
+      else {
+        window.location.href = "https://prev.affomelody.com/click?pid=116623&offer_id=844&redirect=https://gaysprivate.com/members/join";
+      }
+    }
+  </script>
+
+  <!-- Код для Google Translate Widget -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,af,ar,bn,bs,ca,cs,da,de,el,en,es,et,fa,fi,fil,fr,ga,gl,he,hi,hr,hu,id,it,ja,jv,ko,lt,lv,mk,ml,mr,ms,nb,ne,nl,pl,ps,pt,ro,ru,sq,sv,ta,th,tr,uk,vi,zh',
+        layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
-<body>
-	<div class="wrapper">
-		<div class="header">
-			<strong class="logo"><a href="#">FreeTeens</a></strong>
-			<h1>Stick your dick comfortably!</h1>
-		</div>
-		<div class="block-tt">
-			<h2>Terabytes of amateur porn!</h2> 			<h3>Just answer a few questions, no e-mail confirmation required! (18+)</h3>
-		</div>
-		<div class="video-block">
-			<div id="video">
-				
-			</div>
-			
-		</div>
-		<div class="btn_block">
-			<a href="https://prev.affomelody.com/click?pid=3749&offer_id=987&l=1749823215">114,059 PORN VIDEOS FOR FREE!</a>
-		</div>
-	</div><!-- wrapper -->
 
-</body></html>
+<body>
+  <!-- Виджет Google Переводчик -->
+  <div id="google_translate_element"></div>
+
+  <div id="container">
+    <div class="video-player" id="ai-bot-player" onclick="openModal()">
+      <img src="ai-bot.png" alt="AI Bot" />
+    </div>
+
+    <div class="sub-heading">GET ACCESS TO 490,000+ VIDEOS IN VARIOUS CATEGORIES</div>
+
+    <div class="image-container">
+      <img src="ai_botfull.png" alt="AI Bot Full" id="ai-bot-full-image" />
+    </div>
+
+    <div class="info-text">Unlock access to the XVideos section in just 3 simple steps — it's quick!</div>
+    <div class="sub-info-text">No need to enter your personal data, we’ve done everything for you!</div>
+
+    <div class="steps">
+      <p><span class="number">1.</span> Enter any username</p>
+      <p><span class="number">2.</span> Paste the received **********@****.com</p>
+      <p><span class="number">3.</span> Enter your password</p>
+    </div>
+
+    <div class="password-container">
+      <input type="text" id="password" readonly placeholder="****************" />
+      <br />
+      <button onclick="generatePassword()" id="generate-password">GET ADDRESS</button>
+      <button onclick="copyPassword()" id="copy-password">COPY ADDRESS</button>
+      <div class="notification" id="notification">Copied successfully!</div>
+    </div>
+
+    <div class="access-info-text">SAVE THE USER NAME AND PASSWORD FOR LOGIN</div>
+    <div class="instant-redirect-text">Instant redirection!</div>
+
+    <div id="message" class="message">
+      <p>Please get and copy the address first!</p>
+    </div>
+
+    <a href="#" id="cta-button" onclick="handleButtonClick(event)" target="_blank" rel="noopener noreferrer">
+      <img src="button.png" alt="Go! Button" />
+    </a>
+  </div>
+
+  <!-- Модальное окно -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>Welcome to the XVideos access page! Follow the instructions carefully to get your access. The full video will start automatically!</p>
+      <button class="close-btn" onclick="closeModal()">I'M READY</button>
+    </div>
+  </div>
+</body>
+</html>
