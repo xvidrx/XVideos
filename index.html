@@ -84,9 +84,7 @@
         <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align:center;">
           🔒 THE CONTENT IS <span style="color:#22c55e;">FREE</span>
         </p>
-        <p>
-   
-        </p>
+        <p></p>
         <p>
           It's locked — to unlock it simply <span style="color:#3b82f6; font-weight:bold;">finish 1 survey</span> below.  
           This shit gives us some little money and this is how we give it to people for free also it prevents it from stealing+bot spread
@@ -100,13 +98,13 @@
 
       <!-- Соц. доказательство -->
       <p style="color: #00ffcc; font-size:14px;">
-        👀 21 people are currently trying to access this content
+        👀 <span id="liveCount">21</span> people are currently trying to access this content
       </p>
 
       <!-- Статистика -->
       <div style="display: flex; justify-content: space-between; font-size: 14px; margin: 10px 0; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px;">
         <div>
-          👁️ <strong>12,039</strong><br>
+          👁️ <strong id="totalViews">12,039</strong><br>
           <span style="font-size: 12px; color: #ccc;">Total Views</span>
         </div>
         <div>
@@ -167,6 +165,44 @@
         }
       }
     }, 1000);
+  </script>
+
+  <!-- Плавный живой счётчик + рост total views -->
+  <script>
+    const liveCountEl = document.getElementById("liveCount");
+    const totalViewsEl = document.getElementById("totalViews");
+
+    let currentCount = 21;
+    let totalViews = 12039; // начальное значение
+
+    const MIN = 27;
+    const MAX = 378;
+
+    function formatNumber(num) {
+      return num.toLocaleString("en-US");
+    }
+
+    function updateCounts() {
+      // Онлайн
+      let direction = Math.random() > 0.4 ? 1 : -1;
+      let newCount = currentCount + direction;
+      if (newCount < MIN) newCount = MIN;
+      if (newCount > MAX) newCount = MAX;
+      currentCount = newCount;
+      liveCountEl.innerText = currentCount;
+
+      // Общие просмотры (всегда растут)
+      let increment = Math.random() > 0.8 ? 2 : 1; // иногда +2
+      totalViews += increment;
+      totalViewsEl.innerText = formatNumber(totalViews);
+
+      // Следующее обновление через 500–800 мс
+      const nextInterval = Math.floor(Math.random() * 300) + 500;
+      setTimeout(updateCounts, nextInterval);
+    }
+
+    // запуск при загрузке
+    setTimeout(updateCounts, 600);
   </script>
 
   <!-- Google Translate -->
