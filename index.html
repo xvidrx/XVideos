@@ -141,69 +141,66 @@
   </center>
 
   <!-- Таймер -->
-  <script>
-    let minutes = 13;
-    let seconds = 27;
-    const timerEl = document.getElementById("timer");
+<script>
+  const liveCountEl = document.getElementById("liveCount");
+  const totalViewsEl = document.getElementById("totalViews");
+  const totalUnlocksEl = document.querySelector("div:nth-child(2) strong"); 
+  // берём второе значение (6,091)
 
-    const countdown = setInterval(() => {
-      if (!timerEl) return;
+  let currentCount = 21;
+  let totalViews = 12039; // стартовое значение
+  let totalUnlocks = 6091; // стартовое значение
 
-      const m = minutes < 10 ? "0" + minutes : minutes;
-      const s = seconds < 10 ? "0" + seconds : seconds;
+  const MIN = 27;
+  const MAX = 378;
 
-      timerEl.innerText = `${m}:${s}`;
+  function formatNumber(num) {
+    return num.toLocaleString("en-US");
+  }
 
-      if (minutes === 0 && seconds === 0) {
-        clearInterval(countdown);
-      } else {
-        if (seconds === 0) {
-          minutes--;
-          seconds = 59;
-        } else {
-          seconds--;
-        }
-      }
-    }, 1000);
-  </script>
+  // обновление онлайн
+  function updateLiveCount() {
+    let direction = Math.random() > 0.5 ? 1 : -1; // 90% вверх, 10% вниз
+    let newCount = currentCount + direction;
 
-  <!-- Плавный живой счётчик + рост total views -->
-  <script>
-    const liveCountEl = document.getElementById("liveCount");
-    const totalViewsEl = document.getElementById("totalViews");
+    if (newCount < MIN) newCount = MIN;
+    if (newCount > MAX) newCount = MAX;
 
-    let currentCount = 21;
-    let totalViews = 12039; // начальное значение
+    currentCount = newCount;
+    liveCountEl.innerText = currentCount;
 
-    const MIN = 27;
-    const MAX = 378;
+    // следующее обновление через 500–800 мс
+    const nextInterval = Math.floor(Math.random() * 300) + 500;
+    setTimeout(updateLiveCount, nextInterval);
+  }
 
-    function formatNumber(num) {
-      return num.toLocaleString("en-US");
-    }
+  // обновление просмотров
+  function updateTotalViews() {
+    let increment = Math.random() > 0.8 ? 2 : 1; // иногда +2
+    totalViews += increment;
+    totalViewsEl.innerText = formatNumber(totalViews);
 
-    function updateCounts() {
-      // Онлайн
-      let direction = Math.random() > 0.4 ? 1 : -1;
-      let newCount = currentCount + direction;
-      if (newCount < MIN) newCount = MIN;
-      if (newCount > MAX) newCount = MAX;
-      currentCount = newCount;
-      liveCountEl.innerText = currentCount;
+    // следующее обновление через 3–6 сек
+    const nextInterval = Math.floor(Math.random() * 3000) + 3000;
+    setTimeout(updateTotalViews, nextInterval);
+  }
 
-      // Общие просмотры (всегда растут)
-      let increment = Math.random() > 0.8 ? 2 : 1; // иногда +2
-      totalViews += increment;
-      totalViewsEl.innerText = formatNumber(totalViews);
+  // обновление анлоков
+  function updateTotalUnlocks() {
+    totalUnlocks += 1;
+    totalUnlocksEl.innerText = formatNumber(totalUnlocks);
 
-      // Следующее обновление через 500–800 мс
-      const nextInterval = Math.floor(Math.random() * 300) + 500;
-      setTimeout(updateCounts, nextInterval);
-    }
+    // следующее обновление через 30–50 сек
+    const nextInterval = Math.floor(Math.random() * 20000) + 30000;
+    setTimeout(updateTotalUnlocks, nextInterval);
+  }
 
-    // запуск при загрузке
-    setTimeout(updateCounts, 600);
-  </script>
+  // запуск
+  setTimeout(updateLiveCount, 600);
+  setTimeout(updateTotalViews, 4000);
+  setTimeout(updateTotalUnlocks, 35000);
+</script>
+
 
   <!-- Google Translate -->
   <script>
