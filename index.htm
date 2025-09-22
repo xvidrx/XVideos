@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secrettt - Multilingual</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css">
+  <style>
+    .goog-te-banner-frame.skiptranslate,
+    .goog-gt-tt,
+    .goog-te-balloon-frame,
+    .goog-te-menu-frame {
+      display: none !important;
+    }
+    body { top: 0 !important; }
+    body > .skiptranslate { display: none !important; }
+
+    body {
+      background: url('fon.png') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      padding: 20px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: #fff;
+    }
+    .display {
+      background: rgba(0, 0, 0, 0.85);
+      max-width: 500px;
+      margin: 40px auto 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+    .offer_help_text {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .link_a {
+      background-color: #F5F5F5;
+      background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
+      border: 1px solid #B3B3B3;
+      border-radius: 4px;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+      color: #333;
+      cursor: pointer;
+      display: inline-block;
+      line-height: 20px;
+      padding: 6px 16px;
+      text-decoration: none;
+      font-size: 15px;
+      margin: 5px 0;
+    }
+    .link_a:hover {
+      background-position: 0 -15px;
+      transition: background-position 0.1s linear 0s;
+    }
+    .each_p_elm { margin: 8px 0; }
+    #timer {
+      font-size:16px;
+      font-weight:bold;
+      color:#00ffcc;
+      margin:10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="google_translate_element" style="display: none;"></div>
+
+  <center>
+    <div class="display">
+      <h1>Human Verification</h1>
+
+      <!-- 🔒 Оригинальный текст -->
+      <div style="
+        background: #121417;
+        padding: 20px;
+        border-radius: 14px;
+        line-height: 1.6;
+        margin: 0 auto 15px auto;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.25);">
+        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align:center;">
+          🔒 THE CONTENT IS <span style="color:#22c55e;">FREE</span>
+        </p>
+        <p>
+   
+        </p>
+        <p>
+          It's locked — to unlock it simply <span style="color:#3b82f6; font-weight:bold;">finish 1 survey</span> below.  
+          This shit gives us some little money and this is how we give it to people for free also it prevents it from stealing+bot spread
+          (<i>genius right?</i> 😏).
+        </p>
+        <p style="margin-top:15px; text-align:center; font-size: 16px; font-weight: bold;">
+          ✅ You win. We win <br>
+          All content is 18+
+        </p>
+      </div>
+
+      <!-- Соц. доказательство -->
+      <p style="color: #00ffcc; font-size:14px;">
+        👀 21 people are currently trying to access this content
+      </p>
+
+      <!-- Статистика -->
+      <div style="display: flex; justify-content: space-between; font-size: 14px; margin: 10px 0; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px;">
+        <div>
+          👁️ <strong>12,039</strong><br>
+          <span style="font-size: 12px; color: #ccc;">Total Views</span>
+        </div>
+        <div>
+          🔓 <strong>6,091</strong><br>
+          <span style="font-size: 12px; color: #ccc;">Total Unlocks</span>
+        </div>
+      </div>
+
+      <!-- Предупреждение -->
+      <p style="background: rgba(255,0,0,0.1); font-size:14px; padding: 8px; border-left: 4px solid red; margin-top:10px;">
+        ⚠️ ONLY 2 UNLOCKS LEFT FOR TODAY
+      </p>
+
+      <!-- Таймер -->
+      <p id="timer"></p>
+
+      <!-- Фиксированные ссылки -->
+      <div id="offerlst">
+        <div class="offer_help_text">✅ Choose one option below to continue</div>
+
+        <p class="each_p_elm">
+          <a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=987&l=1749823210">
+            Answer questions without e-mail confirmation.
+          </a>
+        </p>
+
+        <p class="each_p_elm">
+          <a class="link_a" target="_blank" href="https://xvidrx.github.io/test">
+            Short test without registration.
+          </a>
+        </p>
+      </div>
+    </div>
+  </center>
+
+  <!-- Таймер -->
+  <script>
+    let minutes = 13;
+    let seconds = 27;
+    const timerEl = document.getElementById("timer");
+
+    const countdown = setInterval(() => {
+      if (!timerEl) return;
+
+      const m = minutes < 10 ? "0" + minutes : minutes;
+      const s = seconds < 10 ? "0" + seconds : seconds;
+
+      timerEl.innerText = `${m}:${s}`;
+
+      if (minutes === 0 && seconds === 0) {
+        clearInterval(countdown);
+      } else {
+        if (seconds === 0) {
+          minutes--;
+          seconds = 59;
+        } else {
+          seconds--;
+        }
+      }
+    }, 1000);
+  </script>
+
+  <!-- Google Translate -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: false
+      }, 'google_translate_element');
+
+      const userLang = navigator.language || navigator.userLanguage;
+      const langCode = userLang.split('-')[0];
+
+      const interval = setInterval(() => {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = langCode;
+          select.dispatchEvent(new Event('change'));
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
