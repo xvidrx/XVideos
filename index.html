@@ -14,30 +14,90 @@
     .goog-te-menu-frame {
       display: none !important;
     }
+    body { top: 0 !important; }
+    body > .skiptranslate { display: none !important; }
+
     body {
-      top: 0 !important;
-    }
-    body > .skiptranslate {
-      display: none !important;
-    }
-    body {
-      background: url('fon.png') no-repeat center center fixed;
-      background-size: cover;
+      margin: 0;
+      height: 100vh;
       overflow-x: hidden;
       padding: 20px;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: #fff;
+      position: relative;
     }
+
+    /* Размытый задний слой */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('fon.png') no-repeat center center;
+      background-size: cover;
+      filter: blur(15px) brightness(1.2);
+      transform: scale(1.1);
+      z-index: -2;
+      opacity: 0;
+      animation: fadeInBlur 1.5s ease forwards;
+    }
+
+    /* Основное изображение, целиком видимое */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('fon.png') no-repeat center center;
+      background-size: contain;
+      background-color: transparent;
+      z-index: -1;
+      opacity: 0.9;
+      animation: fadeInImage 2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    /* Анимации */
+    @keyframes fadeInBlur {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInImage {
+      from { opacity: 0; transform: scale(1.05); }
+      to { opacity: 0.9; transform: scale(1); }
+    }
+
     .display {
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.7); /* полупрозрачный блок */
       max-width: 500px;
       margin: 40px auto 20px auto;
       padding: 20px;
       border-radius: 10px;
-      border: 3px solid #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
+
+    /* Обновлённый внутренний блок с градиентом */
+    .inner-block {
+      background: linear-gradient(
+        to bottom right,
+        rgba(18, 20, 23, 0.9),
+        rgba(18, 20, 23, 0.7)
+      );
+      padding: 20px;
+      border-radius: 14px;
+      line-height: 1.6;
+      margin: 0 auto 15px auto;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
     .offer_help_text {
       font-weight: bold;
       text-align: center;
@@ -80,16 +140,7 @@
     <div class="display">
       <h1>Human Verification</h1>
 
-      <div
-        style="
-          background: #121417;
-          padding: 20px;
-          border-radius: 14px;
-          line-height: 1.6;
-          margin: 0 auto 15px auto;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        "
-      >
+      <div class="inner-block">
         <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center">
           🔒 THE CONTENT IS <span style="color: #22c55e">FREE</span>
         </p>
@@ -97,12 +148,11 @@
           It's locked — to unlock it simply
           <span style="color: #3b82f6; font-weight: bold">finish 1 survey</span>
           below.
-		  <p>A little gain for us means free access for You!</p>
-		  <p>Once you complete one of the actions, you’ll be automatically redirected</p>
-		  <p>Premium exclusive content — completely free!</p>
-         </p>  
-		  <p>“Only a minute of your time”</p>
-        </p>
+          <p>A little gain for us means free access for You!</p>
+          <p>Once you complete one of the actions, you’ll be automatically redirected</p>
+          <p>Premium exclusive content — completely free!</p>
+        </p>  
+        <p>“Only a minute of your time”</p>
         <p style="margin-top: 15px; text-align: center; font-size: 16px; font-weight: bold">
           ✅ You’re glad – We’re glad. <br />
           All content is 18+
@@ -160,9 +210,7 @@
             >Complete a short survey.</a
           >
         </p>
-		<p style="color: #00ffcc; font-size: 14px">
-        <span id="liveCount">OR</span>
-      </p>
+        <p style="color: #00ffcc; font-size: 14px">OR</p>
 
         <p class="each_p_elm">
           <a
