@@ -1,328 +1,182 @@
 <!DOCTYPE html>
 <html lang="en" style="height:100%;">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FULL VIDEO - Multilingual</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css" />
-  <style>
-    /* --- Google Translate скрыть лишнее --- */
-    .goog-te-banner-frame.skiptranslate,
-    .goog-te-gadget-icon,
-    #goog-gt-tt,
-    .goog-te-balloon-frame,
-    .goog-te-menu-frame {
-      display: none !important;
-    }
-    body { top: 0 !important; }
-    body > .skiptranslate { display: none !important; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FULL VIDEO - Multilingual</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css">
+<style>
+  /* Стили Google Translate */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-gadget-icon,
+  #goog-gt-tt,
+  .goog-te-balloon-frame,
+  .goog-te-menu-frame { display: none !important; }
+  body { top: 0 !important; }
+  body > .skiptranslate { display: none !important; }
 
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow-x: hidden;
-      padding: 20px;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: #fff;
-      position: relative;
-    }
+  body {
+    margin: 0; height: 100vh; overflow-x: hidden; padding: 20px;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #fff; position: relative;
+  }
 
-    /* Размытый задний слой */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('fon.png') no-repeat center center;
-      background-size: cover;
-      filter: blur(15px) brightness(1.2);
-      transform: scale(1.1);
-      z-index: -2;
-      opacity: 0;
-      animation: fadeInBlur 1.5s ease forwards;
-    }
+  body::before {
+    content:""; position:fixed; inset:0;
+    background:url('fon.png') no-repeat center center/cover;
+    filter: blur(15px) brightness(1.2); transform: scale(1.1);
+    z-index:-2; opacity:0; animation:fadeInBlur 1.5s ease forwards;
+  }
+  body::after {
+    content:""; position:fixed; inset:0;
+    background:url('fon.png') no-repeat center center/contain;
+    z-index:-1; opacity:0.9; animation:fadeInImage 2s ease forwards; animation-delay:0.5s;
+  }
 
-    /* Основное изображение, целиком видимое */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('fon.png') no-repeat center center;
-      background-size: contain;
-      background-color: transparent;
-      z-index: -1;
-      opacity: 0.9;
-      animation: fadeInImage 2s ease forwards;
-      animation-delay: 0.5s;
-    }
+  @keyframes fadeInBlur { from {opacity:0;} to {opacity:1;} }
+  @keyframes fadeInImage { from {opacity:0; transform:scale(1.05);} to {opacity:0.9; transform:scale(1);} }
 
-    /* Анимации */
-    @keyframes fadeInBlur {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInImage {
-      from { opacity: 0; transform: scale(1.05); }
-      to { opacity: 0.9; transform: scale(1); }
-    }
+  .display {
+    background: rgba(0,0,0,0.7); max-width:500px; margin:40px auto 20px auto; padding:20px;
+    border-radius:10px; border:2px solid rgba(255,255,255,0.3); box-shadow:0 0 25px rgba(0,0,0,0.6);
+    text-align:center; position:relative; z-index:1;
+  }
 
-    .display {
-      background: rgba(0, 0, 0, 0.7); /* полупрозрачный блок */
-      max-width: 500px;
-      margin: 40px auto 20px auto;
-      padding: 20px;
-      border-radius: 10px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+  .inner-block {
+    background: linear-gradient(to bottom right, rgba(18,20,23,0.9), rgba(18,20,23,0.7));
+    padding:20px; border-radius:14px; line-height:1.6; margin:0 auto 15px auto;
+    box-shadow:0 6px 20px rgba(0,0,0,0.25);
+  }
 
-    /* Обновлённый внутренний блок с градиентом */
-    .inner-block {
-      background: linear-gradient(
-        to bottom right,
-        rgba(18, 20, 23, 0.9),
-        rgba(18, 20, 23, 0.7)
-      );
-      padding: 20px;
-      border-radius: 14px;
-      line-height: 1.6;
-      margin: 0 auto 15px auto;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
+  .offer_help_text { font-weight:bold; text-align:center; margin-bottom:10px; }
+  .link_a {
+    background-color:#f5f5f5; background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    border:1px solid #b3b3b3; border-radius:4px; box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 1px 2px rgba(0,0,0,0.05);
+    color:#333; cursor:pointer; display:inline-block; line-height:20px; padding:6px 16px; text-decoration:none; font-size:15px; margin:5px 0;
+  }
+  .link_a:hover { background-position:0 -15px; transition: background-position 0.1s linear 0s; }
 
-    .offer_help_text {
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .link_a {
-      background-color: #f5f5f5;
-      background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-      border: 1px solid #b3b3b3;
-      border-radius: 4px;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-      color: #333;
-      cursor: pointer;
-      display: inline-block;
-      line-height: 20px;
-      padding: 6px 16px;
-      text-decoration: none;
-      font-size: 15px;
-      margin: 5px 0;
-    }
-    .link_a:hover {
-      background-position: 0 -15px;
-      transition: background-position 0.1s linear 0s;
-    }
-    .each_p_elm {
-      margin: 8px 0;
-    }
-    #timer {
-      font-size: 16px;
-      font-weight: bold;
-      color: #00ffcc;
-      margin: 10px 0;
-    }
-  </style>
+  .each_p_elm { margin:8px 0; }
+  #timer { font-size:16px; font-weight:bold; color:#00ffcc; margin:10px 0; }
+
+  /* Модалка */
+  #videoModal {
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;
+  }
+  #videoModal .modal-content {
+    background: rgba(18,20,23,0.95); padding:25px; border-radius:10px;
+    max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6);
+  }
+  .unlock-btn {
+    display:inline-block; padding:10px 22px; background: linear-gradient(to right, #00ffcc, #3b82f6);
+    color:#000; font-weight:bold; border-radius:6px; border:none; cursor:pointer; font-size:16px;
+    transition: opacity 0.2s ease;
+  }
+  .unlock-btn:hover { opacity:0.9; }
+</style>
 </head>
 <body>
-  <div id="google_translate_element" style="display: none;"></div>
+<div id="google_translate_element" style="display:none;"></div>
 
 <center>
-  <div class="display">
-    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #00ffcc;">
-      FULL VIDEO
-    </h2>
-    <img src="ai_bot.png" alt="AI Bot" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;" />
-    <h1>Just for You!</h1>
+<div class="display">
 
-      <div class="inner-block">
-        <p style="font-size: 18px; font-weight: bold; margin-bottom: 10px; text-align: center">
-          🔒 THE CONTENT IS <span style="color: #22c55e">FREE</span>
-        </p>
-        <p>
-          
-          <span style="color: #3b82f6; font-weight: bold"></span>
-          <p></p>
-          <p></p>
-          <p></p>
-        </p>  
-        <p>“Only a minute of your time”</p>
-        <p style="margin-top: 15px; text-align: center; font-size: 16px; font-weight: bold">
-           <br />
-          490000+ EXCLUSIVE HD VIDEOS BY CATEGORY
-        </p>
-      </div>
+  <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;">FULL VIDEO</h2>
 
-      <p style="color: #00ffcc; font-size: 14px">
-        👀 <span id="liveCount">21</span> people are currently trying to access
-        this content
-      </p>
+  <!-- AI Bot -->
+  <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
 
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          font-size: 14px;
-          margin: 10px 0;
-          background: rgba(255, 255, 255, 0.05);
-          padding: 8px 12px;
-          border-radius: 8px;
-        "
-      >
-        <div>
-          👁️ <strong id="totalViews">12,039</strong><br />
-          <span style="font-size: 12px; color: #ccc">Total Views</span>
-        </div>
-        <div>
-          🔓 <strong id="totalUnlocks">6,091</strong><br />
-          <span style="font-size: 12px; color: #ccc">Total Unlocks</span>
-        </div>
-      </div>
+  <h1>Just for You!</h1>
 
-      <p
-        style="
-          background: rgba(255, 0, 0, 0.1);
-          font-size: 14px;
-          padding: 8px;
-          border-left: 4px solid red;
-          margin-top: 10px;
-        "
-      >
-        ⚠️ ONLY <span id="leftCount">17</span> UNLOCKS LEFT FOR TODAY
-      </p>
-
-      <p id="timer"></p>
-
-      <div id="offerlst">
-        <div class="offer_help_text">✅ Choose one option below to continue</div>
-          <p style="color: #00ffcc; font-size: 14px">1</p>
-          <p class="each_p_elm">
-          <a
-            class="link_a"
-            target="_blank"
-            href="https://tone.affomelody.com/click?pid=3749&offer_id=1007"
-            >Find the ‘Videos’ tab and get your link!</a>
-        </p>
-        <p style="color: #00ffcc; font-size: 14px">2</p>
-        <p class="each_p_elm">
-          <a
-            class="link_a"
-            target="_blank"
-            href="https://tone.affomelody.com/click?pid=3749&offer_id=1006"
-            >Enter any e-mail for access – it’s just a formality!</a>
-        </p>
-        <p style="color: #00ffcc; font-size: 14px">OR</p>
-
-        <p class="each_p_elm">
-          <a
-            class="link_a"
-            href="#"
-            onclick="redirectMobile(); return false;"
-            >Short test – 6 questions only.</a>
-        </p>
-      </div>
+  <!-- Модалка -->
+  <div id="videoModal" onclick="if(event.target.id==='videoModal')closeModal()">
+    <div class="modal-content">
+      <h3 style="margin-bottom:10px; color:#00ffcc; font-size:22px;">🔒 Locked</h3>
+      <p style="margin-bottom:20px; font-size:15px;">You need to unlock access to view this full video.</p>
+      <button class="unlock-btn" onclick="closeModal()">🔓 Unlock Now</button>
     </div>
-  </center>
+  </div>
 
-  <script>
-    function redirectMobile() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      const androidUrl =
-        "https://onykp.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
-      const iosUrl =
-        "https://onykp.com/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
-      const desktopUrl = "https://meendolanding.com/terabytesporn/?partner=26530";
+  <!-- Inner block -->
+  <div class="inner-block">
+    <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">🔒 THE CONTENT IS <span style="color:#22c55e">FREE</span></p>
+    <p>“Only a minute of your time”</p>
+    <p style="margin-top:15px; font-size:16px; font-weight:bold;">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</p>
+  </div>
 
-      if (/android/i.test(userAgent)) {
-        window.location.href = androidUrl;
-      } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = iosUrl;
-      } else {
-        window.location.href = desktopUrl;
-      }
-    }
+  <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
 
-    const liveCountEl = document.getElementById("liveCount");
-    const totalViewsEl = document.getElementById("totalViews");
-    const totalUnlocksEl = document.getElementById("totalUnlocks");
-    const leftCountEl = document.getElementById("leftCount");
+  <div style="display:flex; justify-content:space-between; font-size:14px; margin:10px 0; background:rgba(255,255,255,0.05); padding:8px 12px; border-radius:8px;">
+    <div>👁️ <strong id="totalViews">12,039</strong><br><span style="font-size:12px; color:#ccc">Total Views</span></div>
+    <div>🔓 <strong id="totalUnlocks">6,091</strong><br><span style="font-size:12px; color:#ccc">Total Unlocks</span></div>
+  </div>
 
-    let currentCount = 21;
-    let totalViews = 12039;
-    let totalUnlocks = 6091;
+  <p style="background:rgba(255,0,0,0.1); font-size:14px; padding:8px; border-left:4px solid red; margin-top:10px;">
+    ⚠️ ONLY <span id="leftCount">17</span> UNLOCKS LEFT FOR TODAY
+  </p>
 
-    let maxDailyUnlocks = totalUnlocks + parseInt(leftCountEl.innerText);
+  <p id="timer"></p>
 
-    const MIN = 27;
-    const MAX = 378;
+  <!-- Offer List -->
+  <div id="offerlst">
+    <div class="offer_help_text">✅ Choose one option below to continue</div>
 
-    function formatNumber(num) {
-      return num.toLocaleString("en-US");
-    }
+    <p style="color:#00ffcc; font-size:14px">1</p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1007">Find the ‘Videos’ tab and get your link!</a></p>
 
-    function updateLiveCount() {
-      let direction = Math.random() > 0.5 ? 1 : -1;
-      let newCount = currentCount + direction;
-      if (newCount < MIN) newCount = MIN;
-      if (newCount > MAX) newCount = MAX;
-      currentCount = newCount;
-      liveCountEl.innerText = currentCount;
-      setTimeout(updateLiveCount, Math.floor(Math.random() * 300) + 500);
-    }
+    <p style="color:#00ffcc; font-size:14px">2</p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1006">Enter any e-mail for access – it’s just a formality!</a></p>
 
-    function updateTotalViews() {
-      let increment = Math.random() > 0.8 ? 2 : 1;
-      totalViews += increment;
-      totalViewsEl.innerText = formatNumber(totalViews);
-      setTimeout(updateTotalViews, Math.floor(Math.random() * 3000) + 3000);
-    }
+    <p style="color:#00ffcc; font-size:14px">OR</p>
+    <p class="each_p_elm"><a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 6 questions only.</a></p>
+  </div>
 
-    function updateTotalUnlocks() {
-      totalUnlocks += 1;
-      totalUnlocksEl.innerText = formatNumber(totalUnlocks);
-      let left = maxDailyUnlocks - totalUnlocks;
-      if (left < 0) left = 0;
-      leftCountEl.innerText = left;
-      setTimeout(updateTotalUnlocks, Math.floor(Math.random() * 20000) + 30000);
-    }
+</div>
+</center>
 
-    setTimeout(updateLiveCount, 600);
-    setTimeout(updateTotalViews, 4000);
-    setTimeout(updateTotalUnlocks, 35000);
-  </script>
+<script>
+  function openModal(){document.getElementById('videoModal').style.display='flex';}
+  function closeModal(){document.getElementById('videoModal').style.display='none';}
 
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          autoDisplay: false,
-        },
-        "google_translate_element"
-      );
+  function redirectMobile(){
+    const ua=navigator.userAgent||navigator.vendor||window.opera;
+    const androidUrl="https://onykp.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
+    const iosUrl="https://onykp.com/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
+    const desktopUrl="https://meendolanding.com/terabytesporn/?partner=26530";
+    if(/android/i.test(ua)){window.location.href=androidUrl;}
+    else if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream){window.location.href=iosUrl;}
+    else{window.location.href=desktopUrl;}
+  }
 
-      const userLang = navigator.language || navigator.userLanguage;
-      const langCode = userLang.split("-")[0];
+  const liveCountEl=document.getElementById("liveCount");
+  const totalViewsEl=document.getElementById("totalViews");
+  const totalUnlocksEl=document.getElementById("totalUnlocks");
+  const leftCountEl=document.getElementById("leftCount");
+  let currentCount=21, totalViews=12039, totalUnlocks=6091;
+  let maxDailyUnlocks=totalUnlocks+parseInt(leftCountEl.innerText);
+  const MIN=27, MAX=378;
 
-      const interval = setInterval(() => {
-        const select = document.querySelector(".goog-te-combo");
-        if (select) {
-          select.value = langCode;
-          select.dispatchEvent(new Event("change"));
-          clearInterval(interval);
-        }
-      }, 500);
-    }
-  </script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  function formatNumber(num){return num.toLocaleString("en-US");}
+  function updateLiveCount(){let dir=Math.random()>0.5?1:-1; let newCount=currentCount+dir;
+    if(newCount<MIN)newCount=MIN; if(newCount>MAX)newCount=MAX; currentCount=newCount;
+    liveCountEl.innerText=currentCount; setTimeout(updateLiveCount, Math.floor(Math.random()*300)+500);}
+  function updateTotalViews(){let inc=Math.random()>0.8?2:1; totalViews+=inc;
+    totalViewsEl.innerText=formatNumber(totalViews); setTimeout(updateTotalViews, Math.floor(Math.random()*3000)+3000);}
+  function updateTotalUnlocks(){totalUnlocks+=1; totalUnlocksEl.innerText=formatNumber(totalUnlocks);
+    let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=left;
+    setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
+  setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
+</script>
+
+<script>
+  function googleTranslateElementInit(){
+    new google.translate.TranslateElement({pageLanguage:"en", autoDisplay:false},"google_translate_element");
+    const userLang=navigator.language||navigator.userLanguage; const langCode=userLang.split("-")[0];
+    const interval=setInterval(()=>{const select=document.querySelector(".goog-te-combo");
+      if(select){select.value=langCode; select.dispatchEvent(new Event("change")); clearInterval(interval);}},500);
+  }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
