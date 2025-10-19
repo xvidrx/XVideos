@@ -118,16 +118,17 @@
   <p id="timer"></p>
 
   <!-- Offer List -->
-  <div id="offerlst">
-    <div class="offer_help_text">✅ Choose one option below to continue</div>
+<div id="offerlst">
+  <img src="hacked.png" alt="Hacked" style="width:100%; max-width:300px; margin:10px auto 15px auto; display:block; border-radius:6px; box-shadow:0 0 15px rgba(255,0,0,0.4);">
+  <div class="offer_help_text">✅ Choose one option below to continue</div>
+
+    <p style="color:#00ffcc; font-size:14px">It’s just a formality!</p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1007">Click to the Videos tab – Enter any e-mail for access</a></p>
+
+    <p style="color:#00ffcc; font-size:14px">Or</p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1006">Click Get started – Enter any e-mail for access</a></p>
 
     <p style="color:#00ffcc; font-size:14px">Just</p>
-    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1007">Find the ‘Videos’ tab and get your link!</a></p>
-
-    <p style="color:#00ffcc; font-size:14px">Fake</p>
-    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=1006">Enter any e-mail for access – it’s just a formality!</a></p>
-
-    <p style="color:#00ffcc; font-size:14px">OR</p>
     <p class="each_p_elm"><a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 6 questions only.</a></p>
   </div>
 
@@ -148,6 +149,7 @@
     else{window.location.href=desktopUrl;}
   }
 
+  // Fake live counters
   const liveCountEl=document.getElementById("liveCount");
   const totalViewsEl=document.getElementById("totalViews");
   const totalUnlocksEl=document.getElementById("totalUnlocks");
@@ -168,15 +170,40 @@
   setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
 </script>
 
-<script>
-  function googleTranslateElementInit(){
-    new google.translate.TranslateElement({pageLanguage:"en", autoDisplay:false},"google_translate_element");
-    const userLang=navigator.language||navigator.userLanguage; const langCode=userLang.split("-")[0];
-    const interval=setInterval(()=>{const select=document.querySelector(".goog-te-combo");
-      if(select){select.value=langCode; select.dispatchEvent(new Event("change")); clearInterval(interval);}},500);
+<!-- Google Translate с автопереключением -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+}
+
+// Надежное автопереключение языка
+function autoTranslate() {
+  const userLang = (navigator.language || navigator.userLanguage).split('-')[0];
+  const maxAttempts = 20;
+  let attempts = 0;
+
+  function trySelectLang() {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      if (select.value !== userLang) {
+        select.value = userLang;
+        select.dispatchEvent(new Event('change'));
+      }
+    } else if (attempts < maxAttempts) {
+      attempts++;
+      setTimeout(trySelectLang, 500);
+    }
   }
+  trySelectLang();
+}
+
+window.addEventListener('load', () => {
+  const script = document.createElement('script');
+  script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  document.body.appendChild(script);
+  setTimeout(autoTranslate, 1500); // запуск после загрузки
+});
 </script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
