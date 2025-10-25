@@ -3,76 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FULL VIDEO</title>
+<title>FULL VIDEO - Multilingual</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
-  /* Стили Google Translate */
-  .goog-te-banner-frame.skiptranslate,
-  .goog-te-gadget-icon,
-  #goog-gt-tt,
-  .goog-te-balloon-frame,
-  .goog-te-menu-frame { display: none !important; }
-  body { top: 0 !important; }
-  body > .skiptranslate { display: none !important; }
+/* Скрытие элементов Google Translate */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-frame { display: none !important; }
+body { top: 0 !important; }
+body > .skiptranslate { display: none !important; }
 
-  body {
-    margin: 0; height: 100vh; overflow-x: hidden; padding: 20px;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #fff; position: relative;
-  }
+/* Общие стили */
+body {
+  margin: 0; height: 100vh; overflow-x: hidden; padding: 20px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #fff; position: relative;
+}
+body::before {
+  content:""; position:fixed; inset:0;
+  background:url('fon.png') no-repeat center center/cover;
+  filter: blur(15px) brightness(1.2); transform: scale(1.1);
+  z-index:-2; opacity:0; animation:fadeInBlur 1.5s ease forwards;
+}
+body::after {
+  content:""; position:fixed; inset:0;
+  background:url('fon.png') no-repeat center center/contain;
+  z-index:-1; opacity:0.9; animation:fadeInImage 2s ease forwards; animation-delay:0.5s;
+}
+@keyframes fadeInBlur { from {opacity:0;} to {opacity:1;} }
+@keyframes fadeInImage { from {opacity:0; transform:scale(1.05);} to {opacity:0.9; transform:scale(1);} }
 
-  body::before {
-    content:""; position:fixed; inset:0;
-    background:url('fon.png') no-repeat center center/cover;
-    filter: blur(15px) brightness(1.2); transform: scale(1.1);
-    z-index:-2; opacity:0; animation:fadeInBlur 1.5s ease forwards;
-  }
-  body::after {
-    content:""; position:fixed; inset:0;
-    background:url('fon.png') no-repeat center center/contain;
-    z-index:-1; opacity:0.9; animation:fadeInImage 2s ease forwards; animation-delay:0.5s;
-  }
+.display {
+  background: rgba(0,0,0,0.7); max-width:500px; margin:40px auto 20px auto; padding:20px;
+  border-radius:10px; border:2px solid rgba(255,255,255,0.3); box-shadow:0 0 25px rgba(0,0,0,0.6);
+  text-align:center; position:relative; z-index:1;
+  opacity:0; transform: translateY(20px); animation:fadeInBlock 1s ease forwards;
+}
+@keyframes fadeInBlock { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
 
-  @keyframes fadeInBlur { from {opacity:0;} to {opacity:1;} }
-  @keyframes fadeInImage { from {opacity:0; transform:scale(1.05);} to {opacity:0.9; transform:scale(1);} }
+.inner-block {
+  background: linear-gradient(to bottom right, rgba(18,20,23,0.9), rgba(18,20,23,0.7));
+  padding:20px; border-radius:14px; line-height:1.6; margin:0 auto 15px auto;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
 
-  .display {
-    background: rgba(0,0,0,0.7); max-width:500px; margin:40px auto 20px auto; padding:20px;
-    border-radius:10px; border:2px solid rgba(255,255,255,0.3); box-shadow:0 0 25px rgba(0,0,0,0.6);
-    text-align:center; position:relative; z-index:1;
-  }
+.offer_help_text { font-weight:bold; text-align:center; margin-bottom:10px; }
+.link_a {
+  background-color:#f5f5f5; background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+  border:1px solid #b3b3b3; border-radius:4px; box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 1px 2px rgba(0,0,0,0.05);
+  color:#333; cursor:pointer; display:inline-block; line-height:20px; padding:6px 16px; text-decoration:none; font-size:15px; margin:5px 0;
+}
+.link_a:hover { background-position:0 -15px; transition: background-position 0.1s linear 0s; }
 
-  .inner-block {
-    background: linear-gradient(to bottom right, rgba(18,20,23,0.9), rgba(18,20,23,0.7));
-    padding:20px; border-radius:14px; line-height:1.6; margin:0 auto 15px auto;
-    box-shadow:0 6px 20px rgba(0,0,0,0.25);
-  }
+.each_p_elm { margin:8px 0; }
+#timer { font-size:16px; font-weight:bold; color:#00ffcc; margin:10px 0; }
 
-  .offer_help_text { font-weight:bold; text-align:center; margin-bottom:10px; }
-  .link_a {
-    background-color:#f5f5f5; background-image: linear-gradient(to bottom,#fff,#e6e6e6);
-    border:1px solid #b3b3b3; border-radius:4px; box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 1px 2px rgba(0,0,0,0.05);
-    color:#333; cursor:pointer; display:inline-block; line-height:20px; padding:6px 16px; text-decoration:none; font-size:15px; margin:5px 0;
-  }
-  .link_a:hover { background-position:0 -15px; transition: background-position 0.1s linear 0s; }
+/* Модалка */
+#videoModal {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;
+}
+#videoModal .modal-content {
+  background: rgba(18,20,23,0.95); padding:25px; border-radius:10px;
+  max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+.unlock-btn {
+  display:inline-block; padding:10px 22px; background: linear-gradient(to right, #00ffcc, #3b82f6);
+  color:#000; font-weight:bold; border-radius:6px; border:none; cursor:pointer; font-size:16px;
+  transition: opacity 0.2s ease;
+}
+.unlock-btn:hover { opacity:0.9; }
 
-  .each_p_elm { margin:8px 0; }
-  #timer { font-size:16px; font-weight:bold; color:#00ffcc; margin:10px 0; }
+/* Hacked style password generator */
+.hacked-wrap {
+  width:100%;
+  max-width:320px;
+  margin:10px auto 18px auto;
+  border-radius:8px;
+  background: linear-gradient(180deg, rgba(25,0,0,0.25), rgba(0,0,0,0.55));
+  padding:12px;
+  box-shadow: 0 6px 18px rgba(255,0,0,0.12), 0 0 30px rgba(255,0,0,0.08) inset;
+  border: 1px solid rgba(255,0,0,0.22);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-sizing: border-box;
+  opacity:0; transform: translateY(20px); animation:fadeInHacked 1s ease forwards 1.2s;
+}
+@keyframes fadeInHacked { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
 
-  /* Модалка */
-  #videoModal {
-    display:none; position:fixed; inset:0;
-    background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;
-  }
-  #videoModal .modal-content {
-    background: rgba(18,20,23,0.95); padding:25px; border-radius:10px;
-    max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6);
-  }
-  .unlock-btn {
-    display:inline-block; padding:10px 22px; background: linear-gradient(to right, #00ffcc, #3b82f6);
-    color:#000; font-weight:bold; border-radius:6px; border:none; cursor:pointer; font-size:16px;
-    transition: opacity 0.2s ease;
-  }
-  .unlock-btn:hover { opacity:0.9; }
+.hacked-wrap img.hacked { width:100%; border-radius:6px; box-shadow:0 0 15px rgba(255,0,0,0.4); }
+
+.password-container {
+  width:100%;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+  box-sizing: border-box;
+}
+
+.password-field {
+  flex:1;
+  min-width:0;
+  padding:10px 12px;
+  border-radius:6px;
+  border:1px solid rgba(255,90,90,0.25);
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(20,0,0,0.35));
+  color:#ffefef;
+  font-weight:600;
+  text-align:center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 16px rgba(0,0,0,0.6);
+  box-sizing: border-box;
+}
+
+.password-btn {
+  padding:9px 14px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  color:#1b1b1b;
+  background: linear-gradient(90deg,#ff6b6b 0%, #ff2d2d 50%, #a70000 100%);
+  box-shadow: 0 6px 16px rgba(167,0,0,0.25);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.password-btn:hover { transform: translateY(-2px); opacity:0.98; box-shadow: 0 10px 26px rgba(167,0,0,0.35); }
+
+.notification {
+  margin-top:8px;
+  font-size:13px;
+  color:#ffdede;
+  background: rgba(0,0,0,0.25);
+  padding:6px 10px;
+  border-radius:6px;
+  border: 1px solid rgba(255, 120, 120, 0.12);
+  opacity:0; transform: translateY(-4px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.notification.show { opacity:1; transform: translateY(0); }
+
+.password-hint {
+  margin-top:8px;
+  font-size:13px;
+  color:#ffb3b3;
+  text-align:center;
+  font-weight:600;
+  text-shadow: 0 0 4px rgba(255,0,0,0.4);
+  animation: pulseHint 1.8s infinite alternate;
+}
+@keyframes pulseHint {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@media (max-width:480px){
+  .hacked-wrap { max-width:92%; padding:10px; }
+  .hacked-wrap img.hacked { max-width:100%; }
+  .password-container { flex-direction:column; gap:10px; }
+  .password-btn { width:100%; }
+}
 </style>
 </head>
 <body>
@@ -80,28 +172,21 @@
 
 <center>
 <div class="display">
-
   <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;"></h2>
 
   <!-- AI Bot -->
   <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
 
-  <!-- Модалка -->
-  <div id="videoModal" onclick="if(event.target.id==='videoModal')closeModal()">
-    <div class="modal-content">
-      <h3 style="margin-bottom:10px; color:#00ffcc; font-size:22px;">🔒 Locked</h3>
-      <p style="margin-bottom:20px; font-size:15px;">You need to unlock access to view this full video.</p>
-      <button class="unlock-btn" onclick="closeModal()">🔓 Unlock Now</button>
-    </div>
-  </div>
-
   <!-- Inner block -->
   <div class="inner-block">
     <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">🔒 THE CONTENT IS <span style="color:#22c55e">FREE</span></p>
-    <p>“Only a minute of your time”</p>
+    <p>We’ll earn a little to help us grow.</p>
+    <p>And You get free access!</p>
+    <p>Everything’s automatic, but sometimes the link goes to your e-mail.</p>
     <p style="margin-top:15px; font-size:16px; font-weight:bold;">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</p>
   </div>
 
+  <!-- Live counters -->
   <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
 
   <div style="display:flex; justify-content:space-between; font-size:14px; margin:10px 0; background:rgba(255,255,255,0.05); padding:8px 12px; border-radius:8px;">
@@ -116,96 +201,109 @@
   <p id="timer"></p>
 
   <!-- Offer List -->
-<div id="offerlst">
-  <img src="hacked.png" alt="Hacked" style="width:100%; max-width:300px; margin:10px auto 15px auto; display:block; border-radius:6px; box-shadow:0 0 15px rgba(255,0,0,0.4);">
-  <div class="offer_help_text">✅ Choose one option below to continue</div>
+  <div id="offerlst">
+    <div class="hacked-wrap">
+      <img class="hacked" src="hacked.png" alt="Hacked">
+      <div class="password-container">
+        <input class="password-field" type="text" id="generated-password" readonly placeholder="Generated Password">
+        <button class="password-btn" id="copy-password" onclick="copyPassword()">COPY</button>
+      </div>
+      <div class="notification" id="notification">Password copied to clipboard</div>
+      <div class="password-hint">Paste this password in the next step</div>
+    </div>
+
+    <div class="offer_help_text">✅ Choose one option below to continue</div>
 
     <p style="color:#00ffcc; font-size:14px">It’s just a formality!</p>
-    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://m.meendo.com/videos/teen+amateur?sort=rating_down&partner=26530">Use any e-mail to unlock</a></p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=64&path=signup/user">Sign up in seconds – link arrives by e-mail!</a></p>
 
     <p style="color:#00ffcc; font-size:14px">Or</p>
-    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=795&l=1703486163">Few questions – and e-mail for unlock</a></p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://wr22mrh.easy-connect-place.com/cadphtw">Answer the questions and paste this password.</a></p>
+    
+    <p style="color:#00ffcc; font-size:14px">Or</p>
+    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://avzqa.glrliovers.net/?utm_source=da57dc555e50572d&ban=other&j5=1&j6=1&s1=48854&s2=2150648">Just answer & paste this password to continue.</a></p>
 
-    <p style="color:#00ffcc; font-size:14px">Just</p>
-    <p class="each_p_elm"><a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 6 questions only without registration!</a></p>
-  
-    <p style="color:#00ffcc; font-size:14px">BONUS</p>
-    <p class="each_p_elm"><a class="link_a" target="_blank" href="https://3vetz.com/link?z=10085396&var={SOURCE_ID}&ymid={CLICK_ID}">Watch without limits</a></p>
-  
+    <p style="color:#00ffcc; font-size:14px">Or just</p>
+    <p class="each_p_elm"><a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 6 questions only - no registration!</a></p>
   </div>
-
-</div>
 </center>
 
+<!-- Modal -->
+<div id="videoModal" onclick="if(event.target.id==='videoModal')closeModal()">
+  <div class="modal-content">
+    <h3 style="margin-bottom:10px; color:#00ffcc; font-size:22px;">🔒</h3>
+    <p style="margin-bottom:20px; font-size:15px;">“Access by password!”</p>
+    <button class="unlock-btn" onclick="closeModal()">🔓 Get and Unlock</button>
+  </div>
+</div>
+
 <script>
-  function openModal(){document.getElementById('videoModal').style.display='flex';}
-  function closeModal(){document.getElementById('videoModal').style.display='none';}
+function openModal(){document.getElementById('videoModal').style.display='flex';}
+function closeModal(){document.getElementById('videoModal').style.display='none';}
 
-  function redirectMobile(){
-    const ua=navigator.userAgent||navigator.vendor||window.opera;
-    const androidUrl="https://onykp.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
-    const iosUrl="https://onykp.com/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
-    const desktopUrl="https://cuty.io/d70fXhPEO";
-    if(/android/i.test(ua)){window.location.href=androidUrl;}
-    else if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream){window.location.href=iosUrl;}
-    else{window.location.href=desktopUrl;}
-  }
+function redirectMobile(){
+  const ua=navigator.userAgent||navigator.vendor||window.opera;
+  const androidUrl="https://onykp.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
+  const iosUrl="https://onykp.com/link?z=5753412&var={SOURCE_ID}&ymid={CLICK_ID}";
+  const desktopUrl="https://meendolanding.com/terabytesporn/?partner=26530";
+  if(/android/i.test(ua)){window.location.href=androidUrl;}
+  else if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream){window.location.href=iosUrl;}
+  else{window.location.href=desktopUrl;}
+}
 
-  // Fake live counters
-  const liveCountEl=document.getElementById("liveCount");
-  const totalViewsEl=document.getElementById("totalViews");
-  const totalUnlocksEl=document.getElementById("totalUnlocks");
-  const leftCountEl=document.getElementById("leftCount");
-  let currentCount=21, totalViews=12039, totalUnlocks=6091;
-  let maxDailyUnlocks=totalUnlocks+parseInt(leftCountEl.innerText);
-  const MIN=27, MAX=378;
+// Fake live counters
+const liveCountEl=document.getElementById("liveCount");
+const totalViewsEl=document.getElementById("totalViews");
+const totalUnlocksEl=document.getElementById("totalUnlocks");
+const leftCountEl=document.getElementById("leftCount");
+let currentCount=21, totalViews=12039, totalUnlocks=6091;
+let maxDailyUnlocks=totalUnlocks+parseInt(leftCountEl.innerText);
+const MIN=27, MAX=378;
+function formatNumber(num){return num.toLocaleString("en-US");}
+function updateLiveCount(){let dir=Math.random()>0.5?1:-1; let newCount=currentCount+dir;
+if(newCount<MIN)newCount=MIN; if(newCount>MAX)newCount=MAX; currentCount=newCount;
+liveCountEl.innerText=currentCount; setTimeout(updateLiveCount, Math.floor(Math.random()*300)+500);}
+function updateTotalViews(){let inc=Math.random()>0.8?2:1; totalViews+=inc;
+totalViewsEl.innerText=formatNumber(totalViews); setTimeout(updateTotalViews, Math.floor(Math.random()*3000)+3000);}
+function updateTotalUnlocks(){totalUnlocks+=1; totalUnlocksEl.innerText=formatNumber(totalUnlocks);
+let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=left;
+setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
+setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
 
-  function formatNumber(num){return num.toLocaleString("en-US");}
-  function updateLiveCount(){let dir=Math.random()>0.5?1:-1; let newCount=currentCount+dir;
-    if(newCount<MIN)newCount=MIN; if(newCount>MAX)newCount=MAX; currentCount=newCount;
-    liveCountEl.innerText=currentCount; setTimeout(updateLiveCount, Math.floor(Math.random()*300)+500);}
-  function updateTotalViews(){let inc=Math.random()>0.8?2:1; totalViews+=inc;
-    totalViewsEl.innerText=formatNumber(totalViews); setTimeout(updateTotalViews, Math.floor(Math.random()*3000)+3000);}
-  function updateTotalUnlocks(){totalUnlocks+=1; totalUnlocksEl.innerText=formatNumber(totalUnlocks);
-    let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=left;
-    setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
-  setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
-</script>
+// Password generator
+document.addEventListener("DOMContentLoaded", () => {
+  const passChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+  const passLength = 15 + Math.floor(Math.random()*3); // 15-17 chars
+  let password = "";
+  for (let i=0;i<passLength;i++){password += passChars[Math.floor(Math.random()*passChars.length)];}
+  document.getElementById("generated-password").value = password;
+});
 
-<!-- Google Translate с автопереключением -->
-<script type="text/javascript">
+function copyPassword(){
+  const field = document.getElementById("generated-password");
+  if(!field.value) return;
+  navigator.clipboard.writeText(field.value).then(()=>{
+    const note = document.getElementById("notification");
+    note.classList.add("show");
+    setTimeout(()=>{note.classList.remove("show");}, 1500);
+  });
+}
+
+// Google Translate
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+  const userLang = navigator.language || navigator.userLanguage;
+  const langCode = userLang.split('-')[0];
+  const interval = setInterval(()=>{
+    const select=document.querySelector('.goog-te-combo');
+    if(select){ select.value=langCode; select.dispatchEvent(new Event('change')); clearInterval(interval);}
+  },500);
 }
-
-// Надежное автопереключение языка
-function autoTranslate() {
-  const userLang = (navigator.language || navigator.userLanguage).split('-')[0];
-  const maxAttempts = 20;
-  let attempts = 0;
-
-  function trySelectLang() {
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      if (select.value !== userLang) {
-        select.value = userLang;
-        select.dispatchEvent(new Event('change'));
-      }
-    } else if (attempts < maxAttempts) {
-      attempts++;
-      setTimeout(trySelectLang, 500);
-    }
-  }
-  trySelectLang();
-}
-
 window.addEventListener('load', () => {
   const script = document.createElement('script');
   script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
   document.body.appendChild(script);
-  setTimeout(autoTranslate, 1500); // запуск после загрузки
 });
 </script>
-
 </body>
 </html>
