@@ -6,45 +6,70 @@
 <title>FULL VIDEO - VPN Warning</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
+/* --- Google Translate скрыть лишнее --- */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-frame { display: none !important; }
+body > .skiptranslate { display: none !important; }
+
+/* --- Общий стиль страницы --- */
 body { margin:0; height:100vh; overflow-x:hidden; padding:20px; font-family:system-ui,sans-serif; color:#fff; position:relative; }
 body::before { content:""; position:fixed; inset:0; background:url('fon.png') no-repeat center center/cover; filter: blur(15px) brightness(1.2); transform: scale(1.1); z-index:-2; opacity:0; animation:fadeInBlur 1.5s ease forwards; }
 body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-repeat center center/contain; z-index:-1; opacity:0.9; animation:fadeInImage 2s ease forwards; animation-delay:0.5s; }
+
 @keyframes fadeInBlur { from {opacity:0;} to {opacity:1;} }
 @keyframes fadeInImage { from {opacity:0; transform:scale(1.05);} to {opacity:0.9; transform:scale(1);} }
 
 .display { background: rgba(0,0,0,0.7); max-width:500px; margin:40px auto 20px auto; padding:20px; border-radius:10px; border:2px solid rgba(255,255,255,0.3); box-shadow:0 0 25px rgba(0,0,0,0.6); text-align:center; position:relative; z-index:1; opacity:0; transform: translateY(20px); animation:fadeInBlock 1s ease forwards; }
 @keyframes fadeInBlock { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+
 .inner-block { background: linear-gradient(to bottom right, rgba(18,20,23,0.9), rgba(18,20,23,0.7)); padding:20px; border-radius:14px; line-height:1.6; margin:0 auto 15px auto; box-shadow:0 6px 20px rgba(0,0,0,0.25); }
+
 .offer_help_text { font-weight:bold; text-align:center; margin-bottom:10px; }
+
 .link_a { background-color:#f5f5f5; background-image: linear-gradient(to bottom,#fff,#e6e6e6); border:1px solid #b3b3b3; border-radius:4px; box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 1px 2px rgba(0,0,0,0.05); color:#333; cursor:pointer; display:inline-block; line-height:20px; padding:6px 16px; text-decoration:none; font-size:15px; margin:5px 0; }
 .link_a:hover { background-position:0 -15px; transition: background-position 0.1s linear 0s; }
+
 .each_p_elm { margin:8px 0; }
 #timer { font-size:16px; font-weight:bold; color:#00ffcc; margin:10px 0; }
+
 /* Modal */
 #videoModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; }
 #videoModal .modal-content { background: rgba(18,20,23,0.95); padding:25px; border-radius:10px; max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6); }
+
 .unlock-btn { display:inline-block; padding:10px 22px; background: linear-gradient(to right, #00ffcc, #3b82f6); color:#000; font-weight:bold; border-radius:6px; border:none; cursor:pointer; font-size:16px; transition: opacity 0.2s ease; }
 .unlock-btn:hover { opacity:0.9; }
+
 /* Hacked password block */
 .hacked-wrap { width:100%; max-width:320px; margin:10px auto 18px auto; border-radius:8px; background: linear-gradient(180deg, rgba(25,0,0,0.25), rgba(0,0,0,0.55)); padding:12px; box-shadow: 0 6px 18px rgba(255,0,0,0.12), 0 0 30px rgba(255,0,0,0.08) inset; border: 1px solid rgba(255,0,0,0.22); display:flex; flex-direction:column; align-items:center; box-sizing: border-box; opacity:0; transform: translateY(20px); animation:fadeInHacked 1s ease forwards 1.2s; }
 @keyframes fadeInHacked { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+
 .hacked-wrap img.hacked { width:100%; border-radius:6px; box-shadow:0 0 15px rgba(255,0,0,0.4); }
+
 .password-container { width:100%; display:flex; gap:8px; align-items:center; justify-content:center; box-sizing: border-box; }
 .password-field { flex:1; min-width:0; padding:10px 12px; border-radius:6px; border:1px solid rgba(255,90,90,0.25); background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(20,0,0,0.35)); color:#ffefef; font-weight:600; text-align:center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 16px rgba(0,0,0,0.6); box-sizing: border-box; }
 .password-btn { padding:9px 14px; border-radius:6px; border:none; cursor:pointer; font-weight:700; color:#1b1b1b; background: linear-gradient(90deg,#ff6b6b 0%, #ff2d2d 50%, #a70000 100%); box-shadow: 0 6px 16px rgba(167,0,0,0.25); transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease; }
 .password-btn:hover { transform: translateY(-2px); opacity:0.98; box-shadow: 0 10px 26px rgba(167,0,0,0.35); }
+
 .notification { margin-top:8px; font-size:13px; color:#ffdede; background: rgba(0,0,0,0.25); padding:6px 10px; border-radius:6px; border: 1px solid rgba(255, 120, 120, 0.12); opacity:0; transform: translateY(-4px); transition: opacity .22s ease, transform .22s ease; }
 .notification.show { opacity:1; transform: translateY(0); }
+
 .password-hint { margin-top:8px; font-size:13px; color:#ffb3b3; text-align:center; font-weight:600; text-shadow: 0 0 4px rgba(255,0,0,0.4); animation: pulseHint 1.8s infinite alternate; }
 @keyframes pulseHint { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+
 #vpn-password-warning { display:none; color:#ff4d4d; font-size:14px; text-align:center; margin-top:6px; }
 </style>
 </head>
 <body>
 
+<!-- Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
+
 <center>
 <div class="display">
-  <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;">🔒 FULL VIDEO ACCESS</h2>
+  <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;"></h2>
   <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
 
   <div class="inner-block">
@@ -101,8 +126,11 @@ body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-
 </div>
 
 <script>
+// --- Modal ---
 function openModal(){document.getElementById('videoModal').style.display='flex';}
 function closeModal(){document.getElementById('videoModal').style.display='none';}
+
+// --- Mobile redirection ---
 function redirectMobile(){
   const ua=navigator.userAgent||navigator.vendor||window.opera;
   const androidUrl="https://onykp.com/link?z=6962446&var={SOURCE_ID}&ymid={CLICK_ID}";
@@ -113,7 +141,7 @@ function redirectMobile(){
   else{window.location.href=desktopUrl;}
 }
 
-// Live counters
+// --- Live counters ---
 const liveCountEl=document.getElementById("liveCount");
 const totalViewsEl=document.getElementById("totalViews");
 const totalUnlocksEl=document.getElementById("totalUnlocks");
@@ -132,7 +160,7 @@ let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=l
 setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
 setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
 
-// Password generator
+// --- Password generator ---
 document.addEventListener("DOMContentLoaded", () => {
   const passChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
   const passLength = 15 + Math.floor(Math.random()*3); 
@@ -150,24 +178,17 @@ function copyPassword(){
   });
 }
 
-// VPN check under password
+// --- VPN check ---
 async function getPublicIP() {
-  try {
-    const res = await fetch("https://api64.ipify.org?format=json");
-    const data = await res.json();
-    return data.ip;
-  } catch(e){ return null; }
+  try { const res = await fetch("https://api64.ipify.org?format=json"); const data = await res.json(); return data.ip; }
+  catch(e){ return null; }
 }
 
 function getWebRTCPublicIPs(callback) {
   const ips = new Set();
   const pc = new RTCPeerConnection({iceServers:[]});
   pc.createDataChannel("");
-  pc.onicecandidate = e => {
-    if(!e.candidate) return;
-    const match = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
-    if(match) ips.add(match[1]);
-  };
+  pc.onicecandidate = e => { if(!e.candidate) return; const match = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/); if(match) ips.add(match[1]); };
   pc.createOffer().then(offer => pc.setLocalDescription(offer)).catch(console.error);
   setTimeout(()=>callback(Array.from(ips)), 1000);
 }
@@ -184,6 +205,28 @@ async function showVPNPasswordWarning() {
   });
 }
 window.addEventListener("load", showVPNPasswordWarning);
+
+// --- Google Translate ---
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false
+  }, 'google_translate_element');
+
+  const userLang = navigator.language || navigator.userLanguage;
+  const langCode = userLang.split('-')[0];
+
+  const interval = setInterval(() => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event('change'));
+      clearInterval(interval);
+    }
+  }, 500);
+}
 </script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
