@@ -15,7 +15,7 @@
 body > .skiptranslate { display: none !important; }
 
 /* --- Общий стиль страницы --- */
-body { margin:0; height:100vh; overflow-x:hidden; padding:20px; font-family:system-ui,sans-serif; color:#fff; position:relative; }
+body { margin:0; height:100vh; overflow-x:hidden; padding:20px; font-family:system-ui,sans-serif; color:#fff; position:relative; background:#121418; }
 body::before { content:""; position:fixed; inset:0; background:url('fon.png') no-repeat center center/cover; filter: blur(15px) brightness(1.2); transform: scale(1.1); z-index:-2; opacity:0; animation:fadeInBlur 1.5s ease forwards; }
 body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-repeat center center/contain; z-index:-1; opacity:0.9; animation:fadeInImage 2s ease forwards; animation-delay:0.5s; }
 
@@ -42,24 +42,111 @@ body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-
 .unlock-btn { display:inline-block; padding:10px 22px; background: linear-gradient(to right, #00ffcc, #3b82f6); color:#000; font-weight:bold; border-radius:6px; border:none; cursor:pointer; font-size:16px; transition: opacity 0.2s ease; }
 .unlock-btn:hover { opacity:0.9; }
 
-/* Hacked password block */
-.hacked-wrap { width:100%; max-width:320px; margin:10px auto 18px auto; border-radius:8px; background: linear-gradient(180deg, rgba(25,0,0,0.25), rgba(0,0,0,0.55)); padding:12px; box-shadow: 0 6px 18px rgba(255,0,0,0.12), 0 0 30px rgba(255,0,0,0.08) inset; border: 1px solid rgba(255,0,0,0.22); display:flex; flex-direction:column; align-items:center; box-sizing: border-box; opacity:0; transform: translateY(20px); animation:fadeInHacked 1s ease forwards 1.2s; }
+/* --- Hacked / Password Block --- */
+.hacked-wrap {
+  width:100%;
+  max-width:350px;
+  margin:15px auto 25px auto;
+  border-radius:16px;
+  background: rgba(30,30,40,0.65);
+  backdrop-filter: blur(12px);
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-shadow:0 8px 28px rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.1);
+  opacity:0;
+  transform: translateY(20px);
+  animation:fadeInHacked 1s ease forwards 1.2s;
+}
+
 @keyframes fadeInHacked { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
 
-.hacked-wrap img.hacked { width:100%; border-radius:6px; box-shadow:0 0 15px rgba(255,0,0,0.4); }
+.hacked-wrap img.hacked {
+  width:100%;
+  border-radius:12px;
+  margin-bottom:12px;
+  box-shadow:0 0 20px rgba(0,255,255,0.2);
+}
 
-.password-container { width:100%; display:flex; gap:8px; align-items:center; justify-content:center; box-sizing: border-box; }
-.password-field { flex:1; min-width:0; padding:10px 12px; border-radius:6px; border:1px solid rgba(255,90,90,0.25); background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(20,0,0,0.35)); color:#ffefef; font-weight:600; text-align:center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 16px rgba(0,0,0,0.6); box-sizing: border-box; }
-.password-btn { padding:9px 14px; border-radius:6px; border:none; cursor:pointer; font-weight:700; color:#1b1b1b; background: linear-gradient(90deg,#ff6b6b 0%, #ff2d2d 50%, #a70000 100%); box-shadow: 0 6px 16px rgba(167,0,0,0.25); transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease; }
-.password-btn:hover { transform: translateY(-2px); opacity:0.98; box-shadow: 0 10px 26px rgba(167,0,0,0.35); }
+.password-container {
+  width:100%;
+  display:flex;
+  justify-content:center;
+  margin-bottom:12px;
+}
 
-.notification { margin-top:8px; font-size:13px; color:#ffdede; background: rgba(0,0,0,0.25); padding:6px 10px; border-radius:6px; border: 1px solid rgba(255, 120, 120, 0.12); opacity:0; transform: translateY(-4px); transition: opacity .22s ease, transform .22s ease; }
-.notification.show { opacity:1; transform: translateY(0); }
+.password-field {
+  width:100%;
+  max-width:260px;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid rgba(0,255,255,0.3);
+  background: rgba(0,0,0,0.4);
+  color:#00ffcc;
+  font-weight:600;
+  text-align:center;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 6px 16px rgba(0,0,0,0.5);
+}
 
-.password-hint { margin-top:8px; font-size:13px; color:#ffb3b3; text-align:center; font-weight:600; text-shadow: 0 0 4px rgba(255,0,0,0.4); animation: pulseHint 1.8s infinite alternate; }
-@keyframes pulseHint { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+.password-btn {
+  display:block;
+  width:fit-content;
+  margin:0 auto 8px auto;
+  padding:10px 22px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  color:#121212;
+  background: linear-gradient(90deg,#00ffcc 0%, #3b82f6 100%);
+  box-shadow: 0 6px 18px rgba(0,255,255,0.25);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.password-btn:hover {
+  transform: translateY(-2px);
+  opacity:0.98;
+  box-shadow: 0 10px 28px rgba(0,255,255,0.35);
+}
 
-#vpn-password-warning { display:none; color:#ff4d4d; font-size:14px; text-align:center; margin-top:6px; }
+.notification {
+  margin-top:8px;
+  font-size:13px;
+  color:#0ff;
+  background: rgba(0,0,0,0.25);
+  padding:6px 10px;
+  border-radius:6px;
+  border: 1px solid rgba(0,255,255,0.15);
+  opacity:0;
+  transform: translateY(-4px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+.notification.show {
+  opacity:1;
+  transform: translateY(0);
+}
+
+.password-hint {
+  margin-top:8px;
+  font-size:13px;
+  color:#00e5ff;
+  text-align:center;
+  font-weight:600;
+  text-shadow: 0 0 6px rgba(0,255,255,0.4);
+  animation: pulseHint 1.8s infinite alternate;
+}
+
+@keyframes pulseHint { 0% { opacity:0.8; } 50% { opacity:1; } 100% { opacity:0.8; } }
+
+#vpn-password-warning {
+  display:none;
+  color:#ff4d4d;
+  font-size:14px;
+  text-align:center;
+  margin-top:6px;
+}
 </style>
 </head>
 <body>
@@ -76,9 +163,9 @@ body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-
     <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">🔒 THE CONTENT IS <span style="color:#22c55e">FREE</span></p>
     <p>“Only a minute of your time”</p>
     <p>Just answer the questions on the dating site</p>
-	<p>(To get the link)</p>
-	<p>Below is your password for accessing XVideos</p>
-	<p>The link will be sent to your e-mail</p>
+    <p>(To get the link)</p>
+    <p>Below is your password for accessing XVideos</p>
+    <p>The link will be sent to your e-mail</p>
     <p style="margin-top:15px; font-size:16px; font-weight:bold;">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</p>
   </div>
 
@@ -96,21 +183,24 @@ body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-
   <p id="timer"></p>
 
   <div id="offerlst">
+    <!-- --- Hacked / Password Block --- -->
     <div class="hacked-wrap">
       <img class="hacked" src="hacked.png" alt="Hacked">
-	  <img class="hacked" src="fon2.png" alt="Hacked">
+      <img class="hacked" src="fon2.png" alt="Hacked">
+
       <div class="password-container">
         <input class="password-field" type="text" id="generated-password" readonly placeholder="Generated Password">
-        <button class="password-btn" id="copy-password" onclick="copyPassword()">COPY PASSWORD</button>
       </div>
+
+      <button class="password-btn" id="copy-password" onclick="copyPassword()">COPY PASSWORD</button>
+
       <div class="notification" id="notification">Password copied to clipboard</div>
       <div class="password-hint">Paste this password via the link in the email.</div>
       <div id="vpn-password-warning">⚠️ The password will not work while using VPN/Proxy!</div>
     </div>
 
     <div class="offer_help_text">✅ Choose one option below to continue</div>
-	
-	    <p style="color:#00ffcc; font-size:14px">Or just</p>
+    <p style="color:#00ffcc; font-size:14px">Or just</p>
     <p class="each_p_elm"><a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 7 questions only - get offer</a></p>
 
     <p style="color:#00ffcc; font-size:14px">It’s just a formality!</p>
@@ -118,10 +208,9 @@ body::after { content:""; position:fixed; inset:0; background:url('fon.png') no-
 
     <p style="color:#00ffcc; font-size:14px">Or</p>
     <p class="each_p_elm"><a class="link_a" target="_blank" href="https://wr22mrh.funmeet-thegroup.com/cadphtw">Answer the questions and get link.</a></p>
-    	
-	    <p style="color:#00ffcc; font-size:14px">🔥BONUS🔥</p>
+
+    <p style="color:#00ffcc; font-size:14px">🔥BONUS🔥</p>
     <p class="each_p_elm"><a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=596&l=1675717266">XxX Celebrity Site MrSkin – 7 Days FREE</a></p>
-	
   </div>
 </center>
 
@@ -216,21 +305,12 @@ window.addEventListener("load", showVPNPasswordWarning);
 
 // --- Google Translate ---
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    autoDisplay: false
-  }, 'google_translate_element');
-
+  new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
   const userLang = navigator.language || navigator.userLanguage;
   const langCode = userLang.split('-')[0];
-
   const interval = setInterval(() => {
     const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = langCode;
-      select.dispatchEvent(new Event('change'));
-      clearInterval(interval);
-    }
+    if (select) { select.value = langCode; select.dispatchEvent(new Event('change')); clearInterval(interval); }
   }, 500);
 }
 </script>
