@@ -32,22 +32,13 @@ body::before {
   content:"";
   position:fixed;
   inset:0;
-  background:url('fon.png') no-repeat center center/cover;
-  filter: blur(15px) brightness(1.2);
+  background:url('fon2.png') no-repeat center center/cover;
+
   transform: scale(1.1);
   z-index:-2;
   opacity:0;
   animation:fadeInBlur 1.5s ease forwards;
-}
-body::after {
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url('fon.png') no-repeat center center/contain;
-  z-index:-1;
-  opacity:0.9;
-  animation:fadeInImage 2s ease forwards;
-  animation-delay:0.5s;
+
 }
 @keyframes fadeInBlur { from{opacity:0;} to{opacity:1;} }
 @keyframes fadeInImage { from{opacity:0;transform:scale(1.05);} to{opacity:0.9;transform:scale(1);} }
@@ -266,6 +257,7 @@ body::after {
     <p>“Only a minute of your time”</p>
     <p>Below get password for accessing XVideos</p>
     <p style="font-size:16px; font-weight:bold; margin-bottom:10px;"><span style="color:#fdb54e">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</span></p>
+  <img src="fon.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
   </div>
 
   <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
@@ -284,7 +276,6 @@ body::after {
   <div id="offerlst">
     <div class="hacked-wrap">
       <img class="hacked" src="hacked.png" alt="Hacked">
-      <img class="hacked" src="fon2.png" alt="Hacked">
 
       <div class="password-container">
         <input class="password-field" type="text" id="generated-password" readonly placeholder="Generated Password">
