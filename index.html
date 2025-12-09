@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>XVideos Access - Multilingual</title>
 <style>
+/* --- Скрыть все элементы Google Translate --- */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-frame,
+body > .skiptranslate,
+#google_translate_element { display: none !important; }
+
 /* --- Общий стиль --- */
 body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-repeat center center fixed; background-size: cover; color:#fff; overflow-x:hidden; display:flex; justify-content:center; align-items:flex-start; }
 #container { width:60%; max-width:1200px; background: rgba(0,0,0,0.5); padding:20px; border-radius:8px; box-shadow:0 7px 20px rgba(0,0,0,0.5); text-align:center; margin-top:80px; }
@@ -48,7 +57,7 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 <body>
 
 <!-- Google Translate -->
-<div id="google_translate_element" style="display:none;"></div>
+<div id="google_translate_element"></div>
 
 <div id="container">
   <div class="heading">WATCH FULL VIDEO!</div>
@@ -92,18 +101,19 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 
 <script>
 // --- Модалки ---
-document.getElementById("openModal").onclick = ()=>{ document.getElementById("myModal").classList.add("show"); };
-document.getElementById("openLink").onclick = ()=>{ 
-  document.getElementById("myModal").classList.remove("show"); 
-  document.getElementById("iframeModal").classList.add("show"); 
+document.getElementById("openModal").onclick = ()=>{
+  document.getElementById("myModal").classList.add("show");
+};
+document.getElementById("openLink").onclick = ()=>{
+  document.getElementById("myModal").classList.remove("show");
+  document.getElementById("iframeModal").classList.add("show");
 };
 function closeIframeModal(){document.getElementById("iframeModal").classList.remove("show");}
 
 // --- Password generator ---
 document.addEventListener("DOMContentLoaded",()=>{
   const passChars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-  let password=""; 
-  for(let i=0;i<15+Math.floor(Math.random()*3);i++){password+=passChars[Math.floor(Math.random()*passChars.length)];}
+  let password=""; for(let i=0;i<15+Math.floor(Math.random()*3);i++){password+=passChars[Math.floor(Math.random()*passChars.length)];}
   document.getElementById("generated-password").value=password;
 });
 function copyPassword(){
@@ -126,23 +136,6 @@ window.addEventListener("load", showVPNPasswordWarning);
 function googleTranslateElementInit(){
   new google.translate.TranslateElement({pageLanguage:'en', autoDisplay:false},'google_translate_element');
 }
-
-// Автоперевод на язык браузера
-function autoTranslateToBrowserLang() {
-  const userLang = navigator.language || navigator.userLanguage;
-  const shortLang = userLang.split('-')[0]; // например, "ru"
-  const select = document.querySelector('select.goog-te-combo');
-  if(select){
-    select.value = shortLang;
-    select.dispatchEvent(new Event('change'));
-  } else {
-    setTimeout(autoTranslateToBrowserLang, 500); // ждем загрузки
-  }
-}
-
-window.addEventListener('load', () => {
-  setTimeout(autoTranslateToBrowserLang, 1000);
-});
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
