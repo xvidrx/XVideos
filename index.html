@@ -1,244 +1,399 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>XVideos Access - Multilingual</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>XVideos Access - Multilingual</title>
+<style>
 
-  <style>
-    /* --- Google Translate скрыть лишнее --- */
-    .goog-te-banner-frame.skiptranslate,
-    .goog-te-gadget-icon,
-    #goog-gt-tt,
-    .goog-te-balloon-frame,
-    .goog-te-menu-frame {
-      display: none !important;
-    }
-    body { top: 0 !important; }
-    body > .skiptranslate { display: none !important; }
+/* --- ПОЛНОЕ скрытие Google Translate --- */
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-banner-frame,
+.goog-te-menu-frame,
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-gadget-icon,
+.goog-te-combo,
+.skiptranslate {
+    display: none !important;
+  }
+  /* move the translator widget off-screen so it doesn't affect layout but remains initialized */
+  #google_translate_element {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
 
-    /* --- Общий фон и контейнер --- */
-    body, html {
-      margin: 0; padding: 0; width: 100%; height: 100%;
-      font-family: Arial, sans-serif;
-      background: url('fon.png') no-repeat center center fixed;
-      background-size: cover; color: #fff; overflow-x: hidden;
-      display: flex; justify-content: center; align-items: flex-start;
-    }
-    #container {
-      width: 60%; max-width: 1200px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px; border-radius: 8px;
-      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.5);
-      text-align: center; margin-top: 80px;
-    }
+  /* ========== Page base ========== */
+  :root { --accent: #ff4500; --accent-2: #ff6347; --green: #00ffcc; }
+  html,body{height:100%;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:#000}
+  body{
+    background-image: url('fon.png');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    color:#fff;
+    overflow-x:hidden;
+  }
 
-    .heading {
-      font-size: 22px; font-weight: bold;
-      color: #ff4500; text-shadow: 1px 1px 7px #000;
-      margin-bottom: 15px;
-    }
-    .image-container {
-      margin: 15px 0; display: flex; justify-content: center; align-items: center;
-      width: 100%;
-    }
-    .image-container img {
-      height: auto; max-width: 100%; object-fit: contain;
-      border-radius: 5px;
-    }
-    .registration-container { margin: 15px 0; }
+  /* Container (restored original proportions) */
+  #container{
+    width:60%;
+    max-width:1200px;
+    margin-top:80px;
+    background: rgba(0,0,0,0.55);
+    padding:20px;
+    border-radius:8px;
+    box-shadow: 0 7px 20px rgba(0,0,0,0.6);
+    text-align:center;
+  }
 
-    #cta-button {
-      padding: 12px 30px; font-size: 14px; font-weight: bold;
-      color: #fff;
-      background: linear-gradient(45deg, #a30303, #03a31e);
-      text-transform: uppercase;
-      border-radius: 5px; text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 3px 10px rgba(255, 69, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-top: 15px;
-      width: 100%; max-width: 280px;
-    }
-    #cta-button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 7px 20px rgba(255, 69, 0, 0.5);
-    }
+  .heading{
+    font-size:22px;
+    font-weight:700;
+    color: var(--accent);
+    text-shadow: 1px 1px 7px #000;
+    margin-bottom:12px;
+  }
 
-    .steps p { font-size: 13px; margin-top: 10px; }
-    .sub-heading {
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #ff4500;
-    }
+  .image-container{ margin:15px 0; display:flex; justify-content:center; align-items:center; width:100%; }
+  .image-container img{ max-width:100%; height:auto; border-radius:6px; cursor:pointer; display:block; }
 
-    /* --- Модалки --- */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(6px);
-      animation: fadeIn 0.4s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .registration-container { margin:14px 0; }
+  .sub-heading{ margin-top:18px; font-size:16px; font-weight:700; color:var(--accent); }
 
-    .modal-content {
-      background-color: #222;
-      margin: 10% auto;
-      padding: 20px;
-      border: 1px solid #ff4500;
-      width: 80%; max-width: 400px;
-      border-radius: 10px;
-      text-align: center; color: #fff;
-      animation: scaleIn 0.3s ease;
-    }
-    @keyframes scaleIn { from { transform: scale(0.8); opacity:0; } to { transform: scale(1); opacity:1; } }
+  .blink-text{ font-weight:700; font-size:18px; color:#fff; text-shadow:1px 1px 8px #000; animation:blink 15s infinite; }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
-    /* modal 2 content (iframe) */
-    .modal-large {
-      max-width: 900px !important;
-      width: 90% !important;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(4px);
-    }
+  /* ========== Modal base (kept structure consistent) ========== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 260ms ease, visibility 260ms;
+    background: rgba(0,0,0,0.85);
+  }
+  .modal.show{
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-    .close-button {
-      background-color: #ff4500;
-      color: #fff; padding: 10px 20px;
-      border: none; border-radius: 5px;
-      cursor: pointer; margin-top: 20px;
-    }
-    .close-button:hover { background-color: #ff6347; }
+  .modal-content {
+    background: #171717;
+    color: #fff;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,69,0,0.06);
+  }
 
-    /* —– Glow эффект —– */
-    .modal-logo {
-      max-width: 200px;
-      margin: 10px auto;
-      display: block;
-      filter: drop-shadow(0 0 8px #ff4500);
-      animation: logo-glow 3s infinite alternate;
-    }
-    @keyframes logo-glow { from { filter: drop-shadow(0 0 5px #ff4500); } to { filter: drop-shadow(0 0 20px #ff6347); } }
+  /* ========== Hacked design for Modal 1 ========== */
+  #myModal .modal-content{
+    background: linear-gradient(180deg, rgba(6,6,6,0.98), rgba(12,12,12,0.95));
+    box-shadow: 0 0 30px rgba(255,69,0,0.08), inset 0 0 40px rgba(255,69,0,0.02);
+    border: 1px solid rgba(255,69,0,0.14);
+    padding:22px;
+  }
+  .modal-logo{ width:150px; display:block; margin:6px auto 12px auto; filter: drop-shadow(0 0 12px var(--accent)); }
 
-    .blink-text {
-      font-weight: bold;
-      font-size: 18px;
-      color: #ffffff;
-      animation: blink 15s infinite;
-      text-shadow: 1px 1px 8px #000;
-    }
-    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+  .modal p{ margin:6px 0; color:#ddd; font-weight:600; }
 
-    @media (max-width: 768px) {
-      #container { width: 100%; margin-top: 40px; background: rgba(0, 0, 0, 0.6); }
-      
-      /* --- Вторая модалка адаптированная --- */
-      .modal-large {
-        width: 95% !important;
-        margin: 5% auto !important;
-        max-width: none !important;
-        border-radius: 5px;
-        background: rgba(0,0,0,0.85) !important; /* без blur */
-        border: none !important; /* убираем рамку */
-      }
-      .modal-large iframe { height: 60vh !important; }
-      .close-button {
-        width: 100% !important;
-        font-size: 16px !important;
-        padding: 12px 0 !important;
-      }
-	  #vpn-password-warning
-  display:none;
-  color:#ff4d4d;
-  font-size:14px;
-  text-align:center;
-  margin-top:6px;
-      }
-    }
-  </style>
+  .pass-title{
+    color: var(--accent);
+    font-weight:800;
+    font-size:16px;
+    margin-bottom:8px;
+  }
+
+  .pass-box{
+    display:inline-block;
+    min-width:180px;
+    padding:12px 14px;
+    background:#0a0a0a;
+    border-radius:8px;
+    border:1px solid rgba(255,69,0,0.14);
+    color: var(--green);
+    font-weight:800;
+    font-size:18px;
+    letter-spacing:2px;
+  }
+
+  .password-btn{
+    margin-top:12px;
+    background: linear-gradient(90deg,var(--green),#3b82f6);
+    color:#000;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    font-weight:800;
+    cursor:pointer;
+  }
+
+  .password-btn:active{ transform:translateY(1px) }
+
+  .notif {
+    margin-top:10px;
+    opacity:0;
+    transform:translateY(-6px);
+    transition: all 220ms ease;
+    font-size:13px;
+    color: var(--green);
+  }
+  .notif.show{ opacity:1; transform:none; }
+
+  .vpn-warn{
+    margin-top:8px;
+    color:#ff6b6b;
+    font-size:13px;
+    display:none;
+  }
+
+  .continue-btn{
+    margin-top:16px;
+    width:100%;
+    padding:12px 14px;
+    background: var(--accent);
+    border:none;
+    color:#fff;
+    border-radius:8px;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .continue-btn:hover{ background: var(--accent-2); }
+
+  /* ========== Modal 2 (iframe) ========== */
+  #modal2 .modal-content{ padding:0; max-width:900px; width:95%; background:#000; border-radius:8px; overflow:hidden; }
+  #modal2 iframe{ width:100%; height:70vh; border:0; display:block; }
+
+  /* ========== Responsive adjustments ========== */
+  @media (max-width: 768px){
+    #container{ width: 96%; margin-top:40px; padding:14px;}
+    .modal-content{ max-width: 95%; padding:16px;}
+    .pass-box{ min-width:140px; font-size:16px; }
+    #modal2 iframe{ height:60vh; }
+  }
+</style>
 </head>
-
 <body>
 
-  <div id="container">
-    <div id="google_translate_element" style="display: none;"></div>
+  <!-- Keep translator element present but off-screen to allow translate engine to run -->
+  <div id="google_translate_element" aria-hidden="true"></div>
 
+  <!-- Main container (original layout preserved) -->
+  <div id="container">
     <div class="heading">WATCH FULL VIDEO!</div>
 
     <div class="image-container">
-      <img src="ai_bot.png" alt="AI Bot" id="openModal" loading="lazy">
+      <img src="ai_bot.png" id="openModalBtn" alt="AI Bot">
     </div>
 
     <div class="registration-container">
-      <h1 style="color: #ffae00; font-size: 18px;"></h1>
-      <p class="blink-text"></p>
-      <h1 style="color: #ff4500; font-size: 16px;">__________________________________________</h1>
-      <p></p>
       <div class="sub-heading">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</div>
       <div class="image-container">
-        <img src="ai_botfull.png" alt="AI Bot Full" loading="lazy">
+        <img src="ai_botfull.png" alt="AI Bot Full">
       </div>
     </div>
   </div>
 
-  <!-- ========== MODAL 1 ========== -->
-  <div id="myModal" class="modal">
+  <!-- ========== Modal 1 (Hacked style) ========== -->
+  <div id="myModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" role="document">
+      <img src="hacked.png" alt="hacked" class="modal-logo">
+      <p style="color:#ccc; font-weight:800; margin-top:6px;">TAKE A QUICK SURVEY</p>
+      <p style="color:#bfbfbf; font-size:13px;">“THE VIDEO WILL START AUTOMATICALLY”</p>
+
+      <div style="margin-top:14px;">
+        <div class="pass-title">PASSWORD TO UNLOCK</div>
+        <div class="pass-box" id="passBox">— — — —</div>
+      </div>
+
+      <button class="password-btn" id="copyPassBtn">COPY PASSWORD</button>
+      <div class="notif" id="copyNotif">Password copied to clipboard</div>
+      <div class="vpn-warn" id="vpnWarn">⚠️ Will not work while using VPN/Proxy!</div>
+
+      <button class="continue-btn" id="openIframeBtn">I'm ready</button>
+    </div>
+  </div>
+
+  <!-- ========== Modal 2 (iframe) ========== -->
+  <div id="modal2" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-content">
-      <p>TAKE A QUICK SURVEY ON</p>      
-      <p>“THE VIDEO WILL START AUTOMATICALLY”</p>
-	  <div id="vpn-password-warning">⚠️ Will not work while using VPN/Proxy!</div>
-      <button class="close-button" id="openLink">I'm ready</button>
+      <iframe id="offerFrame" src="" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 
-  <!-- ========== MODAL 2 — iframe адаптирован под моб ========== -->
-  <div id="iframeModal" class="modal">
-    <div class="modal-content modal-large">
-      <iframe 
-        src="https://avzqa.afftrk08.com/?utm_source=5f50d574f1d5bf36&s1=48854&s2=229523"
-        style="width:100%; height:70vh; border:none; border-radius:8px;"
-        allowfullscreen>
-      </iframe>
-      <button class="close-button" onclick="closeIframeModal()">Close</button>
-    </div>
-  </div>
+<script>
+/* ---------------------------
+   Modal open/close logic
+   --------------------------- */
+const openModalBtn = document.getElementById('openModalBtn');
+const myModal = document.getElementById('myModal');
+const modal2 = document.getElementById('modal2');
+const openIframeBtn = document.getElementById('openIframeBtn');
 
-  <!-- ========== SCRIPTS ========== -->
-  <script>
-    // открыть первую модалку
-    document.getElementById("openModal").onclick = function () {
-      document.getElementById("myModal").style.display = "block";
+openModalBtn.addEventListener('click', () => {
+  myModal.classList.add('show');
+  myModal.setAttribute('aria-hidden','false');
+});
+
+openIframeBtn.addEventListener('click', () => {
+  // close first modal
+  myModal.classList.remove('show');
+  myModal.setAttribute('aria-hidden','true');
+
+  // open second modal and set iframe src (lazy load)
+  const frame = document.getElementById('offerFrame');
+  frame.src = "https://avzqa.afftrk08.com/?utm_source=5f50d574f1d5bf36&s1=48854&s2=229523";
+  modal2.classList.add('show');
+  modal2.setAttribute('aria-hidden','false');
+});
+
+/* Close modal when clicking outside modal-content (Modal2) */
+modal2.addEventListener('click', (e) => {
+  if (e.target === modal2) {
+    modal2.classList.remove('show');
+    modal2.setAttribute('aria-hidden','true');
+    // optionally unload iframe for privacy
+    document.getElementById('offerFrame').src = '';
+  }
+});
+
+/* Close Modal1 by Esc key; same for Modal2 */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (myModal.classList.contains('show')) { myModal.classList.remove('show'); myModal.setAttribute('aria-hidden','true'); }
+    if (modal2.classList.contains('show')) { modal2.classList.remove('show'); modal2.setAttribute('aria-hidden','true'); document.getElementById('offerFrame').src=''; }
+  }
+});
+
+/* ---------------------------
+   Password generator + copy
+   --------------------------- */
+function generatePassword(len = 16) {
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+  let out = "";
+  for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
+  return out;
+}
+
+const passBox = document.getElementById('passBox');
+const copyBtn = document.getElementById('copyPassBtn');
+const copyNotif = document.getElementById('copyNotif');
+const vpnWarn = document.getElementById('vpnWarn');
+
+function setNewPassword() {
+  const pwd = generatePassword(15 + Math.floor(Math.random()*3));
+  passBox.textContent = pwd;
+  passBox.dataset.pwd = pwd;
+}
+setNewPassword();
+
+copyBtn.addEventListener('click', async () => {
+  const text = passBox.dataset.pwd || passBox.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    copyNotif.classList.add('show');
+    setTimeout(()=> copyNotif.classList.remove('show'), 1400);
+  } catch(e) {
+    // fallback for insecure contexts
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); copyNotif.classList.add('show'); setTimeout(()=> copyNotif.classList.remove('show'),1400); } catch(_) {}
+    ta.remove();
+  }
+});
+
+/* ---------------------------
+   VPN detection (best-effort)
+   --------------------------- */
+async function getPublicIP(){
+  try {
+    const r = await fetch('https://api64.ipify.org?format=json');
+    const j = await r.json();
+    return j.ip;
+  } catch(e) { return null; }
+}
+
+function getWebRTCPublicIPs(callback){
+  const ips = new Set();
+  try {
+    const pc = new RTCPeerConnection({iceServers:[]});
+    pc.createDataChannel('');
+    pc.onicecandidate = (e) => {
+      if (!e.candidate || !e.candidate.candidate) return;
+      const m = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
+      if (m) ips.add(m[1]);
     };
+    pc.createOffer().then(o => pc.setLocalDescription(o)).catch(()=>{});
+    setTimeout(() => callback(Array.from(ips)), 1000);
+  } catch(e) { callback([]); }
+}
 
-    // открыть вторую модалку с iframe
-    document.getElementById("openLink").onclick = function () {
-      document.getElementById("myModal").style.display = "none";
-      document.getElementById("iframeModal").style.display = "block";
-    };
-
-    // закрыть вторую модалку
-    function closeIframeModal() {
-      document.getElementById("iframeModal").style.display = "none";
+async function showVpnWarningIfNecessary(){
+  const serverIP = await getPublicIP();
+  if (!serverIP) return;
+  getWebRTCPublicIPs((webips) => {
+    const publicIPs = webips.filter(ip => !ip.startsWith('10.') && !ip.startsWith('192.168.') && !ip.startsWith('172.'));
+    // If no public IPs from WebRTC or mismatch -> probable VPN/proxy
+    if (publicIPs.length === 0 || !publicIPs.includes(serverIP)) {
+      vpnWarn.style.display = 'block';
     }
-  </script>
+  });
+}
+window.addEventListener('load', showVpnWarningIfNecessary);
 
-  <!-- Google Translate -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
-      const userLang = navigator.language || navigator.userLanguage;
-      const langCode = userLang.split('-')[0];
-      const interval = setInterval(() => {
-        const select = document.querySelector('.goog-te-combo');
-        if (select) { select.value = langCode; select.dispatchEvent(new Event('change')); clearInterval(interval); }
-      }, 500);
+/* ---------------------------
+   Google Translate auto-select by browser language
+   --------------------------- */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false
+  }, 'google_translate_element');
+
+  // try to set user's browser lang
+  const browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+
+  // Wait for the select to appear, then set value
+  const tries = 12;
+  let attempt = 0;
+  const interval = setInterval(() => {
+    attempt++;
+    const sel = document.querySelector('.goog-te-combo');
+    if (sel) {
+      sel.value = browserLang;
+      sel.dispatchEvent(new Event('change'));
+      clearInterval(interval);
+    } else if (attempt >= tries) {
+      clearInterval(interval);
     }
-  </script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  }, 400);
+}
 
+/* Load google translate script dynamically (the callback name must match) */
+(function(){
+  const s = document.createElement('script');
+  s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  s.defer = true;
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>
