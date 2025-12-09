@@ -151,6 +151,13 @@
         font-size: 16px !important;
         padding: 12px 0 !important;
       }
+	  #vpn-password-warning
+  display:none;
+  color:#ff4d4d;
+  font-size:14px;
+  text-align:center;
+  margin-top:6px;
+      }
     }
   </style>
 </head>
@@ -181,9 +188,9 @@
   <!-- ========== MODAL 1 ========== -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <p>TAKE A QUICK SURVEY ON</p>
-      
+      <p>TAKE A QUICK SURVEY ON</p>      
       <p>“THE VIDEO WILL START AUTOMATICALLY”</p>
+	  <div id="vpn-password-warning">⚠️ Will not work while using VPN/Proxy!</div>
       <button class="close-button" id="openLink">I'm ready</button>
     </div>
   </div>
