@@ -135,11 +135,15 @@
 
     @media (max-width: 768px) {
       #container { width: 100%; margin-top: 40px; background: rgba(0, 0, 0, 0.6); }
+      
+      /* --- Вторая модалка адаптированная --- */
       .modal-large {
         width: 95% !important;
         margin: 5% auto !important;
         max-width: none !important;
         border-radius: 5px;
+        background: rgba(0,0,0,0.85) !important; /* без blur */
+        border: none !important; /* убираем рамку */
       }
       .modal-large iframe { height: 60vh !important; }
       .close-button {
@@ -178,7 +182,7 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <p>TAKE A QUICK SURVEY ON</p>
-     
+      
       <p>“THE VIDEO WILL START AUTOMATICALLY”</p>
       <button class="close-button" id="openLink">I'm ready</button>
     </div>
