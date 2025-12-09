@@ -5,8 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>XVideos Access - Multilingual</title>
 <style>
+/* --- Плавное появление всей страницы --- */
+body { 
+  margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-repeat center center fixed; 
+  background-size: cover; color:#fff; overflow-x:hidden; display:flex; justify-content:center; align-items:flex-start; 
+  opacity:0; transition: opacity 0.5s ease; 
+}
+
 /* --- Общий стиль --- */
-body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-repeat center center fixed; background-size: cover; color:#fff; overflow-x:hidden; display:flex; justify-content:center; align-items:flex-start; }
 #container { width:60%; max-width:1200px; background: rgba(0,0,0,0.5); padding:20px; border-radius:8px; box-shadow:0 7px 20px rgba(0,0,0,0.5); text-align:center; margin-top:80px; }
 .heading { font-size:22px; font-weight:bold; color:#ff4500; text-shadow:1px 1px 7px #000; margin-bottom:15px; }
 .image-container { margin:15px 0; display:flex; justify-content:center; align-items:center; width:100%; }
@@ -19,8 +25,18 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 /* --- Модалки --- */
 .modal { display:flex; opacity:0; pointer-events:none; visibility:hidden; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85); justify-content:center; align-items:center; transition: opacity 0.3s ease; }
 .modal.show { opacity:1; pointer-events:auto; visibility:visible; }
-.modal-content { background-color:#222; padding:20px; border-radius:10px; max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6); }
-.close-button, .unlock-btn, .password-btn { cursor:pointer; border:none; border-radius:5px; font-weight:bold; }
+
+/* Плавное появление модалок и их содержимого */
+.modal-content { background-color:#222; padding:20px; border-radius:10px; max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6); transform: translateY(-20px); opacity:0; transition: opacity 0.4s ease, transform 0.4s ease; }
+.modal.show .modal-content { transform: translateY(0); opacity:1; }
+
+.close-button, .unlock-btn, .password-btn { cursor:pointer; border:none; border-radius:5px; font-weight:bold; opacity:0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+.modal.show .close-button,
+.modal.show .unlock-btn,
+.modal.show .password-btn,
+.modal.show .hacked-wrap { opacity:1; transform:translateY(0); }
+
+/* --- Кнопки --- */
 .close-button { background:#ff4500; color:#fff; padding:10px 20px; margin-top:15px; }
 .close-button:hover { background:#ff6347; }
 .unlock-btn { background:linear-gradient(to right,#00ffcc,#3b82f6); color:#000; padding:10px 22px; margin-top:15px; }
@@ -29,7 +45,7 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 .password-btn:hover { transform:translateY(-2px); opacity:0.98; }
 
 /* --- Генератор пароля --- */
-.hacked-wrap { width:100%; max-width:340px; margin:15px auto; border-radius:16px; background: rgba(30,30,40,0.65); padding:20px; display:flex; flex-direction:column; align-items:center; box-shadow:0 8px 28px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.1); }
+.hacked-wrap { width:100%; max-width:340px; margin:15px auto; border-radius:16px; background: rgba(30,30,40,0.65); padding:20px; display:flex; flex-direction:column; align-items:center; box-shadow:0 8px 28px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.1); opacity:0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
 .password-container { width:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:12px; }
 .password-hint { margin-bottom:6px; font-size:14px; color:#ff4500; font-weight:bold; text-align:center; }
 .password-field { width:100%; max-width:260px; padding:12px 14px; border-radius:8px; border:1px solid rgba(0,255,255,0.3); background: rgba(0,0,0,0.4); color:#00ffcc; font-weight:600; text-align:center; }
@@ -39,7 +55,8 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 
 /* --- iframe модалка --- */
 .modal-large { max-width:900px; width:90%; background: rgba(0,0,0,0.85); border-radius:5px; }
-.modal-large iframe { width:100%; height:70vh; border:none; border-radius:8px; }
+.modal-large iframe { width:100%; height:70vh; border:none; border-radius:8px; opacity:0; transition: opacity 0.5s ease; }
+.modal.show .modal-large iframe { opacity:1; }
 
 /* --- Адаптив --- */
 @media(max-width:768px){ #container{width:95%; margin-top:40px;} .modal-large{width:95%; margin:5% auto; border:none; background: rgba(0,0,0,0.85);} .modal-large iframe{height:60vh;} .close-button{width:100%; font-size:16px; padding:12px 0;} }
@@ -92,12 +109,27 @@ body { margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-r
 
 <script>
 // --- Модалки ---
-document.getElementById("openModal").onclick = ()=>{ document.getElementById("myModal").classList.add("show"); };
+document.getElementById("openModal").onclick = ()=>{ 
+  const modal = document.getElementById("myModal");
+  modal.classList.add("show"); 
+  animateModalElements(modal);
+};
 document.getElementById("openLink").onclick = ()=>{ 
-  document.getElementById("myModal").classList.remove("show"); 
-  document.getElementById("iframeModal").classList.add("show"); 
+  const modal = document.getElementById("myModal");
+  modal.classList.remove("show"); 
+  const iframeModal = document.getElementById("iframeModal");
+  iframeModal.classList.add("show"); 
+  animateModalElements(iframeModal);
 };
 function closeIframeModal(){document.getElementById("iframeModal").classList.remove("show");}
+
+// --- Анимация внутренних элементов модалок ---
+function animateModalElements(modal){
+  const elements = modal.querySelectorAll('.hacked-wrap, .password-btn, .close-button');
+  elements.forEach((el,i)=>{
+    el.style.transitionDelay = `${0.15*i}s`;
+  });
+}
 
 // --- Password generator ---
 document.addEventListener("DOMContentLoaded",()=>{
@@ -127,21 +159,24 @@ function googleTranslateElementInit(){
   new google.translate.TranslateElement({pageLanguage:'en', autoDisplay:false},'google_translate_element');
 }
 
-// Автоперевод на язык браузера
-function autoTranslateToBrowserLang() {
+// Автоперевод на язык браузера с плавным появлением страницы
+function autoTranslateToBrowserLang(callback) {
   const userLang = navigator.language || navigator.userLanguage;
-  const shortLang = userLang.split('-')[0]; // например, "ru"
+  const shortLang = userLang.split('-')[0];
   const select = document.querySelector('select.goog-te-combo');
   if(select){
     select.value = shortLang;
     select.dispatchEvent(new Event('change'));
+    if(callback) callback();
   } else {
-    setTimeout(autoTranslateToBrowserLang, 500); // ждем загрузки
+    setTimeout(()=>autoTranslateToBrowserLang(callback), 500);
   }
 }
 
 window.addEventListener('load', () => {
-  setTimeout(autoTranslateToBrowserLang, 1000);
+  setTimeout(()=>autoTranslateToBrowserLang(()=>{
+    document.body.style.opacity = 1; // плавно показываем страницу
+  }), 1000);
 });
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
