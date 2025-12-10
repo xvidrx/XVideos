@@ -178,16 +178,16 @@ document.getElementById("openLink").onclick = ()=>{
   const ua = navigator.userAgent || navigator.vendor || window.opera;
   const offerURL = getOfferURL();
 
-  if (/android/i.test(ua)) {
-    // Статическое изображение для Android
-    const img = document.createElement("img");
-    img.src = "android_placeholder.png"; // путь к твоему изображению
-    img.style.width = "100%";
-    img.style.borderRadius = "8px";
-    img.style.cursor = "pointer";
-    img.onclick = () => window.open(offerURL, "_blank");
-    wrapper.appendChild(img);
-  } else {
+if (/android/i.test(ua)) {
+  // Для Android — статическое изображение (placeholder)
+  const img = document.createElement("img");
+  img.src = "android_placeholder.png"; // <-- локальный файл
+  img.style.width = "100%";
+  img.style.borderRadius = "8px";
+  img.style.cursor = "pointer";
+  img.onclick = () => window.open(offerURL, "_blank");
+  wrapper.appendChild(img);
+ }
     // iOS и Desktop — iframe
     const iframe = document.createElement("iframe");
     iframe.src = offerURL;
@@ -247,3 +247,4 @@ window.addEventListener("load", showVPNPasswordWarning);
 
 </body>
 </html>
+
