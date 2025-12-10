@@ -5,56 +5,98 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>XVideos Access - Multilingual</title>
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: url('fon.png') no-repeat center center fixed;
-  background-size: cover;
-  color:#fff;
-  overflow-x:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-}
-#container {
-  width:60%;
-  max-width:1200px;
-  background: rgba(0,0,0,0.55);
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 7px 20px rgba(0,0,0,0.5);
-  text-align:center;
-  margin-top:80px;
-}
-.heading { font-size:22px; font-weight:bold; color:#ff4500; text-shadow:1px 1px 7px #000; margin-bottom:15px; }
-.sub-heading { margin-top:20px; font-size:16px; font-weight:bold; color:#ff4500; }
-.image-container { margin:15px 0; display:flex; justify-content:center; align-items:center; width:100%; }
-.image-container img { max-width:100%; height:auto; object-fit:contain; border-radius:5px; cursor:pointer; }
-.modal { display:flex; opacity:0; pointer-events:none; visibility:hidden; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.85); justify-content:center; align-items:center; transition: opacity 0.3s ease; }
-.modal.show { opacity:1; pointer-events:auto; visibility:visible; }
-.modal-content { background-color:#222; padding:20px; border-radius:10px; max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6); transform: translateY(-20px); opacity:0; transition: opacity 0.4s ease, transform 0.4s ease; }
-.modal.show .modal-content { transform: translateY(0); opacity:1; }
-.close-button, .password-btn { cursor:pointer; border:none; border-radius:5px; font-weight:bold; transition: all 0.3s ease; }
-.close-button { background:#ff4500; color:#fff; padding:10px 20px; margin-top:15px; }
-.close-button:hover { background:#ff6347; }
-.password-btn { background:linear-gradient(90deg,#00ffcc,#3b82f6); color:#000; padding:10px 22px; margin-top:10px; }
-.password-btn:hover { transform:translateY(-2px); opacity:0.98; }
-.hacked-wrap { width:100%; max-width:340px; margin:15px auto; border-radius:16px; background: rgba(30,30,40,0.65); padding:20px; display:flex; flex-direction:column; align-items:center; box-shadow:0 8px 28px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.1); }
-.password-container { width:100%; display:flex; flex-direction:column; align-items:center; margin-bottom:12px; }
-.password-hint { margin-bottom:6px; font-size:14px; color:#ff4500; font-weight:bold; text-align:center; }
-.password-field { width:100%; max-width:260px; padding:12px 14px; border-radius:8px; border:1px solid rgba(0,255,255,0.3); background: rgba(0,0,0,0.4); color:#00ffcc; font-weight:600; text-align:center; }
-.notification { margin-top:8px; font-size:13px; color:#0ff; background: rgba(0,0,0,0.25); padding:6px 10px; border-radius:6px; border:1px solid rgba(0,255,255,0.15); opacity:0; transform:translateY(-4px); transition:opacity .22s ease, transform .22s ease; }
-.notification.show { opacity:1; transform:translateY(0); }
-#vpn-password-warning { display:none; color:#ff4d4d; font-size:14px; text-align:center; margin-top:6px; }
-.modal-large { max-width:900px; width:90%; background: rgba(0,0,0,0.85); border-radius:5px; }
-.iframe-wrapper { position:relative; cursor:pointer; width:100%; min-height:70vh; }
-#iframeClickOverlay { position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; }
-@media(max-width:768px){
-  #container{width:95%; margin-top:40px;}
-  .modal-large{width:95%; margin:5% auto;}
-  .iframe-wrapper{min-height:60vh;}
-  .close-button{width:100%; font-size:16px; padding:12px 0;}
-}
+  body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: url('fon.png') no-repeat center center fixed;
+    background-size: cover;
+    color:#fff;
+    overflow-x:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+  }
+  #container {
+    width:60%;
+    max-width:1200px;
+    background: rgba(0,0,0,0.55);
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 7px 20px rgba(0,0,0,0.5);
+    text-align:center;
+    margin-top:80px;
+  }
+  .heading { font-size:22px; font-weight:bold; color:#ff4500; text-shadow:1px 1px 7px #000; margin-bottom:15px; }
+  .sub-heading { margin-top:20px; font-size:16px; font-weight:bold; color:#ff4500; }
+
+  .image-container { margin:15px 0; display:flex; justify-content:center; align-items:center; width:100%; }
+  .image-container img { max-width:100%; height:auto; object-fit:contain; border-radius:5px; cursor:pointer; }
+
+  .modal { display:flex; opacity:0; pointer-events:none; visibility:hidden;
+    position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
+    background-color:rgba(0,0,0,0.85); justify-content:center; align-items:center;
+    transition: opacity 0.3s ease;
+  }
+  .modal.show { opacity:1; pointer-events:auto; visibility:visible; }
+
+  .modal-content { background-color:#222; padding:20px; border-radius:10px;
+    max-width:400px; width:90%; text-align:center; color:#fff;
+    box-shadow:0 0 20px rgba(0,0,0,0.6);
+    transform: translateY(-20px); opacity:0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .modal.show .modal-content { transform: translateY(0); opacity:1; }
+
+  .close-button, .password-btn { cursor:pointer; border:none; border-radius:5px;
+    font-weight:bold; transition: all 0.3s ease;
+  }
+  .close-button { background:#ff4500; color:#fff; padding:10px 20px; margin-top:15px; }
+  .close-button:hover { background:#ff6347; }
+  .password-btn { background:linear-gradient(90deg,#00ffcc,#3b82f6); color:#000;
+    padding:10px 22px; margin-top:10px;
+  }
+  .password-btn:hover { transform:translateY(-2px); opacity:0.98; }
+
+  .hacked-wrap { width:100%; max-width:340px; margin:15px auto;
+    border-radius:16px; background: rgba(30,30,40,0.65); padding:20px;
+    display:flex; flex-direction:column; align-items:center;
+    box-shadow:0 8px 28px rgba(0,0,0,0.45);
+    border:1px solid rgba(255,255,255,0.1);
+  }
+  .password-container { width:100%; display:flex; flex-direction:column;
+    align-items:center; margin-bottom:12px;
+  }
+  .password-hint { margin-bottom:6px; font-size:14px;
+    color:#ff4500; font-weight:bold; text-align:center;
+  }
+  .password-field { width:100%; max-width:260px; padding:12px 14px;
+    border-radius:8px; border:1px solid rgba(0,255,255,0.3);
+    background: rgba(0,0,0,0.4); color:#00ffcc;
+    font-weight:600; text-align:center;
+  }
+  .notification { margin-top:8px; font-size:13px; color:#0ff;
+    background: rgba(0,0,0,0.25); padding:6px 10px;
+    border-radius:6px; border:1px solid rgba(0,255,255,0.15);
+    opacity:0; transform:translateY(-4px);
+    transition:opacity .22s ease, transform .22s ease;
+  }
+  .notification.show { opacity:1; transform:translateY(0); }
+
+  #vpn-password-warning { display:none; color:#ff4d4d; font-size:14px;
+    text-align:center; margin-top:6px;
+  }
+
+  .modal-large { max-width:900px; width:90%; background: rgba(0,0,0,0.85);
+    border-radius:5px;
+  }
+  .iframe-wrapper { position:relative; cursor:pointer; width:100%; min-height:70vh; }
+
+  @media(max-width:768px){
+    #container{width:95%; margin-top:40px;}
+    .modal-large{width:95%; margin:5% auto;}
+    .iframe-wrapper{min-height:60vh;}
+    .close-button{width:100%; font-size:16px; padding:12px 0;}
+  }
 </style>
 </head>
 <body>
@@ -92,23 +134,23 @@ body {
 </div>
 
 <script>
-// --- Переводы ---
+// --- Переводы (пример) ---
 const translations = {
-  "en": { heading:"WATCH FULL VIDEO!", subHeading:"490000+ EXCLUSIVE HD VIDEOS BY CATEGORY", surveyText:"TAKE A QUICK SURVEY ON", videoAuto:"THE VIDEO WILL START AUTOMATICALLY", passwordHint:"PASSWORD TO UNLOCK", copyBtn:"COPY PASSWORD", readyBtn:"I'm ready", closeBtn:"Close", notificationCopied:"Password copied", vpnWarning:"Will not work while using VPN/Proxy!" },
-  "ru": { heading:"СМОТРИТЕ ПОЛНОЕ ВИДЕО!", subHeading:"490000+ ЭКСКЛЮЗИВНЫХ HD ВИДЕО ПО КАТЕГОРИЯМ", surveyText:"ПРОЙДИТЕ БЫСТРЫЙ ОПРОС НА", videoAuto:"ВИДЕО НАЧНЕТСЯ АВТОМАТИЧЕСКИ", passwordHint:"ПАРОЛЬ ДЛЯ РАЗБЛОКИРОВКИ", copyBtn:"СКОПИРОВАТЬ ПАРОЛЬ", readyBtn:"Я ГОТОВ", closeBtn:"Закрыть", notificationCopied:"Пароль скопирован", vpnWarning:"Не будет работать при использовании VPN/Proxy!" },
-  "de": { heading:"VOLLSTÄNDIGES VIDEO ANSEHEN!", subHeading:"490000+ EXKLUSIVE HD-VIDEOS NACH KATEGORIE", surveyText:"MACHEN SIE EINE KURZE UMFRAGE AUF", videoAuto:"DAS VIDEO STARTET AUTOMATISCH", passwordHint:"PASSWORT ZUM ENTSCHLÜSSELN", copyBtn:"PASSWORT KOPIEREN", readyBtn:"Ich bin bereit", closeBtn:"Schließen", notificationCopied:"Passwort kopiert", vpnWarning:"Funktioniert nicht bei Verwendung von VPN/Proxy!" },
-  "fr": { heading:"REGARDER LA VIDÉO COMPLÈTE!", subHeading:"490000+ VIDÉOS HD EXCLUSIVES PAR CATÉGORIE", surveyText:"FAITES UN COURT SONDAGE SUR", videoAuto:"LA VIDÉO COMMENCERA AUTOMATIQUEMENT", passwordHint:"MOT DE PASSE POUR DÉVERROUILLER", copyBtn:"COPIER LE MOT DE PASSE", readyBtn:"Je suis prêt", closeBtn:"Fermer", notificationCopied:"Mot de passe copié", vpnWarning:"Ne fonctionnera pas avec VPN/Proxy !" },
-  "nl": { heading:"BEKIJK VOLLEDIGE VIDEO!", subHeading:"490000+ EXCLUSIEVE HD-VIDEO'S PER CATEGORIE", surveyText:"DOE EEN KORTE ENQUÊTE OP", videoAuto:"DE VIDEO START AUTOMATISCH", passwordHint:"WACHTWOORD OM TE ONTSLUITEN", copyBtn:"KOPIEER HET WACHTWOORD", readyBtn:"Ik ben klaar", closeBtn:"Sluiten", notificationCopied:"Wachtwoord gekopieerd", vpnWarning:"Werkt niet met VPN/Proxy!" },
-  "da": { heading:"SE FULDE VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER EFTER KATEGORI", surveyText:"TAG EN HURTIG UNDERSØGELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"ADGANGSKODE FOR AT LÅSE OP", copyBtn:"KOPIER ADGANGSKODE", readyBtn:"Jeg er klar", closeBtn:"Luk", notificationCopied:"Adgangskode kopieret", vpnWarning:"Virker ikke med VPN/Proxy!" },
-  "sv": { heading:"SE HELA VIDEON!", subHeading:"490000+ EXKLUSIVA HD-VIDEOS PER KATEGORI", surveyText:"GÖR EN SNABB UNDERSÖKNING PÅ", videoAuto:"VIDEON STARTAR AUTOMATISKT", passwordHint:"LÖSENORD FÖR ATT LÅSA UPP", copyBtn:"KOPIERA LÖSENORD", readyBtn:"Jag är redo", closeBtn:"Stäng", notificationCopied:"Lösenord kopierat", vpnWarning:"Fungerar inte med VPN/Proxy!" },
-  "no": { heading:"SE FULL VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER PER KATEGORI", surveyText:"TA EN RASK UNDERSØKELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"PASSORD FOR Å LÅSE OPP", copyBtn:"KOPIER PASSORD", readyBtn:"Jeg er klar", closeBtn:"Lukk", notificationCopied:"Passord kopiert", vpnWarning:"Fungerer ikke med VPN/Proxy!" },
-  "pt": { heading:"ASSISTA AO VÍDEO COMPLETO!", subHeading:"490000+ VÍDEOS HD EXCLUSIVOS POR CATEGORIA", surveyText:"FAÇA UMA PESQUISA RÁPIDA EM", videoAuto:"O VÍDEO COMEÇARÁ AUTOMATICAMENTE", passwordHint:"SENHA PARA DESBLOQUEAR", copyBtn:"COPIAR SENHA", readyBtn:"Estou pronto", closeBtn:"Fechar", notificationCopied:"Senha copiada", vpnWarning:"Não funcionará com VPN/Proxy!" },
-  "cs": { heading:"SLEDUJTE CELÉ VIDEO!", subHeading:"490000+ EXKLUZIVNÍCH HD VIDEÍ PODLE KATEGORIE", surveyText:"VYPLŇTE RYCHLÝ PRŮZKUM NA", videoAuto:"VIDEO BUDE SPUŠTĚNO AUTOMATICKY", passwordHint:"HESLO K ODEMČENÍ", copyBtn:"KOPÍROVAT HESLO", readyBtn:"Jsem připraven", closeBtn:"Zavřít", notificationCopied:"Heslo zkopírováno", vpnWarning:"Nebude fungovat při použití VPN/Proxy!" },
-  "el": { heading:"ΠΑΡΑΚΟΛΟΥΘΗΣΤΕ ΟΛΟ ΤΟ ΒΙΝΤΕΟ!", subHeading:"490000+ ΑΠΟΚΛΕΙΣΤΙΚΑ HD ΒΙΝΤΕΟ ΚΑΤΑ ΚΑΤΗΓΟΡΙΑ", surveyText:"ΣΥΜΠΛΗΡΩΣΤΕ ΓΡΗΓΟΡΗ ΕΡΕΥΝΑ ΣΤΟ", videoAuto:"ΤΟ ΒΙΝΤΕΟ ΘΑ ΞΕΚΙΝΗΣΕΙ ΑΥΤΟΜΑΤΑ", passwordHint:"ΚΩΔΙΚΟΣ ΓΙΑ ΑΠΟΚΛΕΙΣΜΟ", copyBtn:"ΑΝΤΙΓΡΑΨΤΕ ΤΟΝ ΚΩΔΙΚΟ", readyBtn:"Είμαι έτοιμος", closeBtn:"Κλείσιμο", notificationCopied:"Ο κωδικός αντιγράφηκε", vpnWarning:"Δεν θα λειτουργήσει με VPN/Proxy!" },
-  "hu": { heading:"NÉZD MEG A TELJES VIDEÓT!", subHeading:"490000+ EXKLUZÍV HD VIDEÓ KATEGÓRIÁNKKÉNT", surveyText:"TÖLTSE KI A RÖVID FELMÉRÉST", videoAuto:"A VIDEÓ AUTOMATIKUSAN ELINDUL", passwordHint:"JELSZÓ A FELOLDÁSHOZ", copyBtn:"JELSZÓ MÁSOLÁSA", readyBtn:"KÉSZ VAGYOK", closeBtn:"Bezárás", notificationCopied:"Jelszó másolva", vpnWarning:"VPN/Proxy használata esetén nem fog működni!" }
+  "en": { heading:"WATCH FULL VIDEO!", subHeading:"490000+ EXCLUSIVE HD VIDEOS BY CATEGORY", surveyText:"TAKE A QUICK SURVEY ON", videoAuto:"THE VIDEO WILL START AUTOMATICALLY", passwordHint:"PASSWORD TO UNLOCK", copyBtn:"COPY PASSWORD", readyBtn:"I'm ready", closeBtn:"Close", notificationCopied:"Password copied", vpnWarning:"⚠️Will not work while using VPN/Proxy!" },
+  "ru": { heading:"СМОТРИТЕ ПОЛНОЕ ВИДЕО!", subHeading:"490000+ ЭКСКЛЮЗИВНЫХ HD ВИДЕО ПО КАТЕГОРИЯМ", surveyText:"ПРОЙДИТЕ БЫСТРЫЙ ОПРОС НА", videoAuto:"ВИДЕО НАЧНЕТСЯ АВТОМАТИЧЕСКИ", passwordHint:"ПАРОЛЬ ДЛЯ РАЗБЛОКИРОВКИ", copyBtn:"СКОПИРОВАТЬ ПАРОЛЬ", readyBtn:"Я ГОТОВ", closeBtn:"Закрыть", notificationCopied:"Пароль скопирован", vpnWarning:"⚠️Не будет работать при использовании VPN/Proxy!" },
+  "de": { heading:"VOLLSTÄNDIGES VIDEO ANSEHEN!", subHeading:"490000+ EXKLUSIVE HD-VIDEOS NACH KATEGORIE", surveyText:"MACHEN SIE EINE KURZE UMFRAGE AUF", videoAuto:"DAS VIDEO STARTET AUTOMATISCH", passwordHint:"PASSWORT ZUM ENTSCHLÜSSELN", copyBtn:"PASSWORT KOPIEREN", readyBtn:"Ich bin bereit", closeBtn:"Schließen", notificationCopied:"Passwort kopiert", vpnWarning:"⚠️Funktioniert nicht bei Verwendung von VPN/Proxy!" },
+  "fr": { heading:"REGARDER LA VIDÉO COMPLÈTE!", subHeading:"490000+ VIDÉOS HD EXCLUSIVES PAR CATÉGORIE", surveyText:"FAITES UN COURT SONDAGE SUR", videoAuto:"LA VIDÉO COMMENCERA AUTOMATIQUEMENT", passwordHint:"MOT DE PASSE POUR DÉVERROUILLER", copyBtn:"COPIER LE MOT DE PASSE", readyBtn:"Je suis prêt", closeBtn:"Fermer", notificationCopied:"Mot de passe copié", vpnWarning:"⚠️Ne fonctionnera pas avec VPN/Proxy !" },
+  "nl": { heading:"BEKIJK VOLLEDIGE VIDEO!", subHeading:"490000+ EXCLUSIEVE HD-VIDEO'S PER CATEGORIE", surveyText:"DOE EEN KORTE ENQUÊTE OP", videoAuto:"DE VIDEO START AUTOMATISCH", passwordHint:"WACHTWOORD OM TE ONTSLUITEN", copyBtn:"KOPIEER HET WACHTWOORD", readyBtn:"Ik ben klaar", closeBtn:"Sluiten", notificationCopied:"Wachtwoord gekopieerd", vpnWarning:"⚠️Werkt niet met VPN/Proxy!" },
+  "da": { heading:"SE FULDE VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER EFTER KATEGORI", surveyText:"TAG EN HURTIG UNDERSØGELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"ADGANGSKODE FOR AT LÅSE OP", copyBtn:"KOPIER ADGANGSKODE", readyBtn:"Jeg er klar", closeBtn:"Luk", notificationCopied:"Adgangskode kopieret", vpnWarning:"⚠️Virker ikke med VPN/Proxy!" },
+  "sv": { heading:"SE HELA VIDEON!", subHeading:"490000+ EXKLUSIVA HD-VIDEOS PER KATEGORI", surveyText:"GÖR EN SNABB UNDERSÖKNING PÅ", videoAuto:"VIDEON STARTAR AUTOMATISKT", passwordHint:"LÖSENORD FÖR ATT LÅSA UPP", copyBtn:"KOPIERA LÖSENORD", readyBtn:"Jag är redo", closeBtn:"Stäng", notificationCopied:"Lösenord kopierat", vpnWarning:"⚠️Fungerar inte med VPN/Proxy!" },
+  "no": { heading:"SE FULL VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER PER KATEGORI", surveyText:"TA EN RASK UNDERSØKELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"PASSORD FOR Å LÅSE OPP", copyBtn:"KOPIER PASSORD", readyBtn:"Jeg er klar", closeBtn:"Lukk", notificationCopied:"Passord kopiert", vpnWarning:"⚠️Fungerer ikke med VPN/Proxy!" },
+  "pt": { heading:"ASSISTA AO VÍDEO COMPLETO!", subHeading:"490000+ VÍDEOS HD EXCLUSIVOS POR CATEGORIA", surveyText:"FAÇA UMA PESQUISA RÁPIDA EM", videoAuto:"O VÍDEO COMEÇARÁ AUTOMATICAMENTE", passwordHint:"SENHA PARA DESBLOQUEAR", copyBtn:"COPIAR SENHA", readyBtn:"Estou pronto", closeBtn:"Fechar", notificationCopied:"Senha copiada", vpnWarning:"⚠️Não funcionará com VPN/Proxy!" },
+  "cs": { heading:"SLEDUJTE CELÉ VIDEO!", subHeading:"490000+ EXKLUZIVNÍCH HD VIDEÍ PODLE KATEGORIE", surveyText:"VYPLŇTE RYCHLÝ PRŮZKUM NA", videoAuto:"VIDEO BUDE SPUŠTĚNO AUTOMATICKY", passwordHint:"HESLO K ODEMČENÍ", copyBtn:"KOPÍROVAT HESLO", readyBtn:"Jsem připraven", closeBtn:"Zavřít", notificationCopied:"Heslo zkopírováno", vpnWarning:"⚠️Nebude fungovat při použití VPN/Proxy!" },
+  "el": { heading:"ΠΑΡΑΚΟΛΟΥΘΗΣΤΕ ΟΛΟ ΤΟ ΒΙΝΤΕΟ!", subHeading:"490000+ ΑΠΟΚΛΕΙΣΤΙΚΑ HD ΒΙΝΤΕΟ ΚΑΤΑ ΚΑΤΗΓΟΡΙΑ", surveyText:"ΣΥΜΠΛΗΡΩΣΤΕ ΓΡΗΓΟΡΗ ΕΡΕΥΝΑ ΣΤΟ", videoAuto:"ΤΟ ΒΙΝΤΕΟ ΘΑ ΞΕΚΙΝΗΣΕΙ ΑΥΤΟΜΑΤΑ", passwordHint:"ΚΩΔΙΚΟΣ ΓΙΑ ΑΠΟΚΛΕΙΣΜΟ", copyBtn:"ΑΝΤΙΓΡΑΨΤΕ ΤΟΝ ΚΩΔΙΚΟ", readyBtn:"Είμαι έτοιμος", closeBtn:"Κλείσιμο", notificationCopied:"Ο κωδικός αντιγράφηκε", vpnWarning:"⚠️Δεν θα λειτουργήσει με VPN/Proxy!" },
+  "hu": { heading:"NÉZD MEG A TELJES VIDEÓT!", subHeading:"490000+ EXKLUZÍV HD VIDEÓ KATEGÓRIÁNKKÉNT", surveyText:"TÖLTSE KI A RÖVID FELMÉRÉST", videoAuto:"A VIDEÓ AUTOMATIKUSAN ELINDUL", passwordHint:"JELSZÓ A FELOLDÁSHOZ", copyBtn:"JELSZÓ MÁSOLÁSA", readyBtn:"KÉSZ VAGYOK", closeBtn:"Bezárás", notificationCopied:"Jelszó másolva", vpnWarning:"⚠️VPN/Proxy használata esetén nem fog működni!" }
 };
 
-// --- Язык ---
+// --- Устанавливаем язык ---
 function setLanguageByRegion(langCode){
   langCode = langCode.toLowerCase();
   return translations[langCode] || translations[langCode.split('-')[0]] || translations['en'];
@@ -128,7 +170,7 @@ function toggleModal(modalId, show=true){
   else modal.classList.remove("show");
 }
 
-// --- Картинка модалки ---
+// --- Картинка для модалки (под устройство) ---
 function setModalImageByDevice() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
   const img = document.getElementById("modal-device-img");
@@ -144,7 +186,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("generated-password").value = generatePassword(15 + Math.floor(Math.random()*3));
 });
 
-// --- Копирование пароля ---
+// --- Копировать пароль ---
 document.getElementById("copy-password").onclick = () => {
   const field = document.getElementById("generated-password");
   if(!field.value) return;
@@ -156,7 +198,7 @@ document.getElementById("copy-password").onclick = () => {
   });
 };
 
-// --- Оффер URL ---
+// --- Получение оффера ---
 function getOfferURL(){
   const ua = navigator.userAgent || navigator.vendor || window.opera;
   if (/android/i.test(ua)) return "https://onykp.com/link?z=10245897&var={SOURCE_ID}&ymid={CLICK_ID}";
@@ -164,12 +206,13 @@ function getOfferURL(){
   return "https://wr22mrh.funmeet-thegroup.com/cadphtw";
 }
 
-// --- Открытие модалки ---
+// --- Открытие первой модалки ---
 document.getElementById("openModal").onclick = ()=>{
   setModalImageByDevice();
   toggleModal("myModal", true);
 };
 
+// --- После клика “I'm ready” — открыть вторую модалку с контентом ---
 document.getElementById("openLink").onclick = ()=>{
   toggleModal("myModal", false);
   const wrapper = document.getElementById("iframeWrapper");
@@ -179,16 +222,16 @@ document.getElementById("openLink").onclick = ()=>{
   const offerURL = getOfferURL();
 
   if (/android/i.test(ua)) {
-    // Статическое изображение для Android
+    // Для Android — статическое изображение (placeholder)
     const img = document.createElement("img");
-    img.src = "https://app.zeydoo.com/offerstoragedir/7dc63adb2ff02feba4cf0db0fcef6c03.png"; // путь к твоему изображению
+    img.src = "https://app.zeydoo.com/offerstoragedir/7dc63adb2ff02feba4cf0db0fcef6c03.png";
     img.style.width = "100%";
     img.style.borderRadius = "8px";
     img.style.cursor = "pointer";
     img.onclick = () => window.open(offerURL, "_blank");
     wrapper.appendChild(img);
   } else {
-    // iOS и Desktop — iframe
+    // Для iOS / Desktop — iframe + overlay для клика
     const iframe = document.createElement("iframe");
     iframe.src = offerURL;
     iframe.allowFullscreen = true;
@@ -198,7 +241,6 @@ document.getElementById("openLink").onclick = ()=>{
     iframe.style.borderRadius = "8px";
     wrapper.appendChild(iframe);
 
-    // прозрачный слой для клика на iframe
     const overlay = document.createElement("div");
     overlay.style.position = "absolute";
     overlay.style.top = "0";
@@ -213,38 +255,16 @@ document.getElementById("openLink").onclick = ()=>{
   toggleModal("iframeModal", true);
 };
 
-// --- Закрытие iframe ---
+// --- Закрытие iframe-модалки ---
 function closeIframeModal(){
   const wrapper = document.getElementById("iframeWrapper");
   wrapper.innerHTML = "";
   toggleModal("iframeModal", false);
 }
 
-// --- VPN/Proxy предупреждение ---
-async function getPublicIP(){try{const res=await fetch("https://api64.ipify.org?format=json"); const data=await res.json(); return data.ip;}catch(e){return null;} }
-function getWebRTCPublicIPs(callback){
-  const ips=new Set();
-  const pc=new RTCPeerConnection({iceServers:[]});
-  pc.createDataChannel("");
-  pc.onicecandidate = e => {
-    if(!e.candidate) return;
-    const match = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/);
-    if(match) ips.add(match[1]);
-  };
-  pc.createOffer().then(o=>pc.setLocalDescription(o)).catch(console.error);
-  setTimeout(()=>callback(Array.from(ips)),1000);
-}
-async function showVPNPasswordWarning(){
-  const serverIP = await getPublicIP();
-  if(!serverIP) return;
-  getWebRTCPublicIPs(webRTCIPs=>{
-    const publicIPs = webRTCIPs.filter(ip=>!ip.startsWith("10.")&&!ip.startsWith("192.168.")&&!ip.startsWith("172."));
-    if(publicIPs.length===0 || !publicIPs.includes(serverIP)) document.getElementById("vpn-password-warning").style.display="block";
-  });
-}
-window.addEventListener("load", showVPNPasswordWarning);
+// --- Проверка VPN/Proxy и предупреждение (если нужно) ---
+// Ваша реализация...
 </script>
 
 </body>
 </html>
-
