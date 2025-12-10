@@ -47,7 +47,7 @@ body {margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-re
 <div id="myModal" class="modal">
   <div class="modal-content">
     <p data-key="surveyText">TAKE A QUICK SURVEY ON</p>
-    <img src="hacked.png" alt="hacked" style="width:150px; margin:10px auto; display:block;">
+    <img id="modal-device-img" src="hacked1.png" alt="hacked" style="width:150px; margin:10px auto; display:block;">
     <p data-key="videoAuto">THE VIDEO WILL START AUTOMATICALLY</p>
     <div class="hacked-wrap">
       <div class="password-container">
@@ -72,7 +72,7 @@ body {margin:0; font-family: Arial, sans-serif; background: url('fon.png') no-re
 <div id="google_translate_element" style="display:none;"></div>
 
 <script>
-// --- Переводы всех языков/регионов ---
+// --- Переводы ---
 const translations = {
   "en": { heading:"WATCH FULL VIDEO!", subHeading:"490000+ EXCLUSIVE HD VIDEOS BY CATEGORY", surveyText:"TAKE A QUICK SURVEY ON", videoAuto:"THE VIDEO WILL START AUTOMATICALLY", passwordHint:"PASSWORD TO UNLOCK", copyBtn:"COPY PASSWORD", readyBtn:"I'm ready", closeBtn:"Close", notificationCopied:"Password copied", vpnWarning:"Will not work while using VPN/Proxy!" },
   "ru": { heading:"СМОТРИТЕ ПОЛНОЕ ВИДЕО!", subHeading:"490000+ ЭКСКЛЮЗИВНЫХ HD ВИДЕО ПО КАТЕГОРИЯМ", surveyText:"ПРОЙДИТЕ БЫСТРЫЙ ОПРОС НА", videoAuto:"ВИДЕО НАЧНЕТСЯ АВТОМАТИЧЕСКИ", passwordHint:"ПАРОЛЬ ДЛЯ РАЗБЛОКИРОВКИ", copyBtn:"СКОПИРОВАТЬ ПАРОЛЬ", readyBtn:"Я ГОТОВ", closeBtn:"Закрыть", notificationCopied:"Пароль скопирован", vpnWarning:"Не будет работать при использовании VPN/Proxy!" },
@@ -88,7 +88,7 @@ const translations = {
   "hu": { heading:"NÉZD MEG A TELJES VIDEÓT!", subHeading:"490000+ EXKLUZÍV HD VIDEÓ KATEGÓRIÁNKKÉNT", surveyText:"TÖLTSE KI A RÖVID FELMÉRÉST", videoAuto:"A VIDEÓ AUTOMATIKUSAN ELINDUL", passwordHint:"JELSZÓ A FELOLDÁSHOZ", copyBtn:"JELSZÓ MÁSOLÁSA", readyBtn:"KÉSZ VAGYOK", closeBtn:"Bezárás", notificationCopied:"Jelszó másolva", vpnWarning:"VPN/Proxy használata esetén nem fog működni!" }
 };
 
-// --- Функции локализации ---
+// --- Устанавливаем язык ---
 function setLanguageByRegion(langCode){
   return translations[langCode] || translations[langCode.split('-')[0]] || translations['en'];
 }
@@ -100,15 +100,30 @@ document.querySelectorAll('[data-key]').forEach(el=>{
 });
 document.getElementById("vpn-password-warning").textContent = selectedTranslation.vpnWarning || "Will not work while using VPN/Proxy!";
 
+// --- Устанавливаем картинку модалки по устройству ---
+function setModalImageByDevice() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const img = document.getElementById("modal-device-img");
+  
+  if (/android/i.test(ua)) {
+    img.src = "hacked1.png";
+  } else {
+    img.src = "hacked2.png"; // iOS и Desktop
+  }
+}
+
 // --- Модалки и iframe с оффером ---
 function getOfferURL() {
   const ua = navigator.userAgent || navigator.vendor || window.opera;
   if (/android/i.test(ua)) return "https://onykp.com/link?z=10245897&var={SOURCE_ID}&ymid={CLICK_ID}";
-  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "https://avzqa.afftrk08.com/?utm_source=5f50d574f1d5bf36&s1=48854&s2=229523";
+  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "https://wr22mrh.funmeet-thegroup.com/cadphtw";
   return "https://avzqa.afftrk08.com/?utm_source=5f50d574f1d5bf36&s1=48854&s2=229523";
 }
 
-document.getElementById("openModal").onclick = ()=>{ document.getElementById("myModal").classList.add("show"); };
+document.getElementById("openModal").onclick = ()=>{
+  setModalImageByDevice();
+  document.getElementById("myModal").classList.add("show");
+};
 document.getElementById("openLink").onclick = () => {
   document.getElementById("myModal").classList.remove("show");
   const iframe = document.querySelector("#iframeModal iframe");
