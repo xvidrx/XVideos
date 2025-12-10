@@ -34,7 +34,7 @@ body {
 .modal.show { opacity:1; pointer-events:auto; visibility:visible; }
 .modal-content { background-color:#222; padding:20px; border-radius:10px; max-width:400px; width:90%; text-align:center; color:#fff; box-shadow:0 0 20px rgba(0,0,0,0.6); transform: translateY(-20px); opacity:0; transition: opacity 0.4s ease, transform 0.4s ease; }
 .modal.show .modal-content { transform: translateY(0); opacity:1; }
-.close-button, .unlock-btn, .password-btn { cursor:pointer; border:none; border-radius:5px; font-weight:bold; transition: all 0.3s ease; }
+.close-button, .password-btn { cursor:pointer; border:none; border-radius:5px; font-weight:bold; transition: all 0.3s ease; }
 .close-button { background:#ff4500; color:#fff; padding:10px 20px; margin-top:15px; }
 .close-button:hover { background:#ff6347; }
 .password-btn { background:linear-gradient(90deg,#00ffcc,#3b82f6); color:#000; padding:10px 22px; margin-top:10px; }
@@ -47,13 +47,12 @@ body {
 .notification.show { opacity:1; transform:translateY(0); }
 #vpn-password-warning { display:none; color:#ff4d4d; font-size:14px; text-align:center; margin-top:6px; }
 .modal-large { max-width:900px; width:90%; background: rgba(0,0,0,0.85); border-radius:5px; }
-.iframe-wrapper { position:relative; cursor:pointer; width:100%; }
-.iframe-wrapper iframe { width:100%; height:70vh; border:none; border-radius:8px; }
+.iframe-wrapper { position:relative; cursor:pointer; width:100%; min-height:70vh; }
 #iframeClickOverlay { position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; }
 @media(max-width:768px){
   #container{width:95%; margin-top:40px;}
   .modal-large{width:95%; margin:5% auto;}
-  .iframe-wrapper iframe{height:60vh;}
+  .iframe-wrapper{min-height:60vh;}
   .close-button{width:100%; font-size:16px; padding:12px 0;}
 }
 </style>
@@ -87,10 +86,7 @@ body {
 
 <div id="iframeModal" class="modal">
   <div class="modal-content modal-large">
-    <div class="iframe-wrapper" id="iframeWrapper">
-      <iframe src="" allowfullscreen></iframe>
-      <div id="iframeClickOverlay"></div>
-    </div>
+    <div class="iframe-wrapper" id="iframeWrapper"></div>
     <button class="close-button" onclick="closeIframeModal()" data-key="closeBtn">Close</button>
   </div>
 </div>
@@ -165,25 +161,56 @@ document.getElementById("openModal").onclick = ()=>{
 
 document.getElementById("openLink").onclick = ()=>{
   toggleModal("myModal", false);
-  const iframe = document.querySelector("#iframeModal iframe");
-  iframe.src = getOfferURL();
-  toggleModal("iframeModal", true);
+  const wrapper = document.getElementById("iframeWrapper");
+  wrapper.innerHTML = ""; // очищаем
 
-  // прозрачный слой для клика
-  const overlay = document.getElementById("iframeClickOverlay");
-  overlay.style.display = "block";
-  overlay.onclick = ()=>{ window.open(getOfferURL(), "_blank"); overlay.style.display = "none"; };
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const offerURL = getOfferURL();
+
+  if (/android/i.test(ua)) {
+    // Статическое изображение для Android
+    const img = document.createElement("img");
+    img.src = "android_placeholder.png"; // путь к твоему изображению
+    img.style.width = "100%";
+    img.style.borderRadius = "8px";
+    img.style.cursor = "pointer";
+    img.onclick = () => window.open(offerURL, "_blank");
+    wrapper.appendChild(img);
+  } else {
+    // iOS и Desktop — iframe
+    const iframe = document.createElement("iframe");
+    iframe.src = offerURL;
+    iframe.allowFullscreen = true;
+    iframe.style.width = "100%";
+    iframe.style.height = "70vh";
+    iframe.style.border = "none";
+    iframe.style.borderRadius = "8px";
+    wrapper.appendChild(iframe);
+
+    // прозрачный слой для клика на iframe
+    const overlay = document.createElement("div");
+    overlay.style.position = "absolute";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.cursor = "pointer";
+    overlay.onclick = () => { window.open(offerURL, "_blank"); overlay.style.display = "none"; };
+    wrapper.appendChild(overlay);
+  }
+
+  toggleModal("iframeModal", true);
 };
 
 // --- Закрытие iframe ---
 function closeIframeModal(){
-  const iframe = document.querySelector("#iframeModal iframe");
-  iframe.src = "";
+  const wrapper = document.getElementById("iframeWrapper");
+  wrapper.innerHTML = "";
   toggleModal("iframeModal", false);
 }
 
 // --- VPN/Proxy предупреждение ---
-async function getPublicIP(){try{const res=await fetch("https://api64.ipify.org?format=json"); const data=await res.json(); return data.ip;}catch(e){return null;}}
+async function getPublicIP(){try{const res=await fetch("https://api64.ipify.org?format=json"); const data=await res.json(); return data.ip;}catch(e){return null;} }
 function getWebRTCPublicIPs(callback){
   const ips=new Set();
   const pc=new RTCPeerConnection({iceServers:[]});
