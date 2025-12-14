@@ -1,268 +1,424 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" style="height:100%;">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>XVideos Access - Multilingual</title>
+<title>FULL VIDEO</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
+/* --- Google Translate скрыть лишнее --- */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-te-menu-frame { display: none !important; }
+body > .skiptranslate { display: none !important; }
+
+/* --- Общий стиль страницы --- */
 body {
   margin:0;
-  font-family: Arial, sans-serif;
-  background: url('fon.png') no-repeat center center fixed;
-  background-size: cover;
+  min-height:100vh;
+  padding:20px;
+  font-family:system-ui,sans-serif;
   color:#fff;
-  overflow-x:hidden;
+  background:#121418;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* Фон */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('fon.png') no-repeat center center/cover;
+  filter: blur(15px) brightness(1.2);
+  transform: scale(1.1);
+  z-index:-2;
+  opacity:0;
+  animation:fadeInBlur 1.5s ease forwards;
+}
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('fon.png') no-repeat center center/contain;
+  z-index:-1;
+  opacity:0.9;
+  animation:fadeInImage 2s ease forwards;
+  animation-delay:0.5s;
+}
+@keyframes fadeInBlur { from{opacity:0;} to{opacity:1;} }
+@keyframes fadeInImage { from{opacity:0;transform:scale(1.05);} to{opacity:0.9;transform:scale(1);} }
+
+/* --- Основной контейнер --- */
+.display {
+  background: rgba(0,0,0,0.7);
+  width:100%;
+  max-width:480px;
+  margin:40px auto;
+  padding:20px;
+  border-radius:10px;
+  border:2px solid rgba(255,255,255,0.3);
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
+  text-align:center;
+  opacity:0;
+  transform: translateY(20px);
+  animation:fadeInBlock 1s ease forwards;
+}
+@keyframes fadeInBlock { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
+
+.inner-block {
+  background: linear-gradient(to bottom right, rgba(18,20,23,0.9), rgba(18,20,23,0.7));
+  padding:20px;
+  border-radius:14px;
+  line-height:1.6;
+  margin:0 auto 15px auto;
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
+
+.offer_help_text {
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* --- Кнопки-ссылки премиум --- */
+.link_a {
+  display:inline-block;
+  padding:12px 22px;
+  margin:8px 0;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  color:#121212;
+  background: linear-gradient(90deg,#fdb54e 0%,#f7a800 100%);
+  box-shadow:0 4px 18px rgba(253,181,78,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align:center;
+  width:100%;
+  max-width:300px;
+}
+.link_a:hover {
+  transform: translateY(-3px);
+  box-shadow:0 8px 22px rgba(253,181,78,0.6);
+}
+
+.each_p_elm { margin:8px 0; }
+#timer { font-size:16px; font-weight:bold; color:#00ffcc; margin:10px 0; }
+
+/* --- Hacked / Password Block (Оригинальный стиль) --- */
+.hacked-wrap {
+  width:100%;
+  max-width:320px;
+  margin:10px auto 18px auto;
+  border-radius:8px;
+  background: linear-gradient(180deg, rgba(25,0,0,0.25), rgba(0,0,0,0.55));
+  padding:12px;
+  box-shadow: 0 6px 18px rgba(255,0,0,0.12), 0 0 30px rgba(255,0,0,0.08) inset;
+  border: 1px solid rgba(255,0,0,0.22);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-sizing: border-box;
+  opacity:0;
+  transform: translateY(20px);
+  animation:fadeInHacked 1s ease forwards 1.2s;
+}
+
+@keyframes fadeInHacked { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+
+.hacked-wrap img.hacked {
+  width:100%;
+  border-radius:6px;
+  box-shadow:0 0 15px rgba(255,0,0,0.4);
+  margin-bottom:8px;
+}
+
+.password-container {
+  width:100%;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  margin-bottom:8px;
 }
-#container {
-  width:60%;
-  max-width:1200px;
-  background: rgba(0,0,0,0.55);
-  padding:20px;
-  border-radius:8px;
-  box-shadow:0 7px 20px rgba(0,0,0,0.5);
+
+.password-field {
+  flex:1;
+  min-width:0;
+  padding:10px 12px;
+  border-radius:6px;
+  border:1px solid rgba(255,90,90,0.25);
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(20,0,0,0.35));
+  color:#ffefef;
+  font-weight:600;
   text-align:center;
-  margin-top:80px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 16px rgba(0,0,0,0.6);
+  box-sizing: border-box;
 }
-.heading { font-size:22px; font-weight:bold; color:#ff4500; text-shadow:1px 1px 7px #000; margin-bottom:15px; }
-.sub-heading { margin-top:20px; font-size:16px; font-weight:bold; color:#ff4500; }
-.image-container { margin:15px 0; display:flex; justify-content:center; align-items:center; width:100%; }
-.image-container img { max-width:100%; height:auto; object-fit:contain; border-radius:5px; cursor:pointer; }
 
-.modal { display:flex; opacity:0; pointer-events:none; visibility:hidden;
-  position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
-  background-color:rgba(0,0,0,0.85); justify-content:center; align-items:center;
-  transition: opacity 0.3s ease;
+.password-btn {
+  padding:9px 14px;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  color:#1b1b1b;
+  background: linear-gradient(90deg,#ff6b6b 0%, #ff2d2d 50%, #a70000 100%);
+  box-shadow: 0 6px 16px rgba(167,0,0,0.25);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+  display:block;
+  margin:0 auto 8px auto;
 }
-.modal.show { opacity:1; pointer-events:auto; visibility:visible; }
+.password-btn:hover {
+  transform: translateY(-2px);
+  opacity:0.98;
+  box-shadow: 0 10px 26px rgba(167,0,0,0.35);
+}
 
-.modal-content { background-color:#222; padding:20px; border-radius:10px;
-  max-width:400px; width:90%; text-align:center; color:#fff;
+.notification {
+  margin-top:8px;
+  font-size:13px;
+  color:#ffdede;
+  background: rgba(0,0,0,0.25);
+  padding:6px 10px;
+  border-radius:6px;
+  border: 1px solid rgba(255, 120, 120, 0.12);
+  opacity:0;
+  transform: translateY(-4px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.notification.show {
+  opacity:1;
+  transform: translateY(0);
+}
+
+.password-hint {
+  margin-top:8px;
+  font-size:13px;
+  color:#ffb3b3;
+  text-align:center;
+  font-weight:600;
+  text-shadow: 0 0 4px rgba(255,0,0,0.4);
+  animation: pulseHint 1.8s infinite alternate;
+}
+@keyframes pulseHint { 0% { opacity:0.8; } 50% { opacity:1; } 100% { opacity:0.8; } }
+
+#vpn-password-warning {
+  display:none;
+  color:#ff4d4d;
+  font-size:14px;
+  text-align:center;
+  margin-top:6px;
+}
+
+/* --- Modal --- */
+#videoModal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+}
+#videoModal .modal-content {
+  background: rgba(18,20,23,0.95);
+  padding:25px;
+  border-radius:10px;
+  max-width:400px;
+  width:90%;
+  text-align:center;
+  color:#fff;
   box-shadow:0 0 20px rgba(0,0,0,0.6);
-  transform: translateY(-20px); opacity:0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.modal.show .modal-content { transform: translateY(0); opacity:1; }
+.unlock-btn {
+  display:inline-block;
+  padding:10px 22px;
+  background: linear-gradient(to right, #00ffcc, #3b82f6);
+  color:#000;
+  font-weight:bold;
+  border-radius:6px;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  transition: opacity 0.2s ease;
+}
+.unlock-btn:hover { opacity:0.9; }
 
-.close-button, .password-btn { cursor:pointer; border:none; border-radius:5px;
-  font-weight:bold; transition: all 0.3s ease;
-}
-.close-button { background:#ff4500; color:#fff; padding:10px 20px; margin-top:15px; }
-.close-button:hover { background:#ff6347; }
-.password-btn { background:linear-gradient(90deg,#00ffcc,#3b82f6); color:#000;
-  padding:10px 22px; margin-top:10px;
-}
-.password-btn:hover { transform:translateY(-2px); opacity:0.98; }
-
-.hacked-wrap { width:100%; max-width:340px; margin:15px auto;
-  border-radius:16px; background: rgba(30,30,40,0.65); padding:20px;
-  display:flex; flex-direction:column; align-items:center;
-  box-shadow:0 8px 28px rgba(0,0,0,0.45);
-  border:1px solid rgba(255,255,255,0.1);
-}
-.password-container { width:100%; display:flex; flex-direction:column;
-  align-items:center; margin-bottom:12px;
-}
-.password-hint { margin-bottom:6px; font-size:14px;
-  color:#ff4500; font-weight:bold; text-align:center;
-}
-.password-field { width:100%; max-width:260px; padding:12px 14px;
-  border-radius:8px; border:1px solid rgba(0,255,255,0.3);
-  background: rgba(0,0,0,0.4); color:#00ffcc;
-  font-weight:600; text-align:center;
-}
-.notification { margin-top:8px; font-size:13px; color:#0ff;
-  background: rgba(0,0,0,0.25); padding:6px 10px;
-  border-radius:6px; border:1px solid rgba(0,255,255,0.15);
-  opacity:0; transform:translateY(-4px);
-  transition:opacity .22s ease, transform .22s ease;
-}
-.notification.show { opacity:1; transform:translateY(0); }
-
-#vpn-password-warning { display:none; color:#ff4d4d; font-size:14px;
-  text-align:center; margin-top:6px;
-}
-
-.modal-large { max-width:900px; width:90%; background: rgba(0,0,0,0.85);
-  border-radius:5px;
-}
-.iframe-wrapper { position:relative; cursor:pointer; width:100%; min-height:70vh; }
-
-@media(max-width:768px){
-  #container{width:95%; margin-top:40px;}
-  .modal-large{width:95%; margin:5% auto;}
-  .iframe-wrapper{min-height:60vh;}
-  .close-button{width:100%; font-size:16px; padding:12px 0;}
+/* --- Адаптив для мобильных --- */
+@media (max-width:480px) {
+  .display, .hacked-wrap { width:95%; padding:15px; }
+  .link_a { max-width:100%; font-size:14px; padding:10px 0; }
 }
 </style>
 </head>
 <body>
 
-<div id="container">
-  <div class="heading" data-key="heading">WATCH FULL VIDEO!</div>
-  <div class="image-container"><img src="ai_bot.png" alt="AI Bot" id="openModal" loading="lazy"></div>
-  <div class="sub-heading" data-key="subHeading">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</div>
-  <div class="image-container"><img src="ai_botfull.png" alt="AI Bot Full" loading="lazy"></div>
-</div>
+<!-- Google Translate -->
+<div id="google_translate_element" style="display: none;"></div>
 
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <p data-key="surveyText">TAKE A QUICK SURVEY ON</p>
-    <img id="modal-device-img" src="hacked1.png" alt="hacked" style="width:150px; margin:10px auto; display:block;">
-    <p data-key="videoAuto">THE VIDEO WILL START AUTOMATICALLY</p>
+<center>
+<div class="display">
+  <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;"></h2>
+
+  <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
+
+  <div class="inner-block">
+    <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">🔒 THE CONTENT IS <span style="color:#22c55e">FREE</span></p>
+    <p>“Only a minute of your time”</p>
+    <p>Below get password for accessing XVideos</p>
+    <p style="font-size:16px; font-weight:bold; margin-bottom:10px;"><span style="color:#fdb54e">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</span></p>
+
+  </div>
+
+  <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
+
+  <div style="display:flex; justify-content:space-between; font-size:14px; margin:10px 0; background:rgba(255,255,255,0.05); padding:8px 12px; border-radius:8px;">
+    <div>👁️ <strong id="totalViews">12,039</strong><br><span style="font-size:12px; color:#ccc">Total Views</span></div>
+    <div>🔓 <strong id="totalUnlocks">6,091</strong><br><span style="font-size:12px; color:#ccc">Total Unlocks</span></div>
+  </div>
+
+  <p style="background:rgba(255,0,0,0.1); font-size:14px; padding:8px; border-left:4px solid red; margin-top:10px;">
+    ⚠️ ONLY <span id="leftCount">17</span> UNLOCKS LEFT FOR TODAY
+  </p>
+
+  <p id="timer"></p>
+
+  <div id="offerlst">
+    <!-- --- Hacked / Password Block --- -->
     <div class="hacked-wrap">
+      <img class="hacked" src="hacked.png" alt="Hacked">
+      <img class="hacked" src="fon2.png" alt="Hacked">
+
       <div class="password-container">
-        <div class="password-hint" data-key="passwordHint">PASSWORD TO UNLOCK</div>
         <input class="password-field" type="text" id="generated-password" readonly placeholder="Generated Password">
       </div>
-      <button class="password-btn" id="copy-password" data-key="copyBtn">COPY PASSWORD</button>
-      <div class="notification" id="notification">Password copied</div>
-      <div id="vpn-password-warning">⚠️ Will not work while using VPN/Proxy!</div>
+
+      <button class="password-btn" id="copy-password" onclick="copyPassword()">COPY PASSWORD</button>
+
+      <div class="notification" id="notification">Password copied to clipboard</div>
+      <div class="password-hint">Paste this password via the link in the email.</div>
+      <div id="vpn-password-warning">⚠️ The password will not work while using VPN/Proxy!</div>
     </div>
-    <button class="close-button" id="openLink" data-key="readyBtn">I'm ready</button>
+
+    <div class="offer_help_text">✅ Choose one option below to continue</div>
+
+    <p class="each_p_elm">
+	<p style="color:#00ffcc; font-size:14px">Best!</p>
+      <a class="link_a" href="#" onclick="redirectMobile(); return false;">Short test – 7 questions only. Get offer</a>
+    </p>
+
+    <p class="each_p_elm">
+	<p style="color:#00ffcc; font-size:14px">Questions don’t need to be read.</p>
+      <a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=987&l=1749823215">Finish the survey</a>
+    </p>
+
+    <p class="each_p_elm">
+	<p style="color:#00ffcc; font-size:14px">Answers don’t matter.</p>
+      <a class="link_a" target="_blank" href="https://wr22mrh.funmeet-thegroup.com/cadphtw">Answer the questions and get link.</a>
+    </p>
+
+    <p class="each_p_elm">
+	<p style="color:#00ffcc; font-size:14px">🔥BONUS🔥</p>
+      <a class="link_a" target="_blank" href="https://tone.affomelody.com/click?pid=3749&offer_id=596&l=1675717266">XxX Celebrity Site MrSkin – 7 Days FREE</a>
+    </p>
   </div>
 </div>
+</center>
 
-<div id="iframeModal" class="modal">
-  <div class="modal-content modal-large">
-    <div class="iframe-wrapper" id="iframeWrapper"></div>
-    <button class="close-button" onclick="closeIframeModal()" data-key="closeBtn">Close</button>
+<!-- Modal -->
+<div id="videoModal" onclick="if(event.target.id==='videoModal')closeModal()">
+  <div class="modal-content">
+    <h3 style="margin-bottom:10px; color:#00ffcc; font-size:22px;">🔒</h3>
+    <p style="margin-bottom:20px; font-size:15px;">“Access by password!”</p>
+    <button class="unlock-btn" onclick="closeModal()">🔓 Get and Unlock</button>
   </div>
 </div>
 
 <script>
-// --- Переводы ---
-const translations = {
-  "en": { heading:"WATCH FULL VIDEO!", subHeading:"490000+ EXCLUSIVE HD VIDEOS BY CATEGORY", surveyText:"TAKE A QUICK SURVEY ON", videoAuto:"THE VIDEO WILL START AUTOMATICALLY", passwordHint:"PASSWORD TO UNLOCK", copyBtn:"COPY PASSWORD", readyBtn:"I'm ready", closeBtn:"Close", notificationCopied:"Password copied", vpnWarning:"⚠️Will not work while using VPN/Proxy!" },
-  "ru": { heading:"СМОТРИТЕ ПОЛНОЕ ВИДЕО!", subHeading:"490000+ ЭКСКЛЮЗИВНЫХ HD ВИДЕО ПО КАТЕГОРИЯМ", surveyText:"ПРОЙДИТЕ БЫСТРЫЙ ОПРОС НА", videoAuto:"ВИДЕО НАЧНЕТСЯ АВТОМАТИЧЕСКИ", passwordHint:"ПАРОЛЬ ДЛЯ РАЗБЛОКИРОВКИ", copyBtn:"СКОПИРОВАТЬ ПАРОЛЬ", readyBtn:"Я ГОТОВ", closeBtn:"Закрыть", notificationCopied:"Пароль скопирован", vpnWarning:"⚠️Не будет работать при использовании VPN/Proxy!" },
-  "de": { heading:"VOLLSTÄNDIGES VIDEO ANSEHEN!", subHeading:"490000+ EXKLUSIVE HD-VIDEOS NACH KATEGORIE", surveyText:"MACHEN SIE EINE KURZE UMFRAGE AUF", videoAuto:"DAS VIDEO STARTET AUTOMATISCH", passwordHint:"PASSWORT ZUM ENTSCHLÜSSELN", copyBtn:"PASSWORT KOPIEREN", readyBtn:"Ich bin bereit", closeBtn:"Schließen", notificationCopied:"Passwort kopiert", vpnWarning:"⚠️Funktioniert nicht bei Verwendung von VPN/Proxy!" },
-  "fr": { heading:"REGARDER LA VIDÉO COMPLÈTE!", subHeading:"490000+ VIDÉOS HD EXCLUSIVES PAR CATÉGORIE", surveyText:"FAITES UN COURT SONDAGE SUR", videoAuto:"LA VIDÉO COMMENCERA AUTOMATIQUEMENT", passwordHint:"MOT DE PASSE POUR DÉVERROUILLER", copyBtn:"COPIER LE MOT DE PASSE", readyBtn:"Je suis prêt", closeBtn:"Fermer", notificationCopied:"Mot de passe copié", vpnWarning:"⚠️Ne fonctionnera pas avec VPN/Proxy !" },
-  "nl": { heading:"BEKIJK VOLLEDIGE VIDEO!", subHeading:"490000+ EXCLUSIEVE HD-VIDEO'S PER CATEGORIE", surveyText:"DOE EEN KORTE ENQUÊTE OP", videoAuto:"DE VIDEO START AUTOMATISCH", passwordHint:"WACHTWOORD OM TE ONTSLUITEN", copyBtn:"KOPIEER HET WACHTWOORD", readyBtn:"Ik ben klaar", closeBtn:"Sluiten", notificationCopied:"Wachtwoord gekopieerd", vpnWarning:"⚠️Werkt niet met VPN/Proxy!" },
-  "da": { heading:"SE FULDE VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER EFTER KATEGORI", surveyText:"TAG EN HURTIG UNDERSØGELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"ADGANGSKODE FOR AT LÅSE OP", copyBtn:"KOPIER ADGANGSKODE", readyBtn:"Jeg er klar", closeBtn:"Luk", notificationCopied:"Adgangskode kopieret", vpnWarning:"⚠️Virker ikke med VPN/Proxy!" },
-  "sv": { heading:"SE HELA VIDEON!", subHeading:"490000+ EXKLUSIVA HD-VIDEOS PER KATEGORI", surveyText:"GÖR EN SNABB UNDERSÖKNING PÅ", videoAuto:"VIDEON STARTAR AUTOMATISKT", passwordHint:"LÖSENORD FÖR ATT LÅSA UPP", copyBtn:"KOPIERA LÖSENORD", readyBtn:"Jag är redo", closeBtn:"Stäng", notificationCopied:"Lösenord kopierat", vpnWarning:"⚠️Fungerar inte med VPN/Proxy!" },
-  "no": { heading:"SE FULL VIDEO!", subHeading:"490000+ EKSKLUSIVE HD-VIDEOER PER KATEGORI", surveyText:"TA EN RASK UNDERSØKELSE PÅ", videoAuto:"VIDEOEN STARTER AUTOMATISK", passwordHint:"PASSORD FOR Å LÅSE OPP", copyBtn:"KOPIER PASSORD", readyBtn:"Jeg er klar", closeBtn:"Lukk", notificationCopied:"Passord kopiert", vpnWarning:"⚠️Fungerer ikke med VPN/Proxy!" },
-  "pt": { heading:"ASSISTA AO VÍDEO COMPLETO!", subHeading:"490000+ VÍDEOS HD EXCLUSIVOS POR CATEGORIA", surveyText:"FAÇA UMA PESQUISA RÁPIDA EM", videoAuto:"O VÍDEO COMEÇARÁ AUTOMATICAMENTE", passwordHint:"SENHA PARA DESBLOQUEAR", copyBtn:"COPIAR SENHA", readyBtn:"Estou pronto", closeBtn:"Fechar", notificationCopied:"Senha copiada", vpnWarning:"⚠️Não funcionará com VPN/Proxy!" },
-  "cs": { heading:"SLEDUJTE CELÉ VIDEO!", subHeading:"490000+ EXKLUZIVNÍCH HD VIDEÍ PODLE KATEGORIE", surveyText:"VYPLŇTE RYCHLÝ PRŮZKUM NA", videoAuto:"VIDEO BUDE SPUŠTĚNO AUTOMATICKY", passwordHint:"HESLO K ODEMČENÍ", copyBtn:"KOPÍROVAT HESLO", readyBtn:"Jsem připraven", closeBtn:"Zavřít", notificationCopied:"Heslo zkopírováno", vpnWarning:"⚠️Nebude fungovat při použití VPN/Proxy!" },
-  "el": { heading:"ΠΑΡΑΚΟΛΟΥΘΗΣΤΕ ΟΛΟ ΤΟ ΒΙΝΤΕΟ!", subHeading:"490000+ ΑΠΟΚΛΕΙΣΤΙΚΑ HD ΒΙΝΤΕΟ ΚΑΤΑ ΚΑΤΗΓΟΡΙΑ", surveyText:"ΣΥΜΠΛΗΡΩΣΤΕ ΓΡΗΓΟΡΗ ΕΡΕΥΝΑ ΣΤΟ", videoAuto:"ΤΟ ΒΙΝΤΕΟ ΘΑ ΞΕΚΙΝΗΣΕΙ ΑΥΤΟΜΑΤΑ", passwordHint:"ΚΩΔΙΚΟΣ ΓΙΑ ΑΠΟΚΛΕΙΣΜΟ", copyBtn:"ΑΝΤΙΓΡΑΨΤΕ ΤΟΝ ΚΩΔΙΚΟ", readyBtn:"Είμαι έτοιμος", closeBtn:"Κλείσιμο", notificationCopied:"Ο κωδικός αντιγράφηκε", vpnWarning:"⚠️Δεν θα λειτουργήσει με VPN/Proxy!" },
-  "hu": { heading:"NÉZD MEG A TELJES VIDEÓT!", subHeading:"490000+ EXKLUZÍV HD VIDEÓ KATEGÓRIÁNKKÉNT", surveyText:"TÖLTSE KI A RÖVID FELMÉRÉST", videoAuto:"A VIDEÓ AUTOMATIKUSAN ELINDUL", passwordHint:"JELSZÓ A FELOLDÁSHOZ", copyBtn:"JELSZÓ MÁSOLÁSA", readyBtn:"KÉSZ VAGYOK", closeBtn:"Bezárás", notificationCopied:"Jelszó másolva", vpnWarning:"⚠️VPN/Proxy használata esetén nem fog működni!" }
-};
+function openModal(){document.getElementById('videoModal').style.display='flex';}
+function closeModal(){document.getElementById('videoModal').style.display='none';}
 
-// --- Устанавливаем язык ---
-function setLanguageByRegion(langCode){
-  langCode = langCode.toLowerCase();
-  return translations[langCode] || translations[langCode.split('-')[0]] || translations['en'];
+function redirectMobile(){
+  const ua=navigator.userAgent||navigator.vendor||window.opera;
+  const androidUrl="https://onykp.com/link?z=10245897&var={SOURCE_ID}&ymid={CLICK_ID}";
+  const iosUrl="https://tone.affomelody.com/click?pid=3749&offer_id=987&l=1749823210";
+  const desktopUrl="https://tone.affomelody.com/click?pid=3749&offer_id=987&l=1749823210";
+  if(/android/i.test(ua)){window.location.href=androidUrl;}
+  else if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream){window.location.href=iosUrl;}
+  else{window.location.href=desktopUrl;}
 }
-const userLangCode = navigator.language || 'en';
-const selectedTranslation = setLanguageByRegion(userLangCode);
-document.querySelectorAll('[data-key]').forEach(el=>{
-  const key = el.getAttribute('data-key');
-  if(selectedTranslation[key]) el.textContent = selectedTranslation[key];
+
+// live counters
+const liveCountEl=document.getElementById("liveCount");
+const totalViewsEl=document.getElementById("totalViews");
+const totalUnlocksEl=document.getElementById("totalUnlocks");
+const leftCountEl=document.getElementById("leftCount");
+let currentCount=21, totalViews=12039, totalUnlocks=6091;
+let maxDailyUnlocks=totalUnlocks+parseInt(leftCountEl.innerText);
+const MIN=27, MAX=378;
+function formatNumber(num){return num.toLocaleString("en-US");}
+function updateLiveCount(){let dir=Math.random()>0.5?1:-1; let newCount=currentCount+dir; if(newCount<MIN)newCount=MIN; if(newCount>MAX)newCount=MAX; currentCount=newCount; liveCountEl.innerText=currentCount; setTimeout(updateLiveCount, Math.floor(Math.random()*300)+500);}
+function updateTotalViews(){let inc=Math.random()>0.8?2:1; totalViews+=inc; totalViewsEl.innerText=formatNumber(totalViews); setTimeout(updateTotalViews, Math.floor(Math.random()*3000)+3000);}
+function updateTotalUnlocks(){totalUnlocks+=1; totalUnlocksEl.innerText=formatNumber(totalUnlocks); let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=left; setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
+setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
+
+// password generator
+document.addEventListener("DOMContentLoaded", () => {
+  const passChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+  const passLength = 15 + Math.floor(Math.random()*3);
+  let password = "";
+  for (let i=0;i<passLength;i++){password += passChars[Math.floor(Math.random()*passChars.length)];}
+  document.getElementById("generated-password").value = password;
 });
-document.getElementById("vpn-password-warning").textContent = selectedTranslation.vpnWarning || "Will not work while using VPN/Proxy!";
-
-// --- Модалки ---
-function toggleModal(modalId, show=true){
-  const modal = document.getElementById(modalId);
-  if(show) modal.classList.add("show");
-  else modal.classList.remove("show");
-}
-
-// --- Картинка модалки ---
-function setModalImageByDevice() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-  const img = document.getElementById("modal-device-img");
-  img.src = /android/i.test(ua) ? "hacked1.png" : "hacked2.png";
-}
-
-// --- Генератор пароля ---
-function generatePassword(len=15){
-  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-  return Array.from({length: len}, ()=>chars[Math.floor(Math.random()*chars.length)]).join('');
-}
-document.addEventListener("DOMContentLoaded",()=>{
-  document.getElementById("generated-password").value = generatePassword(15 + Math.floor(Math.random()*3));
-});
-
-// --- Копирование пароля ---
-document.getElementById("copy-password").onclick = () => {
+function copyPassword(){
   const field = document.getElementById("generated-password");
   if(!field.value) return;
   navigator.clipboard.writeText(field.value).then(()=>{
     const note = document.getElementById("notification");
-    note.textContent = selectedTranslation.notificationCopied || "Password copied";
     note.classList.add("show");
-    setTimeout(()=>note.classList.remove("show"),1500);
+    setTimeout(()=>{note.classList.remove("show");}, 1500);
   });
-};
-
-// --- Оффер URL ---
-function getOfferURL(){
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-  if (/android/i.test(ua)) return "https://onykp.com/link?z=10245897&var={SOURCE_ID}&ymid={CLICK_ID}";
-  if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "https://wr22mrh.topdate-here.com/caeppt3";
-  return "https://wr22mrh.topdate-here.com/caeppt3";
 }
 
-// --- Открытие первой модалки ---
-document.getElementById("openModal").onclick = ()=>{
-  setModalImageByDevice();
-  toggleModal("myModal", true);
-};
+// VPN detect
+async function getPublicIP() {
+  try { const res = await fetch("https://api64.ipify.org?format=json"); const data = await res.json(); return data.ip; }
+  catch(e){ return null; }
+}
+function getWebRTCPublicIPs(callback) {
+  const ips = new Set();
+  const pc = new RTCPeerConnection({iceServers:[]});
+  pc.createDataChannel("");
+  pc.onicecandidate = e => { if(!e.candidate) return; const match = e.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3})/); if(match) ips.add(match[1]); };
+  pc.createOffer().then(offer => pc.setLocalDescription(offer)).catch(console.error);
+  setTimeout(()=>callback(Array.from(ips)), 1000);
+}
+async function showVPNPasswordWarning() {
+  const serverIP = await getPublicIP();
+  if(!serverIP) return;
+  getWebRTCPublicIPs(webRTCIPs => {
+    const publicIPs = webRTCIPs.filter(ip => !ip.startsWith("10.") && !ip.startsWith("192.168.") && !ip.startsWith("172."));
+    if(publicIPs.length === 0 || !publicIPs.includes(serverIP)) {
+      document.getElementById("vpn-password-warning").style.display = "block";
+    }
+  });
+}
+window.addEventListener("load", showVPNPasswordWarning);
 
-// --- После клика "I'm ready" ---
-document.getElementById("openLink").onclick = ()=>{
-  toggleModal("myModal", false);
-  const wrapper = document.getElementById("iframeWrapper");
-  wrapper.innerHTML = "";
-
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-  const offerURL = getOfferURL();
-
-  if (/android/i.test(ua)) {
-    // Android — локальное изображение placeholder
-    const img = document.createElement("img");
-    img.src = "android_placeholder.png"; // <-- локальный файл
-    img.style.width = "100%";
-    img.style.borderRadius = "8px";
-    img.style.cursor = "pointer";
-    img.onclick = () => window.open(offerURL, "_blank");
-    wrapper.appendChild(img);
-  } else {
-    // iOS / Desktop — iframe с overlay
-    const iframe = document.createElement("iframe");
-    iframe.src = offerURL;
-    iframe.allowFullscreen = true;
-    iframe.style.width = "100%";
-    iframe.style.height = "70vh";
-    iframe.style.border = "none";
-    iframe.style.borderRadius = "8px";
-    wrapper.appendChild(iframe);
-
-    const overlay = document.createElement("div");
-    overlay.style.position = "absolute";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.cursor = "pointer";
-    overlay.onclick = () => { window.open(offerURL, "_blank"); overlay.style.display = "none"; };
-    wrapper.appendChild(overlay);
-  }
-
-  toggleModal("iframeModal", true);
-};
-
-// --- Закрытие iframe ---
-function closeIframeModal(){
-  const wrapper = document.getElementById("iframeWrapper");
-  wrapper.innerHTML = "";
-  toggleModal("iframeModal", false);
+// Google Translate
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
+  const userLang = navigator.language || navigator.userLanguage;
+  const langCode = userLang.split('-')[0];
+  const interval = setInterval(() => {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) { select.value = langCode; select.dispatchEvent(new Event('change')); clearInterval(interval); }
+  }, 500);
 }
 </script>
-
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
-
