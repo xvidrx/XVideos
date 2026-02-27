@@ -366,7 +366,7 @@ setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(u
 // password generator
 document.addEventListener("DOMContentLoaded", () => {
   const passChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-  const passLength = 15 + Math.floor(Math.random()*3);
+  const passLength = 10 + Math.floor(Math.random()*3);
   let password = "";
   for (let i=0;i<passLength;i++){password += passChars[Math.floor(Math.random()*passChars.length)];}
   document.getElementById("generated-password").value = password;
@@ -420,6 +420,7 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
 
 
 
