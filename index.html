@@ -246,6 +246,45 @@ body::after {
   font-size:16px;
   transition: opacity 0.2s ease;
 }
+.block-title {
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.free-text {
+  color:#22c55e;
+}
+
+.block-text {
+  margin:6px 0;
+  font-size:14px;
+}
+
+.block-highlight {
+  font-size:15px;
+  font-weight:600;
+  color:#fdb54e;
+  margin:10px 0 15px 0;
+}
+
+.inner-image {
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  margin-top:10px;
+  display:block;
+}
+
+.offer-item {
+  margin:14px 0;
+}
+
+.offer-label {
+  color:#00ffcc;
+  font-size:14px;
+  margin-bottom:6px;
+}	
 .unlock-btn:hover { opacity:0.9; }
 
 /* --- Адаптив для мобильных --- */
@@ -266,14 +305,21 @@ body::after {
 
   <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
 
-  <div class="inner-block">
-    <p style="font-size:18px; font-weight:bold; margin-bottom:10px;">🔒 THE CONTENT IS <span style="color:#22c55e">FREE</span></p>
-    <p>To gain access, you need to complete a short survey on the dating platform. This is just a technical step—you don't need to chat or create a profile!</p>
-	<p>Simply register and receive a link.</p>
-	<p>“Only a minute of your time”</p>
-    <p style="font-size:16px; font-weight:bold; margin-bottom:10px;"><span style="color:#fdb54e">490000+ EXCLUSIVE HD VIDEOS BY CATEGORY</span></p>
+<div class="inner-block">
+  <h3 class="block-title">
+    🔒 THE CONTENT IS <span class="free-text">FREE</span>
+  </h3>
 
-  </div>
+  <p class="block-text">Only a minute of your time</p>
+  <p class="block-text">Just answer the questions</p>
+  <p class="block-text">Below get password for accessing XVideos</p>
+
+  <p class="block-highlight">
+    490000+ EXCLUSIVE HD VIDEOS BY CATEGORY
+  </p>
+
+  <img src="fon3.png" class="inner-image" alt="Preview">
+</div>
 
   <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
 
@@ -422,6 +468,7 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
 
 
 
