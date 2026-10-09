@@ -277,6 +277,241 @@ margin:20px auto;
 }	
 .unlock-btn:hover { opacity:0.9; }
 
+
+/* ===== Адаптация под мобильные устройства и планшеты (по принципу index 7) ===== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(6px, 2vw, 20px);
+  overflow-x: hidden;
+}
+
+.display {
+  width: 100%;
+  max-width: 820px;
+  min-width: 0;
+  margin: clamp(10px, 4vw, 40px) auto;
+  padding: clamp(12px, 3.5vw, 28px);
+  overflow-wrap: anywhere;
+}
+
+.display img,
+.inner-image,
+.hacked-wrap img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.inner-block {
+  width: 100%;
+  min-width: 0;
+  padding: clamp(12px, 2.8vw, 20px);
+  overflow-wrap: anywhere;
+}
+
+.link_a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  min-height: 44px;
+  margin: 8px auto;
+  padding: 11px clamp(12px, 3vw, 22px);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+.hacked-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.password-container {
+  gap: 8px;
+}
+
+.password-field {
+  width: 100%;
+  min-width: 0;
+}
+
+.password-btn,
+.unlock-btn {
+  max-width: 100%;
+  min-height: 42px;
+  padding: 10px 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#videoModal {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+#videoModal .modal-content {
+  width: min(100%, 400px);
+  max-width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: clamp(16px, 4vw, 25px);
+}
+
+#timer {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .display {
+    width: 100%;
+    max-width: 100%;
+    margin: 12px auto;
+    border-width: 1px;
+    border-radius: 12px;
+  }
+
+  .inner-block p {
+    font-size: clamp(13px, 3.6vw, 17px) !important;
+    line-height: 1.55;
+  }
+
+  .display > p {
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  #liveCount {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 6px;
+  }
+
+  .display {
+    margin: 6px auto 14px;
+    padding: clamp(10px, 3.5vw, 16px);
+    border-radius: 10px;
+  }
+
+  .display > img {
+    border-radius: 7px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .inner-block {
+    margin-bottom: 12px;
+    border-radius: 10px;
+  }
+
+  .link_a {
+    max-width: 100%;
+    min-height: 44px;
+    font-size: clamp(13px, 3.7vw, 15px);
+    border-radius: 9px;
+  }
+
+  .offer_help_text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  #liveCount {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Статистика переносится на узких экранах без выхода за границы */
+  .display > div[style*="justify-content:space-between"] {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-around !important;
+    gap: 12px;
+  }
+
+  .display > div[style*="justify-content:space-between"] > div {
+    flex: 1 1 110px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #videoModal .modal-content {
+    border-radius: 9px;
+  }
+}
+
+@media (max-width: 360px) {
+  body { padding: 4px; }
+
+  .display {
+    padding: 9px;
+  }
+
+  .inner-block {
+    padding: 10px;
+  }
+
+  .link_a {
+    padding: 10px 9px;
+    font-size: 12px;
+  }
+
+  .display > p[style*="font-size:14px"],
+  .offer-label {
+    font-size: 12px;
+  }
+
+  .password-container {
+    flex-wrap: wrap;
+  }
+
+  .password-field,
+  .password-btn {
+    width: 100%;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .display {
+    margin-top: 6px;
+    margin-bottom: 12px;
+  }
+
+  #videoModal .modal-content {
+    margin: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -471,51 +706,3 @@ function googleTranslateElementInit() {
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
