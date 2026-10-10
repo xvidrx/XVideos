@@ -545,6 +545,18 @@ body {
 @media(max-width:320px){.controls{height:32px;gap:1px;padding-left:3px;padding-right:3px}.control-btn{flex-basis:22px;width:22px;min-width:22px;height:22px;font-size:11px}.time{font-size:8px;min-width:42px}.volume{display:none}}
 @media(hover:none) and (pointer:coarse){.control-btn,.center-play,.install-btn{min-height:40px}.center-play{min-height:0}}
 
+
+/* fon3.png: toggle fullscreen on click */
+.inner-image.fullscreen-toggle { cursor: zoom-in; transition: border-radius .2s ease; }
+.inner-image.fullscreen-toggle.is-fullscreen {
+  position: fixed !important; inset: 0 !important; z-index: 10000 !important;
+  width: 100vw !important; height: 100vh !important; height: 100dvh !important;
+  max-width: none !important; max-height: none !important; margin: 0 !important;
+  padding: 0 !important; object-fit: contain !important; background: rgba(0,0,0,.96);
+  border-radius: 0 !important; cursor: zoom-out;
+}
+body.image-fullscreen-open { overflow: hidden; }
+
 </style>
 </head>
 <body>
@@ -601,7 +613,7 @@ body {
     <span style="color:#fa100a;">NO ADS!</span>
   </p>
   
-  <img src="fon3.png" class="inner-image" alt="Preview">
+  <img src="fon3.png" class="inner-image fullscreen-toggle" id="fon3Image" alt="Preview" role="button" tabindex="0" aria-label="Open image fullscreen" aria-expanded="false">
 </div>
 
   <p style="color:#00ffcc; font-size:14px">👀 <span id="liveCount">21</span> people are currently trying to access this content</p>
@@ -788,5 +800,28 @@ updateTime();
 })();
 </script>
 
+<script>
+
+(function () {
+  const image = document.getElementById('fon3Image');
+  if (!image) return;
+  function toggleFullscreen() {
+    const active = image.classList.toggle('is-fullscreen');
+    document.body.classList.toggle('image-fullscreen-open', active);
+    image.setAttribute('aria-expanded', String(active));
+    image.setAttribute('aria-label', active ? 'Close fullscreen image' : 'Open image fullscreen');
+  }
+  image.addEventListener('click', toggleFullscreen);
+  image.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); toggleFullscreen();
+    } else if (event.key === 'Escape' && image.classList.contains('is-fullscreen')) toggleFullscreen();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && image.classList.contains('is-fullscreen')) toggleFullscreen();
+  });
+})();
+
+</script>
 </body>
 </html>
